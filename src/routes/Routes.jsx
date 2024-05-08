@@ -4,9 +4,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 const SplashScreen = React.lazy(() =>
   import('../components/Pages/SplashScreen/SplashScreen')
 );
-
 const HomePage = React.lazy(() =>
   import('../components/Pages/HomePage/HomePage')
+);
+const OpenTripPage = React.lazy(() =>
+  import('../components/Pages/OpenTripPage/OpenTripPage')
 );
 
 const ProjectRoutes = () => {
@@ -16,6 +18,8 @@ const ProjectRoutes = () => {
         <Routes>
           <Route path="/" element={<SplashScreen />} />
           <Route path="/home" element={<HomePage />} />
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/opentrip" element={<OpenTripPage />} />
         </Routes>
       </Router>
     </React.Suspense>
