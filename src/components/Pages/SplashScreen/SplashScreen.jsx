@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function SplashScreen() {
   const bgImage = 'images/SplashScreen/bg-image.jpg';
@@ -33,9 +34,12 @@ function SplashScreen() {
             <span className="text-[#F9F871]">Indonesia</span> <br />
             With Trekku
           </p>
-          <button className="rounded-[57px] size-fit px-[54px] py-3 bg-white text-black text-[24px] font-bold uppercase hover:bg-white/80 active:scale-95 transition duration-300">
+          <Link
+            to="/home"
+            className="rounded-[57px] size-fit px-[54px] py-3 bg-white text-black text-[24px] font-bold uppercase hover:bg-white/80 active:scale-95 transition duration-300"
+          >
             Get Started
-          </button>
+          </Link>
         </div>
         <div className="mt-[37px] flex gap-[18px] self-center">
           {iconImg.map((element, index) => (
