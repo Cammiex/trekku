@@ -10,6 +10,9 @@ const HomePage = React.lazy(() =>
 const OpenTripPage = React.lazy(() =>
   import('../components/Pages/OpenTripPage/OpenTripPage')
 );
+const DestinationPage = React.lazy(() =>
+  import('../components/Pages/DestinationPage/DestinationPage')
+);
 
 const ProjectRoutes = () => {
   return (
@@ -20,6 +23,7 @@ const ProjectRoutes = () => {
           <Route path="/home" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
           <Route path="/opentrip" element={<OpenTripPage />} />
+          <Route path="/destination" element={<DestinationPage />} />
         </Routes>
       </Router>
     </React.Suspense>

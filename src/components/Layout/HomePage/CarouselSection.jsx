@@ -1,30 +1,34 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
+const images = [
+  'images/HomePage/slide1.jpg',
+  'images/HomePage/slide2.jpg',
+  'images/HomePage/slide3.jpg',
+  'images/HomePage/slide4.jpg',
+  'images/HomePage/slide5.jpg',
+];
+
 function CarouselSection() {
-  const images = [
-    'images/HomePage/slide1.jpg',
-    'images/HomePage/slide2.jpg',
-    'images/HomePage/slide3.jpg',
-    'images/HomePage/slide4.jpg',
-    'images/HomePage/slide5.jpg',
-  ];
+  const [isOdd, setIsOdd] = useState(true);
+
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000);
+      setIsOdd((prevState) => !prevState);
+    }, 8000);
 
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, []);
 
-  const currentImage = images[currentImageIndex];
+  // const currentImage = images[currentImageIndex];
 
   return (
-    <div className="relative w-full h-[660px] transition duration-300">
-      <div className="absolute inset-0 overflow-hidden transition duration-300 size-full">
-        <motion.img
+    <div className="relative w-full h-[660px] transition-all duration-1000 ease-linear">
+      <div className="absolute inset-0 overflow-hidden transition-all duration-1000 ease-linear size-full">
+        {/* <motion.img
           key={currentImageIndex}
           src={currentImage}
           alt={`Slide ${currentImageIndex + 1}`}
@@ -32,7 +36,26 @@ function CarouselSection() {
           animate={{ opacity: 1, x: 0, y: 0, scale: 1.5 }}
           transition={{ ease: 'linear', duration: 5 }}
           className="object-cover transition duration-300 size-full"
-        />
+        /> */}
+
+        {images.map(
+          (image, index) =>
+            index === currentImageIndex && (
+              <motion.div
+                key={index}
+                style={{ backgroundImage: `url(${image})` }}
+                alt={`Carousel slide ${index + 1}`}
+                initial={
+                  isOdd ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1.5 }
+                }
+                animate={
+                  isOdd ? { opacity: 1, scale: 1.5 } : { opacity: 1, scale: 1 }
+                }
+                transition={{ duration: 10, ease: 'linear' }}
+                className="w-full h-full transition-all duration-1000 ease-linear bg-top bg-no-repeat bg-cover "
+              />
+            )
+        )}
       </div>
       <div className="z-[5] absolute left-1/2 -translate-x-1/2 top-[40%] flex justify-center items-center">
         <span className="text-[240px] text-white/[0.24] font-extrabold absolute">

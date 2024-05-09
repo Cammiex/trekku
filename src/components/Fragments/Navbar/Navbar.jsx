@@ -68,6 +68,7 @@ function Navbar() {
         </Link>
         <Link
           id="destination-link"
+          to="/destination"
           aria-current={
             currentPage.includes('destination') ? 'page' : undefined
           }
