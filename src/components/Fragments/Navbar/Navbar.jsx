@@ -61,7 +61,7 @@ function Navbar() {
         <Link
           id="opentrip-link"
           to="/open-trip"
-          aria-current={currentPage.includes('opentrip') ? 'page' : undefined}
+          aria-current={currentPage.includes('open-trip') ? 'page' : undefined}
           className="text-[20px] font-semibold aria-[current=page]:text-black aria-[current=page]:bg-white aria-[current=page]:opacity-90 aria-[current=page]:shadow-inset px-5 py-3 rounded-3xl hover:text-black hover:bg-white hover:opacity-90 hover:shadow-inset hover:shadow-dropbox transition duration-100 active:opacity-80 focus:text-black focus:bg-white focus:opacity-90 focus:shadow-inset focus:shadow-dropbox"
         >
           Open Trip

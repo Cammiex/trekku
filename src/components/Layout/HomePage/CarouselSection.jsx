@@ -18,44 +18,28 @@ function CarouselSection() {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
       setIsOdd((prevState) => !prevState);
-    }, 8000);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, []);
 
-  // const currentImage = images[currentImageIndex];
+  const currentImage = images[currentImageIndex];
 
   return (
     <div className="relative w-full h-[660px] transition-all duration-1000 ease-linear">
       <div className="absolute inset-0 overflow-hidden transition-all duration-1000 ease-linear size-full">
-        {/* <motion.img
-          key={currentImageIndex}
-          src={currentImage}
-          alt={`Slide ${currentImageIndex + 1}`}
-          initial={{ opacity: 0.9, x: 0, y: 0, scale: 1 }}
-          animate={{ opacity: 1, x: 0, y: 0, scale: 1.5 }}
-          transition={{ ease: 'linear', duration: 5 }}
-          className="object-cover transition duration-300 size-full"
-        /> */}
-
-        {images.map(
-          (image, index) =>
-            index === currentImageIndex && (
-              <motion.div
-                key={index}
-                style={{ backgroundImage: `url(${image})` }}
-                alt={`Carousel slide ${index + 1}`}
-                initial={
-                  isOdd ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1.5 }
-                }
-                animate={
-                  isOdd ? { opacity: 1, scale: 1.5 } : { opacity: 1, scale: 1 }
-                }
-                transition={{ duration: 10, ease: 'linear' }}
-                className="w-full h-full transition-all duration-1000 ease-linear bg-top bg-no-repeat bg-cover "
-              />
-            )
-        )}
+        <motion.div
+          style={{ backgroundImage: `url(${currentImage})` }}
+          alt=""
+          initial={
+            isOdd ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1.5 }
+          }
+          animate={
+            isOdd ? { opacity: 1, scale: 1.5 } : { opacity: 1, scale: 1 }
+          }
+          transition={{ duration: 7, ease: 'linear' }}
+          className="w-full h-full transition-all duration-1000 ease-linear bg-top bg-no-repeat bg-cover "
+        />
       </div>
       <div className="z-[5] absolute left-1/2 -translate-x-1/2 top-[40%] flex justify-center items-center">
         <span className="text-[240px] text-white/[0.24] font-extrabold absolute">
