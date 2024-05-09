@@ -103,7 +103,9 @@ function Footer() {
           </div>
         </div>
         <div id="footer-item" className="flex flex-col flex-wrap gap-3">
-          <h1 className="text-xl font-semibold text-white">Informasi Kontak</h1>
+          <h1 className="text-xl font-semibold text-white">
+            Contact Information
+          </h1>
           <div id="contact-list" className="flex flex-col gap-5">
             <div
               id="contact-item"
@@ -115,7 +117,7 @@ function Footer() {
                 className="max-w-9 max-h-9"
               />
               <div id="contact-text" className="flex flex-col gap-1">
-                <h1 className="text-base font-medium text-white">Telepon</h1>
+                <h1 className="text-base font-medium text-white">Telephone</h1>
                 <h1 className="text-base font-semibold text-white">
                   +62 2118 24322
                 </h1>
@@ -163,9 +165,9 @@ function Footer() {
                 className="max-w-9 max-h-9"
               />
               <div id="contact-text" className="flex flex-col gap-1">
-                <h1 className="text-base font-medium text-white">Lokasi</h1>
+                <h1 className="text-base font-medium text-white">Location</h1>
                 <h1 className="text-base font-semibold text-white">
-                  Jalan Dolan. Jalan Ngasal. <br />
+                  Dolan Street. The Ngasal Avenue. <br />
                   Jakarta, Indonesia
                 </h1>
               </div>
@@ -173,7 +175,7 @@ function Footer() {
           </div>
         </div>
         <div id="footer-item" className="flex flex-col flex-wrap gap-3">
-          <h1 className="text-xl font-semibold text-white">Tautan Cepat</h1>
+          <h1 className="text-xl font-semibold text-white">Quick Links</h1>
           <div id="link-list" className="flex flex-col gap-6">
             <a href="guest-opentrip.html">
               <div
@@ -193,7 +195,7 @@ function Footer() {
               >
                 <img src="images/Footer/loc2.svg" alt="" className="w-9 h-9" />
                 <h1 className="text-base font-medium text-white group-hover:underline">
-                  Destinasi
+                  Destinations
                 </h1>
               </div>
             </a>
@@ -204,14 +206,14 @@ function Footer() {
               >
                 <img src="images/Footer/msg.svg" alt="" className="w-9 h-9" />
                 <h1 className="text-base font-medium text-white group-hover:underline">
-                  Tentang Kami
+                  About Us
                 </h1>
               </div>
             </a>
           </div>
         </div>
         <div id="footer-item" className="flex flex-col flex-wrap gap-3">
-          <h1 className="text-xl font-semibold text-white">Ikuti kami di</h1>
+          <h1 className="text-xl font-semibold text-white">Follow us on</h1>
           <div id="social-list" className="flex flex-col gap-6">
             <a href="#">
               <div id="social-item" className="flex items-center gap-3 group">

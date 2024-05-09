@@ -56,7 +56,7 @@ function DestinationListSection() {
   }, []);
 
   return (
-    <div className="w-full px-[102px] grid grid-cols-5 gap-6 mt-20">
+    <div className="w-full px-[102px] grid grid-cols-5 gap-6 mt-20 place-items-center">
       {data.map((item) => (
         <DestinationItem img={item.img} name={item.name} key={item.id} />
       ))}
