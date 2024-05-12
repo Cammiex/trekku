@@ -1,8 +1,11 @@
-import { useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Dropdown } from 'flowbite-react';
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import { jwtDecode } from 'jwt-decode';
 
-const AvatarIcon = () => {
+const AvatarIcon = ({ name }) => {
   return (
     <div className="flex items-center gap-3">
       <div className="size-[46px] ring-2 ring-white/75 rounded-full bg-white flex items-center justify-center relative">
@@ -12,12 +15,62 @@ const AvatarIcon = () => {
           className="size-[44px] absolute top-0 left-0"
         />
       </div>
-      <h1 className="text-base font-semibold">Guest</h1>
+      <h1 className="text-base font-semibold">{name}</h1>
     </div>
   );
 };
 
 function Navbar() {
+  const [isLogin, setIsLogin] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  // const [token, setToken] = useState('');
+  // const [expire, setExpire] = useState('');
+  const navigate = useNavigate();
+  const firstname =
+    name.split(' ')[0].charAt(0).toUpperCase() + name.split(' ')[0].slice(1);
+
+  const refreshToken = async () => {
+    try {
+      const response = await axios.get('http://localhost:5000/token');
+      // setToken(response.data.accessToken);
+      const decoded = jwtDecode(response.data.accessToken);
+      setName(decoded.name);
+      setEmail(decoded.email);
+      // setExpire(decoded.exp);
+      return true;
+    } catch (error) {
+      if (error.response) {
+        return false;
+      }
+    }
+  };
+
+  const isUserLoggedIn = async () => {
+    const result = await refreshToken();
+    result ? setIsLogin(true) : setIsLogin(false);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await axios.delete('http://localhost:5000/logout');
+      setIsLogin(false);
+      setName('');
+      navigate('/login');
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      refreshToken();
+      isUserLoggedIn();
+    };
+
+    fetchData();
+  }, []);
+
   useEffect(() => {
     const handleScroll = () => {
       const header = document.querySelector('header');
@@ -86,21 +139,64 @@ function Navbar() {
         </Link>
       </nav>
       <Dropdown
-        label={<AvatarIcon className="" />}
+        label={
+          <AvatarIcon
+            className=""
+            name={isLogin ? `Hai, ${firstname}!` : 'Hai, Guest!'}
+          />
+        }
         arrowIcon={false}
         inline
         className="group rounded-[12px] overflow-hidden"
+        placement="bottom"
       >
-        <Dropdown.Item className="hover:text-primary text-[16px] font-semibold w-[179px] py-5">
-          Log In
-        </Dropdown.Item>
-        <div className="w-full h-[1px] bg-black/40"></div>
-        <Dropdown.Item className="hover:text-primary text-[16px] font-semibold w-[179px] py-5">
-          Register
-        </Dropdown.Item>
+        {isLogin ? (
+          <>
+            <Dropdown.Header>
+              <span className="block text-base font-semibold">{name}</span>
+              <span className="block text-base font-medium truncate">
+                {email}
+              </span>
+            </Dropdown.Header>
+            <div className="w-[240px] h-[1px] bg-black/40"></div>
+            <Dropdown.Item className="hover:text-primary text-[16px] font-semibold w-full">
+              <Link to="/profile" className="py-2">
+                {' '}
+                Profile{' '}
+              </Link>
+            </Dropdown.Item>
+            <div className="w-full h-[1px] bg-black/40"></div>
+            <Dropdown.Item className="hover:text-red-700 text-red-600 text-[16px] font-semibold w-full">
+              <Link onClick={handleLogout} className="py-2">
+                {' '}
+                Logout{' '}
+              </Link>
+            </Dropdown.Item>
+          </>
+        ) : (
+          <>
+            <Dropdown.Item className="hover:text-primary text-[16px] font-semibold w-[174px]">
+              <Link to="/login" className="block py-2 text-left size-full">
+                {' '}
+                Log In{' '}
+              </Link>
+            </Dropdown.Item>
+            <div className="w-full h-[1px] bg-black/40"></div>
+            <Dropdown.Item className="hover:text-primary text-[16px] font-semibold w-[174px] ">
+              <Link to="/register" className="block py-2 text-left size-full">
+                {' '}
+                Register{' '}
+              </Link>
+            </Dropdown.Item>
+          </>
+        )}
       </Dropdown>
     </header>
   );
 }
+
+AvatarIcon.propTypes = {
+  name: PropTypes.string.isRequired,
+};
 
 export default Navbar;
