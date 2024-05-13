@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function ArticleTipsSection() {
   const truncateText = (text) => {
     const words = text.split(' ');
@@ -126,12 +128,12 @@ function ArticleTipsSection() {
           </div>
         </div>
       </div>
-      <a
-        href="https://www.hipwee.com/tag/destinasi-wisata/"
+      <Link
+        to="https://www.hipwee.com/tag/destinasi-wisata/"
         className="h-[54px] px-9 bg-primary rounded-xl text-xl font-medium text-white flex items-center hover:bg-primaryDark active:bg-primaryDarker"
       >
         Read the Article
-      </a>
+      </Link>
     </section>
   );
 }

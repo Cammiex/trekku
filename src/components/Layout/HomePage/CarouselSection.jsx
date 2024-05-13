@@ -41,7 +41,7 @@ function CarouselSection() {
           className="w-full h-full transition-all duration-1000 ease-linear bg-top bg-no-repeat bg-cover "
         />
       </div>
-      <div className="z-[5] absolute left-1/2 -translate-x-1/2 top-[40%] flex justify-center items-center">
+      <div className="z-[5] absolute left-1/2 -translate-x-1/2 top-[40%] flex justify-center items-center select-none">
         <span className="text-[240px] text-white/[0.24] font-extrabold absolute">
           TREKKU
         </span>

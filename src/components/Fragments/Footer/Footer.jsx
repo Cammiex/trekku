@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 function Footer() {
   return (
     <footer
@@ -177,7 +179,7 @@ function Footer() {
         <div id="footer-item" className="flex flex-col flex-wrap gap-3">
           <h1 className="text-xl font-semibold text-white">Quick Links</h1>
           <div id="link-list" className="flex flex-col gap-6">
-            <a href="guest-opentrip.html">
+            <Link to="/open-trip">
               <div
                 id="link-item"
                 className="flex items-center gap-3 opacity-40 group hover:opacity-100"
@@ -187,8 +189,8 @@ function Footer() {
                   Open Trip
                 </h1>
               </div>
-            </a>
-            <a href="guest-destination.html">
+            </Link>
+            <Link to="/destination">
               <div
                 id="link-item"
                 className="flex items-center gap-3 opacity-40 group hover:opacity-100"
@@ -198,8 +200,8 @@ function Footer() {
                   Destinations
                 </h1>
               </div>
-            </a>
-            <a href="guest-about.html">
+            </Link>
+            <Link to="/about-us">
               <div
                 id="link-item"
                 className="flex items-center gap-3 opacity-40 group hover:opacity-100"
@@ -209,7 +211,7 @@ function Footer() {
                   About Us
                 </h1>
               </div>
-            </a>
+            </Link>
           </div>
         </div>
         <div id="footer-item" className="flex flex-col flex-wrap gap-3">

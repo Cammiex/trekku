@@ -4,15 +4,16 @@ import { Dropdown } from 'flowbite-react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { jwtDecode } from 'jwt-decode';
+import { Modal } from 'flowbite-react';
 
 const AvatarIcon = ({ name }) => {
   return (
     <div className="flex items-center gap-3">
-      <div className="size-[46px] ring-2 ring-white/75 rounded-full bg-white flex items-center justify-center relative">
+      <div className="size-[46px] ring-2 ring-white/75 rounded-full bg-white flex items-center justify-center relative pr-[1px] pb-[1px]">
         <img
           src="images/AuthPage/guest-profile.png"
           alt=""
-          className="size-[44px] absolute top-0 left-0"
+          className="size-[44px] object-cover object-center"
         />
       </div>
       <h1 className="text-base font-semibold">{name}</h1>
@@ -29,6 +30,7 @@ function Navbar() {
   const navigate = useNavigate();
   const firstname =
     name.split(' ')[0].charAt(0).toUpperCase() + name.split(' ')[0].slice(1);
+  const [openModal, setOpenModal] = useState(false);
 
   const refreshToken = async () => {
     try {
@@ -69,7 +71,7 @@ function Navbar() {
     };
 
     fetchData();
-  }, []);
+  });
 
   useEffect(() => {
     const handleScroll = () => {
@@ -100,98 +102,150 @@ function Navbar() {
   const currentPage = location.pathname.split('/').pop();
 
   return (
-    <header className="px-[100px] py-2 flex items-center justify-between w-full fixed top-0 transition duration-300 z-40">
-      <h1 className="text-[44px] font-extrabold text-white">Trekku</h1>
-      <nav className="flex items-center gap-10">
-        <Link
-          id="home-link"
-          to="/home"
-          aria-current={currentPage.includes('home') ? 'page' : undefined}
-          className="text-[20px] font-semibold aria-[current=page]:text-black aria-[current=page]:bg-white aria-[current=page]:opacity-90 aria-[current=page]:shadow-inset px-5 py-3 rounded-3xl hover:text-black hover:bg-white hover:opacity-90 hover:shadow-inset hover:shadow-dropbox transition duration-100 active:opacity-80 focus:text-black focus:bg-white focus:opacity-90 focus:shadow-inset focus:shadow-dropbox"
-        >
-          Home
-        </Link>
-        <Link
-          id="opentrip-link"
-          to="/open-trip"
-          aria-current={currentPage.includes('open-trip') ? 'page' : undefined}
-          className="text-[20px] font-semibold aria-[current=page]:text-black aria-[current=page]:bg-white aria-[current=page]:opacity-90 aria-[current=page]:shadow-inset px-5 py-3 rounded-3xl hover:text-black hover:bg-white hover:opacity-90 hover:shadow-inset hover:shadow-dropbox transition duration-100 active:opacity-80 focus:text-black focus:bg-white focus:opacity-90 focus:shadow-inset focus:shadow-dropbox"
-        >
-          Open Trip
-        </Link>
-        <Link
-          id="destination-link"
-          to="/destination"
-          aria-current={
-            currentPage.includes('destination') ? 'page' : undefined
+    <>
+      <header className="px-[100px] py-2 flex items-center justify-between w-full fixed top-0 transition duration-300 z-40 select-none">
+        <h1 className="text-[44px] font-extrabold text-white select-none">
+          Trekku
+        </h1>
+        <nav className="flex items-center gap-10">
+          <Link
+            id="home-link"
+            to="/home"
+            aria-current={currentPage.includes('home') ? 'page' : undefined}
+            className="text-[20px] font-semibold aria-[current=page]:text-black aria-[current=page]:bg-white aria-[current=page]:opacity-90 aria-[current=page]:shadow-inset px-5 py-3 rounded-3xl hover:text-black hover:bg-white hover:opacity-90 hover:shadow-inset hover:shadow-dropbox transition duration-100 active:opacity-80 focus:text-black focus:bg-white focus:opacity-90 focus:shadow-inset focus:shadow-dropbox"
+          >
+            Home
+          </Link>
+          <Link
+            id="opentrip-link"
+            to="/open-trip"
+            aria-current={
+              currentPage.includes('open-trip') ? 'page' : undefined
+            }
+            className="text-[20px] font-semibold aria-[current=page]:text-black aria-[current=page]:bg-white aria-[current=page]:opacity-90 aria-[current=page]:shadow-inset px-5 py-3 rounded-3xl hover:text-black hover:bg-white hover:opacity-90 hover:shadow-inset hover:shadow-dropbox transition duration-100 active:opacity-80 focus:text-black focus:bg-white focus:opacity-90 focus:shadow-inset focus:shadow-dropbox"
+          >
+            Open Trip
+          </Link>
+          <Link
+            id="destination-link"
+            to="/destination"
+            aria-current={
+              currentPage.includes('destination') ? 'page' : undefined
+            }
+            className="text-[20px] font-semibold aria-[current=page]:text-black aria-[current=page]:bg-white aria-[current=page]:opacity-90 aria-[current=page]:shadow-inset px-5 py-3 rounded-3xl hover:text-black hover:bg-white hover:opacity-90 hover:shadow-inset hover:shadow-dropbox transition duration-100 active:opacity-80 focus:text-black focus:bg-white focus:opacity-90 focus:shadow-inset focus:shadow-dropbox"
+          >
+            Destinations
+          </Link>
+          <Link
+            id="about-link"
+            to="/about-us"
+            aria-current={currentPage.includes('about') ? 'page' : undefined}
+            className="text-[20px] font-semibold aria-[current=page]:text-black aria-[current=page]:bg-white aria-[current=page]:opacity-90 aria-[current=page]:shadow-inset px-5 py-3 rounded-3xl hover:text-black hover:bg-white hover:opacity-90 hover:shadow-inset hover:shadow-dropbox transition duration-100 active:opacity-80 focus:text-black focus:bg-white focus:opacity-90 focus:shadow-inset focus:shadow-dropbox"
+          >
+            About Us
+          </Link>
+        </nav>
+        <Dropdown
+          label={
+            <AvatarIcon
+              className=""
+              name={isLogin ? `Hai, ${firstname}!` : 'Hai, Guest!'}
+            />
           }
-          className="text-[20px] font-semibold aria-[current=page]:text-black aria-[current=page]:bg-white aria-[current=page]:opacity-90 aria-[current=page]:shadow-inset px-5 py-3 rounded-3xl hover:text-black hover:bg-white hover:opacity-90 hover:shadow-inset hover:shadow-dropbox transition duration-100 active:opacity-80 focus:text-black focus:bg-white focus:opacity-90 focus:shadow-inset focus:shadow-dropbox"
+          arrowIcon={false}
+          inline
+          className="group rounded-[12px] overflow-hidden"
+          placement="bottom"
         >
-          Destinations
-        </Link>
-        <Link
-          id="about-link"
-          to="/about-us"
-          aria-current={currentPage.includes('about') ? 'page' : undefined}
-          className="text-[20px] font-semibold aria-[current=page]:text-black aria-[current=page]:bg-white aria-[current=page]:opacity-90 aria-[current=page]:shadow-inset px-5 py-3 rounded-3xl hover:text-black hover:bg-white hover:opacity-90 hover:shadow-inset hover:shadow-dropbox transition duration-100 active:opacity-80 focus:text-black focus:bg-white focus:opacity-90 focus:shadow-inset focus:shadow-dropbox"
-        >
-          About Us
-        </Link>
-      </nav>
-      <Dropdown
-        label={
-          <AvatarIcon
-            className=""
-            name={isLogin ? `Hai, ${firstname}!` : 'Hai, Guest!'}
-          />
-        }
-        arrowIcon={false}
-        inline
-        className="group rounded-[12px] overflow-hidden"
-        placement="bottom"
+          {isLogin ? (
+            <>
+              <Dropdown.Header className="pl-8">
+                <span className="block text-base font-semibold select-text">
+                  {name}
+                </span>
+                <span className="block text-base font-medium truncate select-text">
+                  {email}
+                </span>
+              </Dropdown.Header>
+              <div className="w-[240px] h-[0.5px] bg-black/40"></div>
+              <Dropdown.Item className="hover:text-primary text-[16px] font-semibold w-full p-0">
+                <Link to="/profile" className="py-4 pl-8 text-left size-full">
+                  {' '}
+                  Profile{' '}
+                </Link>
+              </Dropdown.Item>
+              <div className="w-full h-[1px] bg-black/40"></div>
+              <Dropdown.Item
+                onClick={() => setOpenModal(true)}
+                className="hover:text-red-700 text-red-600 text-[16px] font-semibold w-full py-4 pl-8"
+              >
+                Logout
+              </Dropdown.Item>
+            </>
+          ) : (
+            <>
+              <Dropdown.Item className="hover:text-primary text-[16px] font-semibold w-[174px]">
+                <Link to="/login" className="block py-2 text-left size-full">
+                  {' '}
+                  Log In{' '}
+                </Link>
+              </Dropdown.Item>
+              <div className="w-full h-[1px] bg-black/40"></div>
+              <Dropdown.Item className="hover:text-primary text-[16px] font-semibold w-[174px] ">
+                <Link to="/register" className="block py-2 text-left size-full">
+                  {' '}
+                  Register{' '}
+                </Link>
+              </Dropdown.Item>
+            </>
+          )}
+        </Dropdown>
+      </header>
+      <Modal
+        show={openModal}
+        size="md"
+        onClose={() => setOpenModal(false)}
+        popup
       >
-        {isLogin ? (
-          <>
-            <Dropdown.Header>
-              <span className="block text-base font-semibold">{name}</span>
-              <span className="block text-base font-medium truncate">
-                {email}
-              </span>
-            </Dropdown.Header>
-            <div className="w-[240px] h-[1px] bg-black/40"></div>
-            <Dropdown.Item className="hover:text-primary text-[16px] font-semibold w-full">
-              <Link to="/profile" className="py-2">
-                {' '}
-                Profile{' '}
-              </Link>
-            </Dropdown.Item>
-            <div className="w-full h-[1px] bg-black/40"></div>
-            <Dropdown.Item className="hover:text-red-700 text-red-600 text-[16px] font-semibold w-full">
-              <Link onClick={handleLogout} className="py-2">
-                {' '}
-                Logout{' '}
-              </Link>
-            </Dropdown.Item>
-          </>
-        ) : (
-          <>
-            <Dropdown.Item className="hover:text-primary text-[16px] font-semibold w-[174px]">
-              <Link to="/login" className="block py-2 text-left size-full">
-                {' '}
-                Log In{' '}
-              </Link>
-            </Dropdown.Item>
-            <div className="w-full h-[1px] bg-black/40"></div>
-            <Dropdown.Item className="hover:text-primary text-[16px] font-semibold w-[174px] ">
-              <Link to="/register" className="block py-2 text-left size-full">
-                {' '}
-                Register{' '}
-              </Link>
-            </Dropdown.Item>
-          </>
-        )}
-      </Dropdown>
-    </header>
+        <Modal.Header />
+        <Modal.Body>
+          <div id="popup-logout" className="z-[51]">
+            <div
+              id="pop-up-box"
+              className="w-[459px] h-[359px] bg-white rounded-lg py-9 px-[42px] flex flex-col gap-10 fixed top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%]"
+            >
+              <div className="flex flex-col gap-[18px] items-center">
+                <img
+                  src="images/HomePage/logout-img.png"
+                  alt=""
+                  className="w-[77px] h-[77px]"
+                />
+                <h1 className="text-secondary font-semibold text-[28px] text-center">
+                  Sampai bertemu kembali!
+                </h1>
+                <p className="mt-2 text-base font-semibold text-center text-black">
+                  Apakah Anda yakin ingin keluar dari akun Anda?
+                </p>
+              </div>
+              <div className="grid grid-cols-2 gap-7">
+                <button
+                  onClick={() => setOpenModal(false)}
+                  className="w-[144px] py-3 px-5 h-fit rounded-xl text-secondary text-xl font-medium hover:text-secondary/70 active:scale-90 transition"
+                >
+                  Batalkan
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="w-[144px] py-3 px-5 h-fit rounded-xl text-white text-xl font-medium bg-red-700 hover:bg-red-800 active:scale-90 transition"
+                >
+                  Ya, Logout
+                </button>
+              </div>
+            </div>
+          </div>
+        </Modal.Body>
+      </Modal>
+    </>
   );
 }
 
