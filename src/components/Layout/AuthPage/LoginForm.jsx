@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -32,7 +33,7 @@ const LoginForm = () => {
 
     if (!isError) {
       try {
-        await axios.post('http://localhost:5000/login', {
+        await axios.post(`${apiUrl}/login`, {
           email: email,
           password: password,
         });

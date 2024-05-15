@@ -20,6 +20,9 @@ const Register = React.lazy(() =>
   import('../components/Pages/AuthPage/Register')
 );
 const Login = React.lazy(() => import('../components/Pages/AuthPage/Login'));
+const OpenTripDetail = React.lazy(() =>
+  import('../components/Pages/DetailOpenTripPage/DetailOpenTripPage')
+);
 
 const ProjectRoutes = () => {
   return (
@@ -33,6 +36,7 @@ const ProjectRoutes = () => {
           <Route path="/about-us" element={<AboutPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/trip/:id" element={<OpenTripDetail />} />
         </Routes>
       </Router>
     </React.Suspense>

@@ -5,13 +5,14 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { jwtDecode } from 'jwt-decode';
 import { Modal } from 'flowbite-react';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const AvatarIcon = ({ name }) => {
   return (
     <div className="flex items-center gap-3">
       <div className="size-[46px] ring-2 ring-white/75 rounded-full bg-white flex items-center justify-center relative pr-[1px] pb-[1px]">
         <img
-          src="images/AuthPage/guest-profile.png"
+          src="/images/AuthPage/guest-profile.png"
           alt=""
           className="size-[44px] object-cover object-center"
         />
@@ -34,7 +35,7 @@ function Navbar() {
 
   const refreshToken = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/token');
+      const response = await axios.get(`${apiUrl}/token`);
       // setToken(response.data.accessToken);
       const decoded = jwtDecode(response.data.accessToken);
       setName(decoded.name);
@@ -55,7 +56,7 @@ function Navbar() {
 
   const handleLogout = async () => {
     try {
-      await axios.delete('http://localhost:5000/logout');
+      await axios.delete(`${apiUrl}/logout`);
       setIsLogin(false);
       setName('');
       navigate('/login');
@@ -71,7 +72,8 @@ function Navbar() {
     };
 
     fetchData();
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -216,7 +218,7 @@ function Navbar() {
             >
               <div className="flex flex-col gap-[18px] items-center">
                 <img
-                  src="images/HomePage/logout-img.png"
+                  src="/images/HomePage/logout-img.png"
                   alt=""
                   className="w-[77px] h-[77px]"
                 />

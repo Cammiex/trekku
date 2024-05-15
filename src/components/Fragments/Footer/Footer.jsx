@@ -18,7 +18,7 @@ function Footer() {
             <div id="partner" className="flex flex-col gap-2">
               <h1 className="text-xl font-semibold text-white">Partner</h1>
               <img
-                src="images/Footer/partner1.png"
+                src="/images/Footer/partner1.png"
                 alt=""
                 className="max-h-[82px] w-[200px]"
               />
@@ -32,73 +32,73 @@ function Footer() {
                   id="payment-partner-item"
                   className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
                 >
-                  <img src="images/Footer/bca.png" alt="" />
+                  <img src="/images/Footer/bca.png" alt="" />
                 </div>
                 <div
                   id="payment-partner-item"
                   className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
                 >
-                  <img src="images/Footer/bni.png" alt="" />
+                  <img src="/images/Footer/bni.png" alt="" />
                 </div>
                 <div
                   id="payment-partner-item"
                   className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
                 >
-                  <img src="images/Footer/bri.png" alt="" />
+                  <img src="/images/Footer/bri.png" alt="" />
                 </div>
                 <div
                   id="payment-partner-item"
                   className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
                 >
-                  <img src="images/Footer/cimb.png" alt="" />
+                  <img src="/images/Footer/cimb.png" alt="" />
                 </div>
                 <div
                   id="payment-partner-item"
                   className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
                 >
-                  <img src="images/Footer/mandiri.png" alt="" />
+                  <img src="/images/Footer/mandiri.png" alt="" />
                 </div>
                 <div
                   id="payment-partner-item"
                   className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
                 >
-                  <img src="images/Footer/permata.png" alt="" />
+                  <img src="/images/Footer/permata.png" alt="" />
                 </div>
                 <div
                   id="payment-partner-item"
                   className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
                 >
-                  <img src="images/Footer/briva.png" alt="" />
+                  <img src="/images/Footer/briva.png" alt="" />
                 </div>
                 <div
                   id="payment-partner-item"
                   className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
                 >
-                  <img src="images/Footer/indomaret.png" alt="" />
+                  <img src="/images/Footer/indomaret.png" alt="" />
                 </div>
                 <div
                   id="payment-partner-item"
                   className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
                 >
-                  <img src="images/Footer/alfamart.png" alt="" />
+                  <img src="/images/Footer/alfamart.png" alt="" />
                 </div>
                 <div
                   id="payment-partner-item"
                   className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
                 >
-                  <img src="images/Footer/alfamidi.png" alt="" />
+                  <img src="/images/Footer/alfamidi.png" alt="" />
                 </div>
                 <div
                   id="payment-partner-item"
                   className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
                 >
-                  <img src="images/Footer/dana.png" alt="" />
+                  <img src="/images/Footer/dana.png" alt="" />
                 </div>
                 <div
                   id="payment-partner-item"
                   className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
                 >
-                  <img src="images/Footer/gopay.png" alt="" />
+                  <img src="/images/Footer/gopay.png" alt="" />
                 </div>
               </div>
             </div>
@@ -114,7 +114,7 @@ function Footer() {
               className="flex items-center gap-5 opacity-40 hover:opacity-100"
             >
               <img
-                src="images/Footer/telp.svg"
+                src="/images/Footer/telp.svg"
                 alt=""
                 className="max-w-9 max-h-9"
               />
@@ -130,7 +130,7 @@ function Footer() {
               className="flex items-center gap-5 opacity-40 hover:opacity-100"
             >
               <img
-                src="images/Footer/whatsapp.svg"
+                src="/images/Footer/whatsapp.svg"
                 alt=""
                 className="max-w-9 max-h-9"
               />
@@ -146,7 +146,7 @@ function Footer() {
               className="flex items-center gap-5 opacity-40 hover:opacity-100"
             >
               <img
-                src="images/Footer/mail.svg"
+                src="/images/Footer/mail.svg"
                 alt=""
                 className="max-w-9 max-h-9"
               />
@@ -162,7 +162,7 @@ function Footer() {
               className="flex items-center gap-5 opacity-40 hover:opacity-100"
             >
               <img
-                src="images/Footer/location.svg"
+                src="/images/Footer/location.svg"
                 alt=""
                 className="max-w-9 max-h-9"
               />
@@ -184,7 +184,7 @@ function Footer() {
                 id="link-item"
                 className="flex items-center gap-3 opacity-40 group hover:opacity-100"
               >
-                <img src="images/Footer/trip.svg" alt="" className="w-9 h-9" />
+                <img src="/images/Footer/trip.svg" alt="" className="w-9 h-9" />
                 <h1 className="text-base font-medium text-white group-hover:underline">
                   Open Trip
                 </h1>
@@ -195,7 +195,7 @@ function Footer() {
                 id="link-item"
                 className="flex items-center gap-3 opacity-40 group hover:opacity-100"
               >
-                <img src="images/Footer/loc2.svg" alt="" className="w-9 h-9" />
+                <img src="/images/Footer/loc2.svg" alt="" className="w-9 h-9" />
                 <h1 className="text-base font-medium text-white group-hover:underline">
                   Destinations
                 </h1>
@@ -206,7 +206,7 @@ function Footer() {
                 id="link-item"
                 className="flex items-center gap-3 opacity-40 group hover:opacity-100"
               >
-                <img src="images/Footer/msg.svg" alt="" className="w-9 h-9" />
+                <img src="/images/Footer/msg.svg" alt="" className="w-9 h-9" />
                 <h1 className="text-base font-medium text-white group-hover:underline">
                   About Us
                 </h1>
@@ -220,7 +220,7 @@ function Footer() {
             <a href="#">
               <div id="social-item" className="flex items-center gap-3 group">
                 <img
-                  src="images/Footer/ig.png"
+                  src="/images/Footer/ig.png"
                   alt=""
                   className="w-9 h-9 grayscale group-hover:grayscale-0"
                 />
@@ -232,7 +232,7 @@ function Footer() {
             <a href="#">
               <div id="social-item" className="flex items-center gap-3 group">
                 <img
-                  src="images/Footer/fb.png"
+                  src="/images/Footer/fb.png"
                   alt=""
                   className="w-9 h-9 grayscale group-hover:grayscale-0"
                 />
@@ -244,7 +244,7 @@ function Footer() {
             <a href="#">
               <div id="social-item" className="flex items-center gap-3 group">
                 <img
-                  src="images/Footer/yt.png"
+                  src="/images/Footer/yt.png"
                   alt=""
                   className="w-9 h-9 grayscale group-hover:grayscale-0"
                 />
@@ -256,7 +256,7 @@ function Footer() {
             <a href="#">
               <div id="social-item" className="flex items-center gap-3 group">
                 <img
-                  src="images/Footer/twitter.png"
+                  src="/images/Footer/twitter.png"
                   alt=""
                   className="w-9 h-9 opacity-40 group-hover:opacity-100 grayscale group-hover:grayscale-0"
                 />

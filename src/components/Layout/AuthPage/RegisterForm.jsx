@@ -2,6 +2,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const RegisterForm = () => {
   const [name, setName] = useState('');
@@ -53,7 +54,7 @@ const RegisterForm = () => {
 
     if (!isError) {
       try {
-        await axios.post('http://localhost:5000/users', {
+        await axios.post(`${apiUrl}/users`, {
           name: name,
           email: email,
           password: password,
