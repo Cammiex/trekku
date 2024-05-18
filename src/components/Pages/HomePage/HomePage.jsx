@@ -5,11 +5,13 @@ import PopularDestinationSection from '../../Layout/HomePage/PopularDestinationS
 import OpenTripRecomendSection from '../../Layout/HomePage/OpenTripRecomendSection';
 import TouristFeedbackSection from '../../Layout/HomePage/TouristFeedbackSection';
 import ArticleTipsSection from '../../Layout/HomePage/ArticleTipsSection';
+import FloatButton from '../../Fragments/FloatButton/FloatButton';
 
 function HomePage() {
   return (
     <div className="">
       <Navbar />
+      <FloatButton />
       <CarouselSection />
       <PopularDestinationSection />
       <OpenTripRecomendSection />

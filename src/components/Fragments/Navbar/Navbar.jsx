@@ -5,16 +5,17 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { jwtDecode } from 'jwt-decode';
 import { Modal } from 'flowbite-react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserCircle } from '@fortawesome/free-regular-svg-icons';
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const AvatarIcon = ({ name }) => {
   return (
     <div className="flex items-center gap-3">
-      <div className="size-[46px] ring-2 ring-white/75 rounded-full bg-white flex items-center justify-center relative pr-[1px] pb-[1px]">
-        <img
-          src="/images/AuthPage/guest-profile.png"
-          alt=""
-          className="size-[44px] object-cover object-center"
+      <div className="size-[46px] ring-2 ring-white/75 rounded-full bg-white flex items-center justify-center relative">
+        <FontAwesomeIcon
+          icon={faUserCircle}
+          className="size-[44px] object-cover object-center text-[#5D5D5D]"
         />
       </div>
       <h1 className="text-base font-semibold">{name}</h1>
@@ -112,7 +113,7 @@ function Navbar() {
         <nav className="flex items-center gap-10">
           <Link
             id="home-link"
-            to="/home"
+            to="/"
             aria-current={currentPage.includes('home') ? 'page' : undefined}
             className="text-[20px] font-semibold aria-[current=page]:text-black aria-[current=page]:bg-white aria-[current=page]:opacity-90 aria-[current=page]:shadow-inset px-5 py-3 rounded-3xl hover:text-black hover:bg-white hover:opacity-90 hover:shadow-inset hover:shadow-dropbox transition duration-100 active:opacity-80 focus:text-black focus:bg-white focus:opacity-90 focus:shadow-inset focus:shadow-dropbox"
           >
