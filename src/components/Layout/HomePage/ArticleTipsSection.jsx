@@ -130,7 +130,7 @@ function ArticleTipsSection() {
       </div>
       <Link
         to="https://www.hipwee.com/tag/destinasi-wisata/"
-        className="h-[54px] px-9 bg-primary rounded-xl text-xl font-medium text-white flex items-center hover:bg-primaryDark active:bg-primaryDarker"
+        className="h-[54px] px-9 bg-primary-60 rounded-xl text-xl font-medium text-white flex items-center hover:bg-primaryDark active:bg-primaryDarker"
       >
         Read the Article
       </Link>

@@ -65,7 +65,7 @@ const RatingHeaderSection = () => {
               5 star
             </a>
             <div className="w-2/4 h-5 mx-4 bg-gray-300 rounded-full">
-              <div className="h-5 rounded-full bg-primary w-[50%]"></div>
+              <div className="h-5 rounded-full bg-primary-60 w-[50%]"></div>
             </div>
             <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
               50%
@@ -76,7 +76,7 @@ const RatingHeaderSection = () => {
               4 star
             </a>
             <div className="w-2/4 h-5 mx-4 bg-gray-300 rounded-full">
-              <div className="h-5 rounded-full bg-primary w-[30%]"></div>
+              <div className="h-5 rounded-full bg-primary-60 w-[30%]"></div>
             </div>
             <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
               30%
@@ -87,7 +87,7 @@ const RatingHeaderSection = () => {
               3 star
             </a>
             <div className="w-2/4 h-5 mx-4 bg-gray-300 rounded-full">
-              <div className="h-5 rounded-full bg-primary w-[15%]"></div>
+              <div className="h-5 rounded-full bg-primary-60 w-[15%]"></div>
             </div>
             <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
               15%
@@ -98,7 +98,7 @@ const RatingHeaderSection = () => {
               2 star
             </a>
             <div className="w-2/4 h-5 mx-4 bg-gray-300 rounded-full">
-              <div className="h-5 rounded-l-full bg-primary w-[5%]"></div>
+              <div className="h-5 rounded-l-full bg-primary-60 w-[5%]"></div>
             </div>
             <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
               5%
@@ -109,7 +109,7 @@ const RatingHeaderSection = () => {
               1 star
             </a>
             <div className="w-2/4 h-5 mx-4 bg-gray-300 rounded-full">
-              <div className="h-5 rounded-full bg-primary w-[0%]"></div>
+              <div className="h-5 rounded-full bg-primary-60 w-[0%]"></div>
             </div>
             <span className="text-sm font-medium text-gray-500 dark:text-gray-400">
               0%

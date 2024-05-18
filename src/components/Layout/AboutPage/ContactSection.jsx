@@ -134,7 +134,7 @@ function ContactSection() {
             ></textarea>
             <button
               type="submit"
-              className="w-fit flex justify-center items-center py-3 px-[46px] bg-primary rounded-xl text-white text-xl font-medium"
+              className="w-fit flex justify-center items-center py-3 px-[46px] bg-primary-60 rounded-xl text-white text-xl font-medium"
             >
               Send Message
             </button>

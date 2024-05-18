@@ -171,7 +171,7 @@ function Navbar() {
                 </span>
               </Dropdown.Header>
               <div className="w-[240px] h-[0.5px] bg-black/40"></div>
-              <Dropdown.Item className="hover:text-primary text-[16px] font-semibold w-full p-0">
+              <Dropdown.Item className="hover:text-primary-60 text-[16px] font-semibold w-full p-0">
                 <Link to="/profile" className="py-4 pl-8 text-left size-full">
                   {' '}
                   Profile{' '}
@@ -187,14 +187,14 @@ function Navbar() {
             </>
           ) : (
             <>
-              <Dropdown.Item className="hover:text-primary text-[16px] font-semibold w-[174px]">
+              <Dropdown.Item className="hover:text-primary-60 text-[16px] font-semibold w-[174px]">
                 <Link to="/login" className="block py-2 text-left size-full">
                   {' '}
                   Log In{' '}
                 </Link>
               </Dropdown.Item>
               <div className="w-full h-[1px] bg-black/40"></div>
-              <Dropdown.Item className="hover:text-primary text-[16px] font-semibold w-[174px] ">
+              <Dropdown.Item className="hover:text-primary-60 text-[16px] font-semibold w-[174px] ">
                 <Link to="/register" className="block py-2 text-left size-full">
                   {' '}
                   Register{' '}

@@ -72,7 +72,7 @@ function CarouselSection() {
             placeholder="Labuan Bajo"
             className="py-3 rounded-md h-[48px] w-[427px] shadow-md"
           />
-          <button className="flex items-center justify-center w-[204px] h-fit bg-primary text-white gap-[10px] py-3 rounded-xl">
+          <button className="flex items-center justify-center w-[204px] h-fit bg-primary-60 text-white gap-[10px] py-3 rounded-xl">
             <FontAwesomeIcon icon={faSearch} className="size-5" />
             <h1 className="font-medium text-[20px]">Search</h1>
           </button>

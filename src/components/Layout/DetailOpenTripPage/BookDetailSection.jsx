@@ -10,7 +10,7 @@ const BookDetailSection = ({ location, duration, date, price }) => {
       className="w-[610px] h-[309px] rounded-xl shadow-cardShadow py-[33px] px-[38px] flex flex-col gap-[21px]"
     >
       <div id="book-price" className="flex items-center gap-7">
-        <h1 className="text-[40px] font-extrabold text-primary">
+        <h1 className="text-[40px] font-extrabold text-primary-60">
           Rp{formattedPrice}
         </h1>
         <div id="original-price" className="flex gap-[13px] items-center">
@@ -46,7 +46,7 @@ const BookDetailSection = ({ location, duration, date, price }) => {
           <h1 className="text-[20px] text-slate-500">{date}</h1>
         </div>
       </div>
-      <a className="px-[72px] py-[15px] bg-primary w-fit rounded-xl text-white text-xl font-medium self-center hover:bg-primaryDark active:bg-primaryDarker">
+      <a className="px-[72px] py-[15px] bg-primary-60 w-fit rounded-xl text-white text-xl font-medium self-center hover:bg-primaryDark active:bg-primaryDarker">
         Book Now
       </a>
     </div>

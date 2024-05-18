@@ -73,7 +73,7 @@ function PopularDestinationSection() {
 
       <Link
         to="/destination"
-        className="flex h-[54px] w-[204px] justify-center items-center bg-primary rounded-xl gap-[10px] px-5 hover:bg-primaryDark active:bg-primaryDarker"
+        className="flex h-[54px] w-[204px] justify-center items-center bg-primary-60 rounded-xl gap-[10px] px-5 hover:bg-primaryDark active:bg-primaryDarker"
       >
         <img src="images/HomePage/PopularDestination/search.png" alt="" />
         <h1 className="text-xl font-medium text-white">View More</h1>

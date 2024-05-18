@@ -45,7 +45,7 @@ function OpenTripHeroSection() {
               <option value="audi">Audi</option>
             </select>
           </div>
-          <button className="flex h-[54px] justify-center items-center bg-primary rounded-xl gap-[10px] px-5 self-end">
+          <button className="flex h-[54px] justify-center items-center bg-primary-60 rounded-xl gap-[10px] px-5 self-end">
             <img src="images/OpenTripPage/search.png" alt="" />
             <h1 className="text-white">Search</h1>
           </button>

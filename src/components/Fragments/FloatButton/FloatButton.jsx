@@ -40,8 +40,8 @@ const FloatButton = () => {
       <div
         className={
           isOpen
-            ? 'size-[84px] rounded-full bg-primary flex items-center z-20 justify-center fixed bottom-4 right-[24px] cursor-pointer transition-all duration-100 active:scale-95 shadow-cardShadow'
-            : 'size-[84px] rounded-full bg-primary flex items-center z-20 justify-center fixed bottom-4 right-[24px] cursor-pointer transition-all duration-100 hover:bg-primaryDark active:scale-95 shadow-cardShadow peer'
+            ? 'size-[84px] rounded-full bg-primary-60 flex items-center z-20 justify-center fixed bottom-4 right-[24px] cursor-pointer transition-all duration-100 active:scale-95 shadow-cardShadow'
+            : 'size-[84px] rounded-full bg-primary-60 flex items-center z-20 justify-center fixed bottom-4 right-[24px] cursor-pointer transition-all duration-100 hover:bg-primaryDark active:scale-95 shadow-cardShadow peer'
         }
         onClick={handleClick}
       >

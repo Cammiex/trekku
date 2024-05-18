@@ -13,7 +13,7 @@ const Register = () => {
       >
         <div
           id="register-wrapper"
-          className="flex flex-wrap justify-center mt-[80px] gap-28"
+          className="flex flex-wrap justify-center mt-[148px] mb-[112px] gap-28"
         >
           <RegisterForm />
         </div>

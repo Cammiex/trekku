@@ -2,6 +2,8 @@ import axios from 'axios';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye, faEyeSlash } from '@fortawesome/free-regular-svg-icons';
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const RegisterForm = () => {
@@ -9,10 +11,20 @@ const RegisterForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confPassword, setConfPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfPassword, setShowConfPassword] = useState(false);
   const navigate = useNavigate();
   const validateEmail = (inputEmail) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(inputEmail);
+  };
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
+
+  const handleShowConfPassword = () => {
+    setShowConfPassword(!showConfPassword);
   };
 
   const register = async (e) => {
@@ -73,92 +85,94 @@ const RegisterForm = () => {
   };
 
   return (
-    <div
-      id="register-form"
-      className="flex flex-col px-[60px] py-[52px] bg-white xl:w-[548px] xl:h-[724px] max-h-[95%] rounded-xl items-start gap-[10px]"
-    >
+    <div className="w-[1031px] h-[724px] bg-white rounded-xl flex overflow-hidden">
       <Toaster position="top-right" />
-      <h1 className="text-[32px] font-bold text-primary self-center">
-        Sign Up
-      </h1>
-      <form onSubmit={register} className="flex flex-col flex-wrap gap-[22px]">
-        <div id="input-wrapper" className="flex flex-col">
-          <label
-            htmlFor="fullname"
-            className="flex flex-col gap-2 text-xl font-semibold text-primary"
-          >
-            <span className="after:content-['*'] after:text-red-500 after:ml-1">
+      <div className="w-[50%]">
+        <img
+          src="/images/AuthPage/side-img.png"
+          alt=""
+          className="object-cover size-full"
+        />
+      </div>
+      <form
+        onSubmit={register}
+        className="w-[50%] px-[60px] py-[52px] flex flex-col items-center justify-center"
+      >
+        <h1 className="text-[32px] font-bold text-primary-70 mb-[10px]">
+          Sign Up
+        </h1>
+        <div className="flex flex-col w-full gap-6">
+          <div className="flex flex-col gap-1">
+            <h1 className="text-[20px] font-medium after:content-['*'] after:text-red-500 after:ml-1">
               Full Name
-            </span>
+            </h1>
             <input
-              id="fullname"
               type="text"
-              className="max-w-[428px] h-11 border-2 border-primary rounded-xl w-[428px] px-3 py-3 text-primary"
+              id="fullname"
+              className="w-full border-none rounded-md shadow-inputShadow border-neutral-40"
               value={name}
               onChange={(e) => setName(e.target.value)}
+              autoComplete="off"
             />
-          </label>
-        </div>
-        <div id="input-wrapper" className="flex flex-col gap-2">
-          <label
-            htmlFor="email"
-            className="flex flex-col gap-2 text-xl font-semibold text-primary"
-          >
-            <span className="after:content-['*'] after:text-red-500 after:ml-1">
+          </div>
+          <div className="flex flex-col gap-1">
+            <h1 className="text-[20px] font-medium after:content-['*'] after:text-red-500 after:ml-1">
               Email
-            </span>
+            </h1>
             <input
-              id="email"
               type="text"
-              className="max-w-[428px] h-11 border-2 border-primary rounded-xl w-[428px] px-3 py-3 text-primary"
+              id="email"
+              className="w-full border-none rounded-md shadow-inputShadow border-neutral-40"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
+              autoComplete="off"
             />
-          </label>
-        </div>
-        <div id="input-wrapper" className="flex flex-col gap-2">
-          <label
-            htmlFor="password"
-            className="flex flex-col gap-2 text-xl font-semibold text-primary"
-          >
-            <span className="after:content-['*'] after:text-red-500 after:ml-1">
+          </div>
+          <div className="relative flex flex-col gap-1">
+            <h1 className="text-[20px] font-medium after:content-['*'] after:text-red-500 after:ml-1">
               Password
-            </span>
+            </h1>
             <input
+              type={showPassword ? 'text' : 'password'}
               id="password"
-              type="password"
-              className="max-w-[428px] h-11 border-2 border-primary rounded-xl w-[428px] px-3 py-3"
+              className="w-full border-none rounded-md shadow-inputShadow border-neutral-40"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
-          </label>
-        </div>
-        <div id="input-wrapper" className="flex flex-col gap-2">
-          <label className="flex flex-col gap-2 text-xl font-semibold text-primary">
-            <span className="after:content-['*'] after:text-red-500 after:ml-1">
+            <FontAwesomeIcon
+              icon={showPassword ? faEyeSlash : faEye}
+              onClick={handleShowPassword}
+              className="absolute cursor-pointer right-4 bottom-3"
+            />
+          </div>
+          <div className="relative flex flex-col gap-1">
+            <h1 className="text-[20px] font-medium after:content-['*'] after:text-red-500 after:ml-1">
               Confirm Password
-            </span>
+            </h1>
             <input
-              type="password"
-              className="max-w-[428px] h-11 border-2 border-primary rounded-xl w-[428px] px-3 py-3"
+              type={showConfPassword ? 'text' : 'password'}
+              className="w-full border-none rounded-md shadow-inputShadow border-neutral-40"
               value={confPassword}
               onChange={(e) => setConfPassword(e.target.value)}
             />
-          </label>
+            <FontAwesomeIcon
+              icon={showConfPassword ? faEyeSlash : faEye}
+              onClick={handleShowConfPassword}
+              className="absolute cursor-pointer right-4 bottom-3"
+            />
+          </div>
         </div>
-        <button className="min-h-[54px] w-[243px] bg-primary rounded-xl font-medium text-xl text-white hover:bg-primaryDark active:bg-primaryDarker self-center mt-5">
-          Create!
+        <button className="px-5 py-3 rounded-xl w-fit h-fit bg-primary-60 text-[20px] font-medium mt-[42px] text-white">
+          Create your Account!
         </button>
+        <div className="flex gap-3 mt-[42px]">
+          <h1 className="font-medium">Already have an account?</h1>
+          <Link to="/login" className="font-bold underline text-primary-70">
+            {' '}
+            Sign In.{' '}
+          </Link>
+        </div>
       </form>
-      <div className="flex self-center gap-3 text-[20px] font-semibold mt-[22px]">
-        <h1 className="text-blackui">Already have an account?</h1>
-        <Link
-          to="/login"
-          className="underline text-primary hover:text-primaryDark active:text-primaryDarker"
-        >
-          Sign In.{' '}
-        </Link>
-      </div>
     </div>
   );
 };

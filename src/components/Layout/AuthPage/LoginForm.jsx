@@ -2,12 +2,20 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEye } from '@fortawesome/free-regular-svg-icons';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
+
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
 
   const login = async (e) => {
     e.preventDefault();
@@ -37,7 +45,7 @@ const LoginForm = () => {
           email: email,
           password: password,
         });
-        navigate('/home');
+        navigate('/');
       } catch (error) {
         if (error.response) {
           toast.error(error.response.data.msg);
@@ -47,53 +55,85 @@ const LoginForm = () => {
   };
 
   return (
-    <div
-      id="login-wrapper"
-      className="flex flex-wrap flex-col items-center w-[544px] h-fit bg-white mt-11 mx-auto rounded-xl py-[75px] px-[68px] shadow-inset shadow-dropbox gap-8"
-    >
+    <div className="w-[1031px] h-[724px] bg-white rounded-xl flex overflow-hidden">
       <Toaster position="top-right" />
-      <h1 className="text-5xl font-bold text-primary">Sign In</h1>
+      <div className="w-[50%]">
+        <img
+          src="/images/AuthPage/side-img.png"
+          alt=""
+          className="object-cover size-full"
+        />
+      </div>
       <form
         onSubmit={login}
-        className="w-full flex flex-col gap-[22px] mt-[40px]"
+        className="w-[50%] px-[60px] py-[52px] flex flex-col items-center justify-center"
       >
-        <label htmlFor="email" className="flex flex-col w-full gap-2">
-          <span className="text-xl font-semibold text-primary">Email</span>
-          <input
-            type="text"
-            name="email"
-            id="email"
-            className="w-full font-medium border-2 rounded-xl border-primary text-primary"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </label>
-        <label htmlFor="password" className="flex flex-col w-full gap-2">
-          <span className="text-xl font-semibold text-primary">Password</span>
-          <input
-            type="password"
-            name="password"
-            id="password"
-            className="w-full font-medium border-2 rounded-xl border-primary text-primary"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </label>
-        <button className="flex justify-center items-center text-xl font-medium py-3 px-[70px] w-fit bg-primary hover:bg-primaryDark active:bg-primaryDarker rounded-xl text-white self-center mt-[42px]">
-          Sign In
+        <h1 className="text-[40px] font-bold text-primary-70 mb-[10px]">
+          Sign In to Trekku
+        </h1>
+        <h1 className="text-neutral-80 text-[20px] font-normal mb-[60px]">
+          Welcome Back, Adventurer!
+        </h1>
+        <div className="flex flex-col w-full gap-6">
+          <div className="flex flex-col gap-1">
+            <h1 className="text-[20px] font-medium">Email</h1>
+            <input
+              type="text"
+              id="email"
+              className="w-full border-none rounded-md shadow-inputShadow border-neutral-40 "
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="off"
+            />
+          </div>
+          <div className="relative flex flex-col gap-1">
+            <h1 className="text-[20px] font-medium">Password</h1>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              id="password"
+              className="w-full border-none rounded-md shadow-inputShadow border-neutral-40"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <FontAwesomeIcon
+              icon={showPassword ? faEyeSlash : faEye}
+              onClick={handleShowPassword}
+              className="absolute cursor-pointer right-4 bottom-3"
+            />
+          </div>
+          <div className="flex justify-between w-full">
+            <div className="flex items-center gap-2">
+              <input
+                type="checkbox"
+                name="remember"
+                id="remember"
+                className="rounded-[5px] focus:ring-0 focus:outline-none focus:border-none"
+              />
+              <label
+                htmlFor="remember"
+                className="text-[20px] font-normal select-none"
+              >
+                Remember Me
+              </label>
+            </div>
+            <Link className="text-primary-70 text-[20px] font-semibold underline">
+              Forgot Password?
+            </Link>
+          </div>
+        </div>
+
+        <button className="px-5 py-3 rounded-xl w-[208px] h-fit bg-primary-60 text-[20px] font-medium mt-[42px] text-white">
+          Continue
         </button>
+
+        <div className="flex gap-3 mt-[42px]">
+          <h1 className="font-medium">Don&apos;t have an account?</h1>
+          <Link to="/register" className="font-bold underline text-primary-70">
+            {' '}
+            Sign Up.{' '}
+          </Link>
+        </div>
       </form>
-      <div className="flex justify-between w-full mt-8">
-        <Link
-          to="/register"
-          className="text-xl font-semibold underline text-primary hover:text-primaryDark active:text-primaryDarker"
-        >
-          Sign Up
-        </Link>
-        <Link className="text-xl font-semibold underline text-primary hover:text-primaryDark active:text-primaryDarker">
-          Forgot Password?
-        </Link>
-      </div>
     </div>
   );
 };
