@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCommenting,
   faTimesCircle,
-  faCircleQuestion,
+  faFaceDizzy,
 } from '@fortawesome/free-regular-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { useState } from 'react';
@@ -24,7 +24,7 @@ const FloatButton = () => {
         }
       >
         <FontAwesomeIcon
-          icon={faCircleQuestion}
+          icon={faFaceDizzy}
           className="size-[32px] text-black"
         />
       </div>
