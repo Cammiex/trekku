@@ -4,26 +4,31 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const images = [
-  'images/HomePage/slide1.jpg',
-  'images/HomePage/slide2.jpg',
-  'images/HomePage/slide3.jpg',
-  'images/HomePage/slide4.jpg',
-  'images/HomePage/slide5.jpg',
+  '/images/HomePage/slide1.jpg',
+  '/images/HomePage/slide2.jpg',
+  '/images/HomePage/slide3.jpg',
+  '/images/HomePage/slide4.jpg',
+  '/images/HomePage/slide5.jpg',
 ];
 
 function CarouselSection() {
   const [isOdd, setIsOdd] = useState(true);
-
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
+      setImageLoaded(false);
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
       setIsOdd((prevState) => !prevState);
     }, 10000);
 
     return () => clearInterval(interval);
   }, []);
+
+  const handleImageLoad = () => {
+    setImageLoaded(true);
+  };
 
   const currentImage = images[currentImageIndex];
 
@@ -37,11 +42,21 @@ function CarouselSection() {
             isOdd ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1.5 }
           }
           animate={
-            isOdd ? { opacity: 1, scale: 1.5 } : { opacity: 1, scale: 1 }
+            isOdd && imageLoaded
+              ? { opacity: 1, scale: 1.5 }
+              : { opacity: 1, scale: 1 }
           }
           transition={{ duration: 7, ease: 'linear' }}
           className="w-full h-full transition-all duration-1000 ease-linear bg-top bg-no-repeat bg-cover "
-        />
+        >
+          {/* Image element to monitor the loading status */}
+          <img
+            src={currentImage}
+            alt=""
+            onLoad={handleImageLoad}
+            className="hidden"
+          />
+        </motion.div>
       </div>
       <div className="z-[5] absolute left-1/2 -translate-x-1/2 top-[40%] flex justify-center items-center select-none">
         <span className="text-[240px] text-white/[0.24] font-extrabold absolute">
