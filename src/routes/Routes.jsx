@@ -1,5 +1,10 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 
 // const SplashScreen = React.lazy(() =>
 //   import('../components/Pages/SplashScreen/SplashScreen')
@@ -29,8 +34,8 @@ const ProjectRoutes = () => {
     <React.Suspense fallback={<div>Loading...</div>}>
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          {/* <Route path="/home" element={<HomePage />} /> */}
+          <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/home" element={<HomePage />} />
           <Route path="/open-trip" element={<OpenTripPage />} />
           <Route path="/destination" element={<DestinationPage />} />
           <Route path="/about-us" element={<AboutPage />} />

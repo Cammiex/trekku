@@ -4,7 +4,7 @@ function TouristFeedbackSection() {
       id="touristFeedback"
       className="flex flex-wrap flex-col items-center mt-[100px] gap-10"
     >
-      <h1 className="text-secondary text-[32px] font-bold">Tourist Feedback</h1>
+      <h1 className="text-secondary text-[32px] font-bold">Ulasan Pengguna</h1>
       <div id="feedback-list" className="flex flex-wrap gap-8">
         <div
           id="feedback-item"
