@@ -21,7 +21,7 @@ function OpenTripHeroSection() {
 
             <select name="" id="" className="rounded-lg min-w-[214px]">
               <option value="" disabled selected hidden>
-                Any Destination
+                Pilih Destinasi
               </option>
               <option value="volvo">Volvo</option>
               <option value="saab">Saab</option>
@@ -37,7 +37,7 @@ function OpenTripHeroSection() {
 
             <select name="" id="" className="rounded-lg min-w-[154px]">
               <option value="" disabled selected hidden>
-                Any Day
+                Pilih Durasi
               </option>
               <option value="volvo">Volvo</option>
               <option value="saab">Saab</option>
@@ -47,7 +47,7 @@ function OpenTripHeroSection() {
           </div>
           <button className="flex h-[54px] justify-center items-center bg-primary-60 rounded-xl gap-[10px] px-5 self-end">
             <img src="images/OpenTripPage/search.png" alt="" />
-            <h1 className="text-white">Search</h1>
+            <h1 className="text-white">Cari</h1>
           </button>
         </form>
       </div>

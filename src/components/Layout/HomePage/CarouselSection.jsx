@@ -61,7 +61,7 @@ function CarouselSection() {
         >
           <h1 className="text-[80px] font-extrabold leading-none">Trekku</h1>
           <h2 className="text-[28px] font-semibold leading-none">
-            Exciting Adventures with Trekku
+            Petualangan menarik dengan Trekku
           </h2>
         </div>
       </div>
@@ -82,7 +82,7 @@ function CarouselSection() {
           />
           <button className="flex items-center justify-center w-[204px] h-fit bg-primary-60 text-white gap-[10px] py-3 rounded-xl">
             <FontAwesomeIcon icon={faSearch} className="size-5" />
-            <h1 className="font-medium text-[20px]">Search</h1>
+            <h1 className="font-medium text-[20px]">Cari</h1>
           </button>
         </div>
       </div>

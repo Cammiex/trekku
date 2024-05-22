@@ -4,13 +4,13 @@ function ContactSection() {
       id="contact-us"
       className="flex flex-col items-center mt-[100px] gap-10"
     >
-      <h1 className="text-[32px] font-bold">Contact Us</h1>
+      <h1 className="text-[32px] font-bold">Hubungi kami.</h1>
       <div id="contact-wrapper" className="text-blackui flex gap-[60px]">
         <div id="contact-information" className="w-[532px] flex flex-col gap-8">
           <div>
-            <h1 className="text-2xl font-bold">Contact Information</h1>
+            <h1 className="text-2xl font-bold">Informasi kontak</h1>
             <h2 className="text-base font-medium">
-              Contact us for more information:
+              Hubungi kami untuk informasi lebih lanjut:
             </h2>
           </div>
           <div id="contact-list" className="flex flex-col gap-6">
@@ -21,7 +21,7 @@ function ContactSection() {
                 className="w-9 h-9"
               />
               <div>
-                <h1 className="text-base font-medium">Telephone</h1>
+                <h1 className="text-base font-medium">Telepon</h1>
                 <h1 className="text-base font-semibold">+62 813-2190-3281</h1>
               </div>
             </div>
@@ -43,7 +43,7 @@ function ContactSection() {
                 className="w-9 h-9"
               />
               <div>
-                <h1 className="text-base font-medium">Location</h1>
+                <h1 className="text-base font-medium">Lokasi</h1>
                 <h1 className="text-base font-semibold">
                   Dolan Street. The Ngasal Avenue. Jakarta, Indonesia
                 </h1>
@@ -51,7 +51,7 @@ function ContactSection() {
             </div>
           </div>
           <div id="about-socmed" className="flex flex-col gap-3">
-            <h1 className="text-base font-medium">Follow us:</h1>
+            <h1 className="text-base font-medium">Ikuti kami:</h1>
             <div id="socmed-list" className="flex items-center gap-5">
               <div
                 id="socmed-item"
@@ -96,7 +96,7 @@ function ContactSection() {
         </div>
         <div id="message-us" className="w-[532px] flex flex-col">
           <div id="message-title" className="flex flex-col gap-2">
-            <h1 className="text-2xl font-bold">Send a message</h1>
+            <h1 className="text-2xl font-bold">Kirim pesan</h1>
             <p className="text-base font-medium">
               Lorem ipsum dolor sit amet consectetur. Aliquam nunc a sapien ut
               scelerisque mauris.
@@ -136,7 +136,7 @@ function ContactSection() {
               type="submit"
               className="w-fit flex justify-center items-center py-3 px-[46px] bg-primary-60 rounded-xl text-white text-xl font-medium"
             >
-              Send Message
+              Kirim Pesan
             </button>
           </form>
         </div>

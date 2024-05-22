@@ -16,7 +16,7 @@ function Footer() {
         <div id="footer-item" className="mr-[52px]">
           <div id="partner-wrapper" className="flex flex-col gap-7">
             <div id="partner" className="flex flex-col gap-2">
-              <h1 className="text-xl font-semibold text-white">Partner</h1>
+              <h1 className="text-xl font-semibold text-white">Mitra</h1>
               <img
                 src="/images/Footer/partner1.png"
                 alt=""
@@ -25,7 +25,7 @@ function Footer() {
             </div>
             <div id="payment-partner" className="flex flex-col gap-3">
               <h1 className="text-xl font-semibold text-white">
-                Payment Partners
+                Mitra Pembayaran
               </h1>
               <div id="payment-partner-list" className="grid grid-cols-4 gap-2">
                 <div
@@ -105,9 +105,7 @@ function Footer() {
           </div>
         </div>
         <div id="footer-item" className="flex flex-col flex-wrap gap-3">
-          <h1 className="text-xl font-semibold text-white">
-            Contact Information
-          </h1>
+          <h1 className="text-xl font-semibold text-white">Informasi kontak</h1>
           <div id="contact-list" className="flex flex-col gap-5">
             <div
               id="contact-item"
@@ -119,7 +117,7 @@ function Footer() {
                 className="max-w-9 max-h-9"
               />
               <div id="contact-text" className="flex flex-col gap-1">
-                <h1 className="text-base font-medium text-white">Telephone</h1>
+                <h1 className="text-base font-medium text-white">Telepon</h1>
                 <h1 className="text-base font-semibold text-white">
                   +62 2118 24322
                 </h1>
@@ -167,7 +165,7 @@ function Footer() {
                 className="max-w-9 max-h-9"
               />
               <div id="contact-text" className="flex flex-col gap-1">
-                <h1 className="text-base font-medium text-white">Location</h1>
+                <h1 className="text-base font-medium text-white">Lokasi</h1>
                 <h1 className="text-base font-semibold text-white">
                   Dolan Street. The Ngasal Avenue. <br />
                   Jakarta, Indonesia
@@ -177,7 +175,7 @@ function Footer() {
           </div>
         </div>
         <div id="footer-item" className="flex flex-col flex-wrap gap-3">
-          <h1 className="text-xl font-semibold text-white">Quick Links</h1>
+          <h1 className="text-xl font-semibold text-white">Menu</h1>
           <div id="link-list" className="flex flex-col gap-6">
             <Link to="/open-trip">
               <div
@@ -190,7 +188,7 @@ function Footer() {
                 </h1>
               </div>
             </Link>
-            <Link to="/destination">
+            {/* <Link to="/destination">
               <div
                 id="link-item"
                 className="flex items-center gap-3 opacity-40 group hover:opacity-100"
@@ -200,7 +198,7 @@ function Footer() {
                   Destinations
                 </h1>
               </div>
-            </Link>
+            </Link> */}
             <Link to="/about-us">
               <div
                 id="link-item"
@@ -208,14 +206,14 @@ function Footer() {
               >
                 <img src="/images/Footer/msg.svg" alt="" className="w-9 h-9" />
                 <h1 className="text-base font-medium text-white group-hover:underline">
-                  About Us
+                  Tentang Kami
                 </h1>
               </div>
             </Link>
           </div>
         </div>
         <div id="footer-item" className="flex flex-col flex-wrap gap-3">
-          <h1 className="text-xl font-semibold text-white">Follow us on</h1>
+          <h1 className="text-xl font-semibold text-white">Ikuti kami</h1>
           <div id="social-list" className="flex flex-col gap-6">
             <a href="#">
               <div id="social-item" className="flex items-center gap-3 group">

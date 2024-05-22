@@ -2,7 +2,7 @@ function WhyUsSection() {
   return (
     <>
       <section id="why-us" className="flex flex-col items-center mt-[100px]">
-        <h1 className="text-[32px] font-bold">Why Choose Us?</h1>
+        <h1 className="text-[32px] font-bold">Mengapa Memilih Trekku?</h1>
         <p className="text-base font-medium w-[800px] text-center">
           Dengan komunitas yang solid, pengalaman yang dikelola dengan
           profesional, dan akses ke destinasi tersembunyi, Trekku adalah pilihan
@@ -19,7 +19,7 @@ function WhyUsSection() {
             className="w-[200px] h-[200px]"
           />
           <div id="reason-body" className="flex flex-col items-center">
-            <h1 className="text-2xl font-bold">Community</h1>
+            <h1 className="text-2xl font-bold">Komunitas</h1>
             <p className="text-base font-medium text-center w-[372px]">
               Koneksi dengan sesama petualang, berbagi pengalaman, dan
               merencanakan petualangan bersama.
@@ -33,7 +33,7 @@ function WhyUsSection() {
             className="w-[200px] h-[200px]"
           />
           <div id="reason-body" className="flex flex-col items-center">
-            <h1 className="text-2xl font-bold">Professional</h1>
+            <h1 className="text-2xl font-bold">Profesional</h1>
             <p className="text-base font-medium text-center w-[372px]">
               Manajemen yang cermat dari penyusunan rute hingga penginapan dan
               transportasi, memberikan ketenangan untuk sepenuhnya menikmati
@@ -48,7 +48,7 @@ function WhyUsSection() {
             className="w-[200px] h-[200px]"
           />
           <div id="reason-body" className="flex flex-col items-center">
-            <h1 className="text-2xl font-bold">Accessibility</h1>
+            <h1 className="text-2xl font-bold">Aksesibilitas</h1>
             <p className="text-base font-medium text-center w-[372px]">
               Akses ke tempat-tempat unik dan belum terjamah, menyediakan
               pengalaman autentik yang jauh dari keramaian wisata massal.

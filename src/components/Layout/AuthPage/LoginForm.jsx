@@ -24,12 +24,12 @@ const LoginForm = () => {
 
     if (!email.trim()) {
       isError = true;
-      errors.push('Email is required.');
+      errors.push('Masukkan email anda!');
     }
 
     if (!password.trim()) {
       isError = true;
-      errors.push('Password is required.');
+      errors.push('Masukkan kata sandi anda!');
     }
 
     if (errors.length > 0) {
@@ -69,10 +69,10 @@ const LoginForm = () => {
         className="w-[50%] px-[60px] py-[52px] flex flex-col items-center justify-center"
       >
         <h1 className="text-[40px] font-bold text-primary-70 mb-[10px]">
-          Sign In to Trekku
+          Masuk ke Trekku
         </h1>
         <h1 className="text-neutral-80 text-[20px] font-normal mb-[60px]">
-          Welcome Back, Adventurer!
+          Selamat Datang Kembali, Petualang!
         </h1>
         <div className="flex flex-col w-full gap-6">
           <div className="flex flex-col gap-1">
@@ -87,7 +87,7 @@ const LoginForm = () => {
             />
           </div>
           <div className="relative flex flex-col gap-1">
-            <h1 className="text-[20px] font-medium">Password</h1>
+            <h1 className="text-[20px] font-medium">Kata Sandi</h1>
             <input
               type={showPassword ? 'text' : 'password'}
               id="password"
@@ -113,24 +113,24 @@ const LoginForm = () => {
                 htmlFor="remember"
                 className="text-[20px] font-normal select-none"
               >
-                Remember Me
+                Ingat Saya
               </label>
             </div>
             <Link className="text-primary-70 text-[20px] font-semibold underline">
-              Forgot Password?
+              Lupa Kata Sandi?
             </Link>
           </div>
         </div>
 
         <button className="px-5 py-3 rounded-xl w-[208px] h-fit bg-primary-60 text-[20px] font-medium mt-[42px] text-white">
-          Continue
+          Lanjutkan
         </button>
 
         <div className="flex gap-3 mt-[42px]">
-          <h1 className="font-medium">Don&apos;t have an account?</h1>
+          <h1 className="font-medium">Belum Punya Akun?</h1>
           <Link to="/register" className="font-bold underline text-primary-70">
             {' '}
-            Sign Up.{' '}
+            Daftar.{' '}
           </Link>
         </div>
       </form>

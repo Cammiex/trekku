@@ -9,10 +9,10 @@ function AboutUsHeroSection() {
       <div className="absolute inset-0 bg-black/20"></div>
       <div className="flex flex-col items-center">
         <h1 className="text-[40px] font-extrabold z-10">
-          We are Trekku: Your Ultimate Adventure Companion
+          Kami adalah Trekku: Teman Petualangan Terhebatmu
         </h1>
         <h1 className="text-[28px] font-semibold z-10">
-          Exciting Adventures with Trekku
+          Petualangan Menarik dengan Trekku
         </h1>
       </div>
     </div>

@@ -174,7 +174,7 @@ function Navbar() {
               <Dropdown.Item className="hover:text-primary-60 text-[16px] font-semibold w-full p-0">
                 <Link to="/profile" className="py-4 pl-8 text-left size-full">
                   {' '}
-                  Profile{' '}
+                  Profil{' '}
                 </Link>
               </Dropdown.Item>
               <div className="w-full h-[1px] bg-black/40"></div>
@@ -182,7 +182,7 @@ function Navbar() {
                 onClick={() => setOpenModal(true)}
                 className="hover:text-red-700 text-red-600 text-[16px] font-semibold w-full py-4 pl-8"
               >
-                Logout
+                Keluar
               </Dropdown.Item>
             </>
           ) : (
@@ -190,14 +190,14 @@ function Navbar() {
               <Dropdown.Item className="hover:text-primary-60 text-[16px] font-semibold w-[174px]">
                 <Link to="/login" className="block py-2 text-left size-full">
                   {' '}
-                  Log In{' '}
+                  Masuk{' '}
                 </Link>
               </Dropdown.Item>
               <div className="w-full h-[1px] bg-black/40"></div>
               <Dropdown.Item className="hover:text-primary-60 text-[16px] font-semibold w-[174px] ">
                 <Link to="/register" className="block py-2 text-left size-full">
                   {' '}
-                  Register{' '}
+                  Daftar{' '}
                 </Link>
               </Dropdown.Item>
             </>

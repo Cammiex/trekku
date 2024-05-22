@@ -35,25 +35,25 @@ const RegisterForm = () => {
     // Validasi input
     if (!name.trim()) {
       isError = true;
-      errors.push('Full Name is required.');
+      errors.push('Nama lengkap diperlukan.');
     }
 
     if (!email.trim() || !validateEmail(email)) {
       isError = true;
-      errors.push('Valid Email is required.');
+      errors.push('Email yang anda masukkan tidak valid.');
     }
 
     if (!password.trim()) {
       isError = true;
-      errors.push('Password is required.');
+      errors.push('Kata sandi diperlukan.');
     } else if (password.length < 8) {
       isError = true;
-      errors.push('Password must be at least 8 characters long.');
+      errors.push('Kata sandi setidaknya memiliki 8 karakter.');
     }
 
     if (!confPassword.trim()) {
       isError = true;
-      errors.push('Confirm Password is required.');
+      errors.push('Konfirmasi kata sandi diperlukan.');
     }
 
     // Menampilkan toast jika ada error
@@ -99,12 +99,12 @@ const RegisterForm = () => {
         className="w-[50%] px-[60px] py-[52px] flex flex-col items-center justify-center"
       >
         <h1 className="text-[32px] font-bold text-primary-70 mb-[10px]">
-          Sign Up
+          Daftar
         </h1>
         <div className="flex flex-col w-full gap-6">
           <div className="flex flex-col gap-1">
             <h1 className="text-[20px] font-medium after:content-['*'] after:text-red-500 after:ml-1">
-              Full Name
+              Nama Lengkap
             </h1>
             <input
               type="text"
@@ -130,7 +130,7 @@ const RegisterForm = () => {
           </div>
           <div className="relative flex flex-col gap-1">
             <h1 className="text-[20px] font-medium after:content-['*'] after:text-red-500 after:ml-1">
-              Password
+              Kata Sandi
             </h1>
             <input
               type={showPassword ? 'text' : 'password'}
@@ -147,7 +147,7 @@ const RegisterForm = () => {
           </div>
           <div className="relative flex flex-col gap-1">
             <h1 className="text-[20px] font-medium after:content-['*'] after:text-red-500 after:ml-1">
-              Confirm Password
+              Konfirmasi Kata Sandi
             </h1>
             <input
               type={showConfPassword ? 'text' : 'password'}
@@ -163,13 +163,13 @@ const RegisterForm = () => {
           </div>
         </div>
         <button className="px-5 py-3 rounded-xl w-fit h-fit bg-primary-60 text-[20px] font-medium mt-[42px] text-white">
-          Create your Account!
+          Buat Akun Anda!
         </button>
         <div className="flex gap-3 mt-[42px]">
-          <h1 className="font-medium">Already have an account?</h1>
+          <h1 className="font-medium">Sudah Punya Akun?</h1>
           <Link to="/login" className="font-bold underline text-primary-70">
             {' '}
-            Sign In.{' '}
+            Masuk.{' '}
           </Link>
         </div>
       </form>
