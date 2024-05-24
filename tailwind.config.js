@@ -50,7 +50,7 @@ export default {
           'inset -2px -2px 4px rgba(0, 0, 0, 0.5), 2px 4px 8px rgba(0, 0, 0, 0.5)',
         cardShadow: '1px 2px 12px rgba(0, 0, 0, 0.3)',
         cardShadow2:
-          '0px 117px 47px 0px rgba(0, 0, 0, 0.01), 0px 66px 40px 0px rgba(0, 0, 0, 0.04), 0px 29px 29px 0px rgba(0, 0, 0, 0.07), 0px 7px 16px 0px rgba(0, 0, 0, 0.08)',
+          '0px 183px 51px 0px rgba(0, 0, 0, 0), 0px 117px 47px 0px rgba(0, 0, 0, 0.01), 0px 66px 40px 0px rgba(0, 0, 0, 0.04), 0px 29px 29px 0px rgba(0, 0, 0, 0.07), 0px 7px 16px 0px rgba(0, 0, 0, 0.08)',
         inputShadow:
           '0px 2px 4px 0px rgba(0, 0, 0, 0.15), inset 0px 0px 0px 1px rgba(205, 209, 220, 1)',
       },

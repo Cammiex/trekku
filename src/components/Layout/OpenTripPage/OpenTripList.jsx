@@ -41,7 +41,7 @@ function OpenTripList() {
 
   console.log(data);
   return (
-    <section className="grid w-[1160px] grid-cols-3 gap-10">
+    <section className="grid w-[1240px] grid-cols-3 gap-5">
       {data?.map((item, index) => (
         <OpenTripItem
           key={index}

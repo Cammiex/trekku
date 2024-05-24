@@ -28,6 +28,9 @@ const Login = React.lazy(() => import('../components/Pages/AuthPage/Login'));
 const OpenTripDetail = React.lazy(() =>
   import('../components/Pages/DetailOpenTripPage/DetailOpenTripPage')
 );
+const HelpPage = React.lazy(() =>
+  import('../components/Pages/HelpPage/HelpPage')
+);
 
 const ProjectRoutes = () => {
   return (
@@ -42,6 +45,7 @@ const ProjectRoutes = () => {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/trip/:id" element={<OpenTripDetail />} />
+          <Route path="/help" element={<HelpPage />} />
         </Routes>
       </Router>
     </React.Suspense>

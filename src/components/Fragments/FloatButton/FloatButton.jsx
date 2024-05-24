@@ -77,7 +77,10 @@ const FloatButton = () => {
           </h1>
         </div>
         <div className="flex flex-col justify-center w-full mt-3">
-          <Link className="flex items-center justify-center w-full gap-3 py-3 transition duration-200 hover:scale-105 hover:underline text-neutral-70">
+          <Link
+            to="/help"
+            className="flex items-center justify-center w-full gap-3 py-3 transition duration-200 hover:scale-105 hover:underline text-neutral-70"
+          >
             <FontAwesomeIcon
               icon={faFileText}
               className="size-9 text-neutral-70"

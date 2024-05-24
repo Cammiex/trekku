@@ -15,7 +15,11 @@ function OpenTripHeroSection() {
         <form action="#" className="flex flex-wrap gap-6">
           <div id="search-item" className="flex flex-col">
             <div id="icon" className="flex items-center gap-2 mb-3">
-              <img src="images/OpenTripPage/Loc.svg" alt="" />
+              <div className="flex items-center justify-center bg-white rounded-full size-7 shadow-cardShadow">
+                {' '}
+                <img src="images/OpenTripPage/Loc.svg" alt="" />
+              </div>
+
               <label>Destination</label>
             </div>
 
@@ -31,7 +35,10 @@ function OpenTripHeroSection() {
           </div>
           <div id="search-item" className="flex flex-col">
             <div id="icon" className="flex items-center gap-2 mb-3">
-              <img src="images/OpenTripPage/Clock.svg" alt="" />
+              <div className="flex items-center justify-center bg-white rounded-full size-7 shadow-cardShadow">
+                <img src="images/OpenTripPage/Clock.svg" alt="" />
+              </div>
+
               <label>Duration</label>
             </div>
 
@@ -45,7 +52,7 @@ function OpenTripHeroSection() {
               <option value="audi">Audi</option>
             </select>
           </div>
-          <button className="flex h-[54px] justify-center items-center bg-primary-60 rounded-xl gap-[10px] px-5 self-end">
+          <button className="flex w-[177px] h-[54px] justify-center items-center bg-primary-60 rounded-xl gap-[10px] px-5 self-end">
             <img src="images/OpenTripPage/search.png" alt="" />
             <h1 className="text-white">Cari</h1>
           </button>

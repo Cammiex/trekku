@@ -16,7 +16,7 @@ const customTheme = {
     },
     tabitem: {
       base:
-        'flex items-center justify-center rounded-t-lg p-4 text-sm font-medium first:ml-0 focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500',
+        'flex items-center justify-center rounded-t-lg py-5 px-[41px] text-sm font-medium first:ml-0 focus:outline-none focus:ring-0 disabled:cursor-not-allowed disabled:text-gray-400 disabled:dark:text-gray-500',
       styles: {
         default: {
           base: 'rounded-t-lg',
@@ -30,9 +30,9 @@ const customTheme = {
           base: 'rounded-t-lg',
           active: {
             on:
-              'active rounded-t-lg border-b-2 border-cyan-600 text-cyan-600 dark:border-cyan-500 dark:text-cyan-500',
+              'active rounded-t-lg border-b-4 border-primary-60 text-primary-90 text-[20px] font-semibold',
             off:
-              'border-b-2 border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300',
+              'border-b-2 border-transparent text-[20px] text-gray-500 hover:border-gray-300 hover:text-gray-600 dark:text-gray-400 dark:hover:text-gray-300',
           },
         },
         pills: {
@@ -76,96 +76,29 @@ const InformationSection = ({
   preparation,
 }) => {
   return (
-    <section className="self-start">
+    <section className="self-start w-[1240px] h-fit min-h-[385px] pt-2 rounded-2xl shadow-cardShadow">
       <Tabs
         aria-label="Tabs with underline"
         style="underline"
         theme={customTheme}
       >
         <Tabs.Item active title="Informasi">
-          <div className="w-[1240px] h-fit px-[25px] py-[26px] rounded-xl shadow-cardShadow">
-            {information}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="12"
-              viewBox="0 0 48 12"
-              fill="none"
-              className="mx-auto mt-5"
-            >
-              <circle cx="6" cy="6" r="6" fill="#383838" />
-              <circle cx="24" cy="6" r="6" fill="#383838" />
-              <circle cx="42" cy="6" r="6" fill="#383838" />
-            </svg>
-          </div>
+          <div className="px-8 py-2">{information}</div>
         </Tabs.Item>
         <Tabs.Item active title="Destinasi">
-          <div className="w-[1240px] h-fit px-[25px] py-[26px] rounded-xl shadow-cardShadow">
-            {destination}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="12"
-              viewBox="0 0 48 12"
-              fill="none"
-              className="mx-auto mt-5"
-            >
-              <circle cx="6" cy="6" r="6" fill="#383838" />
-              <circle cx="24" cy="6" r="6" fill="#383838" />
-              <circle cx="42" cy="6" r="6" fill="#383838" />
-            </svg>
-          </div>
+          <div className="px-8 py-2">{destination}</div>
+        </Tabs.Item>
+        <Tabs.Item active title="Jadwal">
+          <div className="px-8 py-2">{facility}</div>
         </Tabs.Item>
         <Tabs.Item active title="Fasilitas">
-          <div className="w-[1240px] h-fit px-[25px] py-[26px] rounded-xl shadow-cardShadow">
-            {facility}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="12"
-              viewBox="0 0 48 12"
-              fill="none"
-              className="mx-auto mt-5"
-            >
-              <circle cx="6" cy="6" r="6" fill="#383838" />
-              <circle cx="24" cy="6" r="6" fill="#383838" />
-              <circle cx="42" cy="6" r="6" fill="#383838" />
-            </svg>
-          </div>
+          <div className="px-8 py-2">{facility}</div>
         </Tabs.Item>
         <Tabs.Item active title="Akomodasi">
-          <div className="w-[1240px] h-fit px-[25px] py-[26px] rounded-xl shadow-cardShadow">
-            {accommodation}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="12"
-              viewBox="0 0 48 12"
-              fill="none"
-              className="mx-auto mt-5"
-            >
-              <circle cx="6" cy="6" r="6" fill="#383838" />
-              <circle cx="24" cy="6" r="6" fill="#383838" />
-              <circle cx="42" cy="6" r="6" fill="#383838" />
-            </svg>
-          </div>
+          <div className="px-8 py-2">{accommodation}</div>
         </Tabs.Item>
         <Tabs.Item active title="Persiapan">
-          <div className="w-[1240px] h-fit px-[25px] py-[26px] rounded-xl shadow-cardShadow">
-            {preparation}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="28"
-              height="12"
-              viewBox="0 0 48 12"
-              fill="none"
-              className="mx-auto mt-5"
-            >
-              <circle cx="6" cy="6" r="6" fill="#383838" />
-              <circle cx="24" cy="6" r="6" fill="#383838" />
-              <circle cx="42" cy="6" r="6" fill="#383838" />
-            </svg>
-          </div>
+          <div className="px-8 py-2">{preparation}</div>
         </Tabs.Item>
       </Tabs>
     </section>
