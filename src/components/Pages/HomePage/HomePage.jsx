@@ -10,17 +10,20 @@ import PromoSection from '../../Layout/HomePage/PromoSection';
 
 function HomePage() {
   return (
-    <div className="">
+    <>
+      {' '}
       <Navbar />
-      <FloatButton />
-      <CarouselSection />
-      {/* <PopularDestinationSection /> */}
-      <OpenTripRecomendSection />
-      <PromoSection />
-      <TouristFeedbackSection />
-      <ArticleTipsSection />
+      <div className="mx-auto">
+        <FloatButton />
+        <CarouselSection />
+        {/* <PopularDestinationSection /> */}
+        <OpenTripRecomendSection />
+        <PromoSection />
+        <TouristFeedbackSection />
+        <ArticleTipsSection />
+      </div>
       <Footer />
-    </div>
+    </>
   );
 }
 

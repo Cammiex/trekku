@@ -121,10 +121,6 @@ function OpenTripList() {
     setData(tripData);
   }, []);
 
-  // useEffect(() => {
-  //   window.scrollTo({ top: 700, behavior: 'smooth' });
-  // }, [currentPage]);
-
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
