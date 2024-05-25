@@ -10,6 +10,7 @@ import RatingHeaderSection from '../../Layout/DetailOpenTripPage/RatingHeaderSec
 import BookDetailSection from '../../Layout/DetailOpenTripPage/BookDetailSection';
 import ReviewsSection from '../../Layout/DetailOpenTripPage/ReviewsSection';
 import BudgetPlanningSection from '../../Layout/DetailOpenTripPage/BudgetPlanningSection';
+import FloatButton from '../../Fragments/FloatButton/FloatButton';
 
 const OpenTripDetail = () => {
   const { id } = useParams();
@@ -161,6 +162,7 @@ const OpenTripDetail = () => {
   return (
     <>
       <Navbar />
+      <FloatButton />
       <main className="flex flex-wrap justify-center">
         <HeroSection />
         <div

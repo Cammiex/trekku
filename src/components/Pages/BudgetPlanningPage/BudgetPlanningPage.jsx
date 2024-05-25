@@ -5,6 +5,7 @@ import ProductHeaderSection from '../../Layout/BudgetPlanningPage/ProductHeaderS
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import BudgetFormSection from '../../Layout/BudgetPlanningPage/BudgetFormSection';
+import FloatButton from '../../Fragments/FloatButton/FloatButton';
 
 const BudgetPlanningPage = () => {
   const { id } = useParams();
@@ -136,8 +137,8 @@ const BudgetPlanningPage = () => {
             'Dengan segala pesonanya, Labuan Bajo adalah tempat yang memikat hati para petualang, pelancong, dan pencinta alam dari seluruh penjuru dunia. Itulah keajaiban dari Labuan Bajo, tempat di mana alam dan kehidupan manusia bersatu dalam harmoni yang indah.',
           preparation:
             'Labuan Bajo, sebuah surga tersembunyi di ujung barat Pulau Flores, Indonesia, merangkul pengunjungnya dengan keindahan tak terlukiskan. Saat matahari memancarkan sinarnya yang lembut di langit biru, deretan perahu phinisi berlabuh di pelabuhan, siap membawa petualang ke petualangan yang menakjubkan. Angin sepoi-sepoi laut meniup lembut, membawa aroma segar dari lautan yang memikat.\n',
-          date: '20260827',
-          price: 900000,
+          date: '20240824',
+          price: 500000,
         },
       ];
 
@@ -155,6 +156,7 @@ const BudgetPlanningPage = () => {
   return (
     <>
       <Navbar />
+      <FloatButton />
       <main className="flex flex-col items-center">
         <HeroSection />
         <ProductHeaderSection

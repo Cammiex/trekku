@@ -5,11 +5,13 @@ import OurVisionSection from '../../Layout/AboutPage/OurVisionSection';
 import WhyUsSection from '../../Layout/AboutPage/WhyUsSection';
 import OurTeamSection from '../../Layout/AboutPage/OurTeamSection';
 import ContactSection from '../../Layout/AboutPage/ContactSection';
+import FloatButton from '../../Fragments/FloatButton/FloatButton';
 
 function AboutPage() {
   return (
     <>
       <Navbar />
+      <FloatButton />
       <AboutUsHeroSection />
       <div
         id="main-content"
