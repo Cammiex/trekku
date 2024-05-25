@@ -136,7 +136,7 @@ const BudgetPlanningPage = () => {
             'Dengan segala pesonanya, Labuan Bajo adalah tempat yang memikat hati para petualang, pelancong, dan pencinta alam dari seluruh penjuru dunia. Itulah keajaiban dari Labuan Bajo, tempat di mana alam dan kehidupan manusia bersatu dalam harmoni yang indah.',
           preparation:
             'Labuan Bajo, sebuah surga tersembunyi di ujung barat Pulau Flores, Indonesia, merangkul pengunjungnya dengan keindahan tak terlukiskan. Saat matahari memancarkan sinarnya yang lembut di langit biru, deretan perahu phinisi berlabuh di pelabuhan, siap membawa petualang ke petualangan yang menakjubkan. Angin sepoi-sepoi laut meniup lembut, membawa aroma segar dari lautan yang memikat.\n',
-          date: '22-24 March 2024',
+          date: '20260827',
           price: 900000,
         },
       ];
@@ -166,7 +166,7 @@ const BudgetPlanningPage = () => {
           image4={trip?.image4}
           image5={trip?.image5}
         />
-        <BudgetFormSection price={trip?.price} />
+        <BudgetFormSection price={trip?.price} date={trip?.date} />
       </main>
       <Footer />
     </>

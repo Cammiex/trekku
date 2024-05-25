@@ -1,7 +1,118 @@
+import moment from 'moment';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 
-const BudgetFormSection = ({ price }) => {
+const OutputBudgetPlanning = ({
+  tripPrice,
+  addPrice,
+  allTotalPrice,
+  month,
+  monthlySave,
+  week,
+  weeklySave,
+  day,
+  daySave,
+}) => {
+  const [calculate, setCalculate] = useState('false');
+
+  const handleCalculate = () => {
+    setCalculate(!calculate);
+  };
+
+  if (!calculate) {
+    return (
+      <>
+        <div className="w-full bg-neutral-20 h-[3px] mb-[56px] mt-[56px]"></div>
+        <div className="flex gap-[46px]">
+          <div className="flex flex-col gap-6 w-[535px]">
+            <h1 className="text-neutral-80 font-semibold text-[32px]">
+              Dana yang Harus Dikumpulkan
+            </h1>
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center justify-between">
+                <h1 className="text-[20px] text-neutral-80 font-semibold">
+                  Paket Open Trip
+                </h1>
+                <h1 className="text-[20px] font-semibold text-neutral-40">
+                  Rp{tripPrice}
+                </h1>
+              </div>
+              <div className="flex items-center justify-between">
+                <h1 className="text-[20px] text-neutral-80 font-semibold">
+                  Pengeluaran Tambahan
+                </h1>
+                <h1 className="text-[20px] font-semibold text-neutral-40">
+                  Rp{addPrice}
+                </h1>
+              </div>
+            </div>
+            <div className="w-full bg-neutral-20 h-[2px] -mt-3"></div>
+            <div className="flex justify-between">
+              <h1 className="text-neutral-80 font-bold text-[32px]">Total</h1>
+              <h1 className="text-[32px] font-bold text-[#F96A01]">
+                Rp{allTotalPrice}
+              </h1>
+            </div>
+          </div>
+          <div className="flex flex-col gap-6 w-[535px] text-black">
+            <h1 className="text-neutral-80 font-semibold text-[32px]">
+              Opsi Menabung
+            </h1>
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center justify-between">
+                <h1 className="text-[20px] text-neutral-80 font-semibold">
+                  ● Per Bulan ({month}x)
+                </h1>
+                <h1 className="text-[20px] font-semibold text-neutral-40">
+                  Rp{monthlySave}
+                </h1>
+              </div>
+              <div className="flex items-center justify-between">
+                <h1 className="text-[20px] text-neutral-80 font-semibold">
+                  ● Per Minggu ({week}x)
+                </h1>
+                <h1 className="text-[20px] font-semibold text-neutral-40">
+                  Rp{weeklySave}
+                </h1>
+              </div>
+              <div className="flex items-center justify-between">
+                <h1 className="text-[20px] text-neutral-80 font-semibold">
+                  ● Per Hari ({day}x)
+                </h1>
+                <h1 className="text-[20px] font-semibold text-neutral-40">
+                  Rp{daySave}
+                </h1>
+              </div>
+            </div>
+          </div>
+        </div>
+      </>
+    );
+  } else {
+    return (
+      <button
+        onClick={handleCalculate}
+        className="size-fit px-[54px] py-[17px] rounded-xl bg-primary-60 mt-[46px] self-center active:scale-95 transition-all"
+      >
+        Hitung Anggaran Anda!
+      </button>
+    );
+  }
+};
+
+OutputBudgetPlanning.propTypes = {
+  tripPrice: PropTypes.number,
+  addPrice: PropTypes.number,
+  allTotalPrice: PropTypes.number,
+  month: PropTypes.number,
+  monthlySave: PropTypes.number,
+  week: PropTypes.number,
+  weeklySave: PropTypes.number,
+  day: PropTypes.number,
+  daySave: PropTypes.number,
+};
+
+const BudgetFormSection = ({ price, date }) => {
   const fixedPrice = price.toLocaleString('id-ID');
   const [souvenir, setSouvenir] = useState('');
   const [eat, setEat] = useState('');
@@ -30,8 +141,60 @@ const BudgetFormSection = ({ price }) => {
     setExtraAct(Number(value).toLocaleString('id-ID'));
   };
 
+  // const timeDifference = moment(date, 'YYYYMMDD').fromNow(true);
+  // const timeDifferenceInIndonesian = timeDifference
+  //   .replace('a few seconds', 'beberapa detik')
+  //   .replace('seconds', 'detik')
+  //   .replace('a minute', 'semenit')
+  //   .replace('minutes', 'menit')
+  //   .replace('an hour', 'sejam')
+  //   .replace('hours', 'jam')
+  //   .replace('a day', 'sehari')
+  //   .replace('days', 'hari')
+  //   .replace('a month', 'sebulan')
+  //   .replace('months', 'Bulan')
+  //   .replace('a year', 'setahun')
+  //   .replace('years', 'tahun');
+
+  const now = moment();
+  const targetDate = moment(date, 'YYYYMMDD');
+  const duration = moment.duration(targetDate.diff(now));
+
+  const months = Math.floor(duration.asMonths());
+  const weeks = Math.floor(duration.asWeeks());
+  const days = Math.floor(duration.asDays());
+
+  const parseLocaleNumber = (str) => {
+    return Number(str.replace(/\./g, ''));
+  };
+
+  const additionalPayment =
+    (souvenir ? parseLocaleNumber(souvenir) : 0) +
+    (eat ? parseLocaleNumber(eat) : 0) +
+    (other ? parseLocaleNumber(other) : 0) +
+    (shopping ? parseLocaleNumber(shopping) : 0) +
+    (extraAct ? parseLocaleNumber(extraAct) : 0);
+
+  const totalPrice = price + additionalPayment;
+
+  const perMonth = totalPrice / months;
+  const perWeek = totalPrice / weeks;
+  const perDay = totalPrice / days;
+
+  const convertedPerMonth = parseFloat(perMonth.toFixed(0));
+  const convertedPerWeek = parseFloat(perWeek.toFixed(0));
+  const convertedPerDay = parseFloat(perDay.toFixed(0));
+
+  const fixedPerMonth = convertedPerMonth.toLocaleString('id-ID');
+  const fixedPerWeek = convertedPerWeek.toLocaleString('id-ID');
+  const fixedPerDay = convertedPerDay.toLocaleString('id-ID');
+
+  const convertedAdditionalPayment = additionalPayment.toLocaleString('id-ID');
+
+  const convertedTotalPrice = totalPrice.toLocaleString('id-ID');
+
   return (
-    <section className="mt-[34px] rounded-2xl w-[1240px] h-[713px] shadow-cardShadow p-12 flex flex-col">
+    <section className="mt-[34px] rounded-2xl w-[1240px] min-h-[713px] h-fit shadow-cardShadow p-12 flex flex-col">
       <h1 className="text-neutral-80 text-[40px] font-bold">
         Rencanakan Anggaran Anda dengan Mudah!
       </h1>
@@ -43,7 +206,12 @@ const BudgetFormSection = ({ price }) => {
           Rp{fixedPrice}
         </h1>
         <h1 className="text-[#FF0F0F] text-[20px] font-medium">
-          *3 Bulan dari Sekarang
+          *
+          {months === 0
+            ? weeks === 0
+              ? `${days} Hari dari Sekarang`
+              : `${weeks} Minggu dari Sekarang`
+            : `${months} Bulan dari Sekarang`}
         </h1>
       </div>
       <div className="flex flex-col mt-6">
@@ -151,15 +319,24 @@ const BudgetFormSection = ({ price }) => {
           </div>
         </div>
       </div>
-      <button className="size-fit px-[54px] py-[17px] rounded-xl bg-primary-60 mt-[46px] self-center active:scale-95 transition-all">
-        Hitung Anggaran Anda!
-      </button>
+      <OutputBudgetPlanning
+        tripPrice={fixedPrice}
+        addPrice={convertedAdditionalPayment}
+        allTotalPrice={convertedTotalPrice}
+        month={months}
+        monthlySave={fixedPerMonth}
+        week={weeks}
+        weeklySave={fixedPerWeek}
+        day={days}
+        daySave={fixedPerDay}
+      />
     </section>
   );
 };
 
 BudgetFormSection.propTypes = {
   price: PropTypes.string,
+  date: PropTypes.string,
 };
 
 export default BudgetFormSection;
