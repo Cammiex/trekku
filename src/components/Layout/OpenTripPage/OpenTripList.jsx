@@ -121,16 +121,19 @@ function OpenTripList() {
     setData(tripData);
   }, []);
 
-  useEffect(() => {
-    window.scrollTo({ top: 700, behavior: 'smooth' });
-  }, [currentPage]);
+  // useEffect(() => {
+  //   window.scrollTo({ top: 700, behavior: 'smooth' });
+  // }, [currentPage]);
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
+    window.scrollTo({ top: 700, behavior: 'smooth' });
+    setTimeout(() => {
+      setCurrentPage(pageNumber);
+    }, 500);
   };
 
   return (
