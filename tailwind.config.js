@@ -55,6 +55,8 @@ export default {
           '0px 194px 54px 0px rgba(0, 0, 0, 0), 0px 124px 50px 0px rgba(0, 0, 0, 0.01), 0px 70px 42px 0px rgba(0, 0, 0, 0.03), 0px 31px 31px 0px rgba(0, 0, 0, 0.04), 0px 8px 17px 0px rgba(0, 0, 0, 0.05)',
         inputShadow:
           '0px 2px 4px 0px rgba(0, 0, 0, 0.15), inset 0px 0px 0px 1px rgba(205, 209, 220, 1)',
+        fieldFocus:
+          '0px 0px 0px 1px rgba(0, 68, 102, 1), inset 0px 0px 0px 1px rgba(140, 146, 171, 1)',
       },
     },
   },

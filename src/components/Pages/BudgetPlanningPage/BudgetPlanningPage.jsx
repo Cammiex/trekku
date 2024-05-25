@@ -1,22 +1,16 @@
-import { useParams } from 'react-router-dom';
-import { useState, useEffect } from 'react';
-
 import Footer from '../../Fragments/Footer/Footer';
 import Navbar from '../../Fragments/Navbar/Navbar';
-import HeaderContentSection from '../../Layout/DetailOpenTripPage/HeaderContentSection';
-import HeroSection from '../../Layout/DetailOpenTripPage/HeroSection';
-import InformationSection from '../../Layout/DetailOpenTripPage/InformationSection';
-import RatingHeaderSection from '../../Layout/DetailOpenTripPage/RatingHeaderSection';
-import BookDetailSection from '../../Layout/DetailOpenTripPage/BookDetailSection';
-import ReviewsSection from '../../Layout/DetailOpenTripPage/ReviewsSection';
-import BudgetPlanningSection from '../../Layout/DetailOpenTripPage/BudgetPlanningSection';
+import HeroSection from '../../Layout/BudgetPlanningPage/HeroSection';
+import ProductHeaderSection from '../../Layout/BudgetPlanningPage/ProductHeaderSection';
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import BudgetFormSection from '../../Layout/BudgetPlanningPage/BudgetFormSection';
 
-const OpenTripDetail = () => {
+const BudgetPlanningPage = () => {
   const { id } = useParams();
   const [trip, setTrip] = useState(null);
 
   useEffect(() => {
-    // Fetch data based on the trip ID
     const fetchTrip = async () => {
       const tripData = [
         {
@@ -106,7 +100,7 @@ const OpenTripDetail = () => {
         {
           id: 3,
           img: 'images/OpenTripPage/OpenTripList/open-trip1.jpg',
-          itemName: 'Open Trip Labuan Bajo',
+          itemName: 'Bojo Galak',
           organizer: 'Nusantara Tour',
           location: 'NTT',
           duration: '3 days 2 nights',
@@ -143,7 +137,7 @@ const OpenTripDetail = () => {
           preparation:
             'Labuan Bajo, sebuah surga tersembunyi di ujung barat Pulau Flores, Indonesia, merangkul pengunjungnya dengan keindahan tak terlukiskan. Saat matahari memancarkan sinarnya yang lembut di langit biru, deretan perahu phinisi berlabuh di pelabuhan, siap membawa petualang ke petualangan yang menakjubkan. Angin sepoi-sepoi laut meniup lembut, membawa aroma segar dari lautan yang memikat.\n',
           date: '22-24 March 2024',
-          price: 600000,
+          price: 900000,
         },
       ];
 
@@ -161,45 +155,22 @@ const OpenTripDetail = () => {
   return (
     <>
       <Navbar />
-      <main className="flex flex-wrap justify-center">
+      <main className="flex flex-col items-center">
         <HeroSection />
-        <div
-          id="content"
-          className="w-full mt-[71px] flex flex-col items-center max-w-[1240px] text-black"
-        >
-          {' '}
-          <HeaderContentSection
-            name={trip?.itemName}
-            location={trip?.location}
-            image1={trip?.image1}
-            image2={trip?.image2}
-            image3={trip?.image3}
-            image4={trip?.image4}
-            image5={trip?.image5}
-          />
-          <InformationSection
-            information={trip?.information}
-            destination={trip?.destination}
-            facility={trip?.facility}
-            accommodation={trip?.accommodation}
-            preparation={trip?.preparation}
-          />
-          <div className="flex gap-4 mt-6">
-            <RatingHeaderSection />
-            <BookDetailSection
-              location={trip?.location}
-              duration={trip?.duration}
-              price={trip?.price}
-              date={trip?.date}
-            />
-          </div>
-          <BudgetPlanningSection id={trip?.id} />
-          <ReviewsSection />
-        </div>
+        <ProductHeaderSection
+          name={trip?.itemName}
+          location={trip?.location}
+          image1={trip?.image1}
+          image2={trip?.image2}
+          image3={trip?.image3}
+          image4={trip?.image4}
+          image5={trip?.image5}
+        />
+        <BudgetFormSection price={trip?.price} />
       </main>
       <Footer />
     </>
   );
 };
 
-export default OpenTripDetail;
+export default BudgetPlanningPage;
