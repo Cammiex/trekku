@@ -1,66 +1,45 @@
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+
 const RatingHeaderSection = () => {
   return (
-    <div id="rating-and-stars" className="flex flex-col items-start">
-      <h1 className="text-[32px] font-bold">Rating and Reviews</h1>
-      <h2 className="text-[32px] font-semibold text-black/50">
+    <div
+      id="rating-and-stars"
+      className="flex flex-col items-start w-[612px] h-[346px] p-8 shadow-cardShadow rounded-2xl"
+    >
+      <h1 className="text-[32px] font-semibold">Penilaian dan Ulasan</h1>
+      <h2 className="text-[20px] font-medium text-black/50">
         Explore NTT - Open Trip Labuan Bajo
       </h2>
       <div className="flex w-full gap-[87px]">
-        <div id="stars" className="flex flex-col items-center">
-          <h1 className="text-[96px] font-semibold leading-tight">4.7</h1>
+        <div id="stars" className="flex flex-col items-center mt-[33px]">
+          <h1 className="text-[80px] font-semibold leading-tight">4.7</h1>
           <div className="flex items-center">
-            <svg
-              className="w-6 h-6 text-yellow-300 ms-2"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 22 20"
-            >
-              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-            </svg>
-            <svg
-              className="w-6 h-6 text-yellow-300 ms-2"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 22 20"
-            >
-              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-            </svg>
-            <svg
-              className="w-6 h-6 text-yellow-300 ms-2"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 22 20"
-            >
-              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-            </svg>
-            <svg
-              className="w-6 h-6 text-yellow-300 ms-2"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 22 20"
-            >
-              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-            </svg>
-            <svg
-              className="w-6 h-6 text-gray-300 ms-2 dark:text-gray-500"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 22 20"
-            >
-              <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-            </svg>
+            <FontAwesomeIcon
+              icon={faStar}
+              className="size-6 ms-2 text-[#FFC107]"
+            />
+            <FontAwesomeIcon
+              icon={faStar}
+              className="size-6 ms-2 text-[#FFC107]"
+            />
+            <FontAwesomeIcon
+              icon={faStar}
+              className="size-6 ms-2 text-[#FFC107]"
+            />
+            <FontAwesomeIcon
+              icon={faStar}
+              className="size-6 ms-2 text-[#FFC107]"
+            />
+            <FontAwesomeIcon
+              icon={faStar}
+              className="size-6 ms-2 text-[#FFC107]"
+            />
           </div>
-          <h3 className="mt-2 text-2xl font-normal text-black/50">
-            (20 Reviews)
-          </h3>
+          <h3 className="mt-2 text-[24px] text-black/50">(20 Reviews)</h3>
         </div>
         <div id="star-progress" className="w-full">
-          <div className="flex items-center mt-4">
+          <div className="flex items-center mt-6">
             <a href="#" className="text-sm font-medium hover:underline">
               5 star
             </a>

@@ -9,6 +9,7 @@ import InformationSection from '../../Layout/DetailOpenTripPage/InformationSecti
 import RatingHeaderSection from '../../Layout/DetailOpenTripPage/RatingHeaderSection';
 import BookDetailSection from '../../Layout/DetailOpenTripPage/BookDetailSection';
 import ReviewsSection from '../../Layout/DetailOpenTripPage/ReviewsSection';
+import BudgetPlanningSection from '../../Layout/DetailOpenTripPage/BudgetPlanningSection';
 
 const OpenTripDetail = () => {
   const { id } = useParams();
@@ -183,7 +184,7 @@ const OpenTripDetail = () => {
             accommodation={trip?.accommodation}
             preparation={trip?.preparation}
           />
-          <div className="flex flex-wrap gap-10 mt-[82px]">
+          <div className="flex gap-4 mt-6">
             <RatingHeaderSection />
             <BookDetailSection
               location={trip?.location}
@@ -192,6 +193,7 @@ const OpenTripDetail = () => {
               date={trip?.date}
             />
           </div>
+          <BudgetPlanningSection />
           <ReviewsSection />
         </div>
       </main>
