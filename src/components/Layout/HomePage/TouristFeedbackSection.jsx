@@ -146,7 +146,7 @@ function TouristFeedbackSection() {
       >
         <button
           onClick={handlePrev}
-          className="p-2 size-[44px] rounded-full shadow-cardShadow2 group"
+          className="p-2 size-[44px] rounded-full shadow-md group"
           disabled={currentPage === 0}
         >
           <FontAwesomeIcon
@@ -159,7 +159,7 @@ function TouristFeedbackSection() {
         ))}
         <button
           onClick={handleNext}
-          className="p-2 size-[44px] rounded-full shadow-cardShadow2 group"
+          className="p-2 size-[44px] rounded-full shadow-md group"
           disabled={startIndex + itemsPerPage >= feedbacks.length}
         >
           <FontAwesomeIcon

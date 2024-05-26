@@ -37,6 +37,12 @@ const BudgetPlanningPage = React.lazy(() =>
 const ArticleDetailPage = React.lazy(() =>
   import('../components/Pages/ArticleDetailPage/ArticleDetailPage')
 );
+const AdminPage = React.lazy(() =>
+  import('../components/Pages/AdminPage/AdminPage')
+);
+const ProductPage = React.lazy(() =>
+  import('../components/Pages/AdminPage/ProductPage')
+);
 
 const ProjectRoutes = () => {
   return (
@@ -54,6 +60,9 @@ const ProjectRoutes = () => {
           <Route path="/help" element={<HelpPage />} />
           <Route path="/budget-planning/:id" element={<BudgetPlanningPage />} />
           <Route path="/article" element={<ArticleDetailPage />} />
+          <Route path="/admin" element={<Navigate to="/admin/dashboard" />} />
+          <Route path="/admin/dashboard" element={<AdminPage />} />
+          <Route path="/admin/products" element={<ProductPage />} />
         </Routes>
       </Router>
     </React.Suspense>
