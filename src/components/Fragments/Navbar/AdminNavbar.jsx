@@ -25,14 +25,15 @@ const AdminNavbar = () => {
   };
 
   const location = useLocation();
-  const currentPage = location.pathname.split('/').pop();
+  const currentPage = location.pathname;
+  // const currentPage = location.pathname.split('/').pop();
 
   return (
     <header
       className={
         isOpen
-          ? 'w-[320px] flex flex-col py-5 pl-5 pr-4 gap-11 h-[100vh] shadow-cardShadow transition-all duration-300 bg-white'
-          : 'w-[78px] flex flex-col py-5 pl-5 pr-4 gap-11 h-[100vh] shadow-cardShadow transition-all duration-300 bg-white'
+          ? 'w-[320px] flex flex-col py-5 pl-5 pr-4 gap-11 h-[100vh] shadow-cardShadow transition-all duration-300 bg-white sticky top-0'
+          : 'w-[78px] flex flex-col py-5 pl-5 pr-4 gap-11 h-[100vh] shadow-cardShadow transition-all duration-300 bg-white sticky top-0'
       }
     >
       <div className="flex items-center justify-between">

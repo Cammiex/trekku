@@ -5,6 +5,7 @@ import moment from 'moment';
 import Swal from 'sweetalert2';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashCan } from '@fortawesome/free-regular-svg-icons';
+import { Link } from 'react-router-dom';
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -60,13 +61,17 @@ const ContentSection = () => {
     <section className="flex flex-col w-full overflow-hidden">
       <div className="flex items-center justify-between w-full px-3">
         <h1 className="text-[32px] font-semibold text-neutral-70">Open Trip</h1>
-        <button className="w-fit px-8 h-[44px] rounded-[6px] bg-secondary btn text-white hover:bg-secondary hover:text-white">
+        <Link
+          to="/admin/products/add"
+          className="w-fit px-8 h-[44px] rounded-[6px] bg-secondary btn text-white hover:bg-secondary hover:text-white"
+        >
           Tambahkan Produk
-        </button>
+        </Link>
       </div>
       <div className="mt-3 overflow-hidden overflow-x-auto border rounded-xl">
         <Table hoverable>
           <Table.Head>
+            <Table.HeadCell>No.</Table.HeadCell>
             <Table.HeadCell>Nama Produk</Table.HeadCell>
             <Table.HeadCell>Jadwal Open Trip</Table.HeadCell>
             <Table.HeadCell>Kuota Orang</Table.HeadCell>
@@ -79,6 +84,9 @@ const ContentSection = () => {
                 key={index}
                 className="bg-white dark:border-gray-700 dark:bg-gray-800"
               >
+                <Table.Cell className="font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  {index + 1}
+                </Table.Cell>
                 <Table.Cell className="font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   {item.name}
                 </Table.Cell>
