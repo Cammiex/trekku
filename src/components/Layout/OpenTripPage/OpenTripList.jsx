@@ -1,129 +1,24 @@
 import { useState, useEffect } from 'react';
 import { OpenTripItem } from './OpenTripItem';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchProduct } from '../../../redux/slices/products/getProducts';
 
 function OpenTripList() {
-  const [data, setData] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-  useEffect(() => {
-    const tripData = [
-      {
-        id: 1,
-        img: 'images/OpenTripPage/OpenTripList/open-trip1.jpg',
-        itemName: 'Open Trip Labuan Bajo',
-        organizer: 'Nusantara Tour',
-        location: 'NTT',
-        duration: '3 days 2 nights',
-        order: '123',
-      },
-      {
-        id: 2,
-        img: 'images/OpenTripPage/OpenTripList/open-trip2.jpg',
-        itemName: 'Open Trip Labuan Bajo',
-        organizer: 'Kemanalagi',
-        location: 'NTT',
-        duration: '3 days 2 nights',
-        order: '123',
-      },
-      {
-        id: 3,
-        img: 'images/OpenTripPage/OpenTripList/open-trip3.jpg',
-        itemName: 'Open Trip Labuan Bajo',
-        organizer: 'Nusantara Tour',
-        location: 'NTT',
-        duration: '3 days 2 nights',
-        order: '123',
-      },
-      {
-        id: 4,
-        img: 'images/OpenTripPage/OpenTripList/open-trip3.jpg',
-        itemName: 'Open Trip Labuan Bajo',
-        organizer: 'Nusantara Tour',
-        location: 'NTT',
-        duration: '3 days 2 nights',
-        order: '123',
-      },
-      {
-        id: 5,
-        img: 'images/OpenTripPage/OpenTripList/open-trip3.jpg',
-        itemName: 'Open Trip Labuan Bajo',
-        organizer: 'Nusantara Tour',
-        location: 'NTT',
-        duration: '3 days 2 nights',
-        order: '123',
-      },
-      {
-        id: 6,
-        img: 'images/OpenTripPage/OpenTripList/open-trip3.jpg',
-        itemName: 'Open Trip Labuan Bajo',
-        organizer: 'Nusantara Tour',
-        location: 'NTT',
-        duration: '3 days 2 nights',
-        order: '123',
-      },
-      {
-        id: 7,
-        img: 'images/OpenTripPage/OpenTripList/open-trip3.jpg',
-        itemName: 'Open Trip Labuan Bajo',
-        organizer: 'Nusantara Tour',
-        location: 'NTT',
-        duration: '3 days 2 nights',
-        order: '123',
-      },
-      {
-        id: 8,
-        img: 'images/OpenTripPage/OpenTripList/open-trip3.jpg',
-        itemName: 'Open Trip Labuan Bajo',
-        organizer: 'Nusantara Tour',
-        location: 'NTT',
-        duration: '3 days 2 nights',
-        order: '123',
-      },
-      {
-        id: 9,
-        img: 'images/OpenTripPage/OpenTripList/open-trip3.jpg',
-        itemName: 'Open Trip Labuan Bajo',
-        organizer: 'Nusantara Tour',
-        location: 'NTT',
-        duration: '3 days 2 nights',
-        order: '123',
-      },
-      {
-        id: 9,
-        img: 'images/OpenTripPage/OpenTripList/open-trip1.jpg',
-        itemName: 'Open Trip Labuan Bajo',
-        organizer: 'Nusantara Tour',
-        location: 'NTT',
-        duration: '3 days 2 nights',
-        order: '123',
-      },
-      {
-        id: 9,
-        img: 'images/OpenTripPage/OpenTripList/open-trip2.jpg',
-        itemName: 'Open Trip Labuan Bajo',
-        organizer: 'Nusantara Tour',
-        location: 'NTT',
-        duration: '3 days 2 nights',
-        order: '123',
-      },
-      {
-        id: 9,
-        img: 'images/OpenTripPage/OpenTripList/open-trip3.jpg',
-        itemName: 'Open Trip Labuan Bajo',
-        organizer: 'Nusantara Tour',
-        location: 'NTT',
-        duration: '3 days 2 nights',
-        order: '123',
-      },
-    ];
+  const productData = useSelector((state) => state.products.data);
+  const isLoading = useSelector((state) => state.products.loading);
+  const dispatch = useDispatch();
 
-    setData(tripData);
-  }, []);
+  useEffect(() => {
+    dispatch(fetchProduct());
+  }, [dispatch]);
+  if (isLoading) return <div>Loading...</div>;
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = data.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = productData.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => {
     window.scrollTo({ top: 700, behavior: 'smooth' });
@@ -142,12 +37,13 @@ function OpenTripList() {
           <OpenTripItem
             key={index}
             id={item.id}
-            img={item.img}
-            itemName={item.itemName}
-            organizer={item.organizer}
+            img={item.url_img1}
+            itemName={item.name}
+            organizer={item.location}
             location={item.location}
             duration={item.duration}
-            order={item.order}
+            order={item.quota}
+            price={item.price}
           />
         ))}
       </section>
@@ -166,7 +62,9 @@ function OpenTripList() {
           onClick={() => {
             paginate(currentPage + 1);
           }}
-          disabled={currentPage === Math.ceil(data.length / itemsPerPage)}
+          disabled={
+            currentPage === Math.ceil(productData.length / itemsPerPage)
+          }
         >
           »
         </button>

@@ -5,6 +5,8 @@ function OpenTripRecomendSection() {
     <section
       id="opentripRecomendation"
       className="flex flex-wrap flex-col items-center mt-[190px] gap-10"
+      data-aos="fade-up"
+      data-aos-duration="1000"
     >
       <h1 className="text-secondary text-[32px] font-bold">
         Rekomendasi Open Trip

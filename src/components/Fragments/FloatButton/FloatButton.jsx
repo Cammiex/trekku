@@ -56,8 +56,8 @@ const FloatButton = () => {
         <h1
           className={
             isOpen
-              ? 'transition-all duration-100 select-none h-7 overflow-hidden'
-              : 'transition-all duration-100 select-none h-7 overflow-hidden'
+              ? 'transition-all duration-100 select-none h-7 overflow-hidden text-white/70'
+              : 'transition-all duration-100 select-none h-7 overflow-hidden text-white/70'
           }
         >
           Halo! Ada yang bisa kami bantu?
@@ -87,7 +87,10 @@ const FloatButton = () => {
             />
             <h1 className="font-medium text-neutral-70">Pertanyaan Umum</h1>
           </Link>
-          <Link className="flex items-center justify-center w-full gap-3 py-3 transition duration-200 hover:scale-105 hover:underline text-neutral-70">
+          <Link
+            to="https://wa.me/6281519456822"
+            className="flex items-center justify-center w-full gap-3 py-3 transition duration-200 hover:scale-105 hover:underline text-neutral-70"
+          >
             <FontAwesomeIcon
               icon={faWhatsapp}
               className="size-9 text-neutral-70"

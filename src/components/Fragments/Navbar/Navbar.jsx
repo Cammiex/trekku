@@ -50,10 +50,14 @@ function Navbar() {
     }
   };
 
-  const isUserLoggedIn = async () => {
-    const result = await refreshToken();
-    result ? setIsLogin(true) : setIsLogin(false);
-  };
+  useEffect(() => {
+    const isUserLoggedIn = async () => {
+      const result = await refreshToken();
+      setIsLogin(!!result);
+    };
+
+    isUserLoggedIn();
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -69,11 +73,9 @@ function Navbar() {
   useEffect(() => {
     const fetchData = async () => {
       refreshToken();
-      isUserLoggedIn();
     };
 
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -102,7 +104,7 @@ function Navbar() {
   }, []);
 
   const location = useLocation();
-  const currentPage = location.pathname.split('/').pop();
+  const currentPage = location.pathname.split('/');
 
   return (
     <>
@@ -142,7 +144,7 @@ function Navbar() {
           <Link
             id="about-link"
             to="/about-us"
-            aria-current={currentPage.includes('about') ? 'page' : undefined}
+            aria-current={currentPage.includes('about-us') ? 'page' : undefined}
             className="text-[20px] font-semibold aria-[current=page]:text-black aria-[current=page]:bg-white aria-[current=page]:opacity-90 aria-[current=page]:shadow-inset px-5 py-3 rounded-3xl hover:text-black hover:bg-white hover:opacity-90 hover:shadow-inset hover:shadow-dropbox transition duration-100 active:opacity-80 focus:text-black focus:bg-white focus:opacity-90 focus:shadow-inset focus:shadow-dropbox"
           >
             Tentang Kami

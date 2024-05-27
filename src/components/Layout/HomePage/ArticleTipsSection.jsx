@@ -13,6 +13,8 @@ function ArticleTipsSection() {
     <section
       id="article&tips"
       className="flex flex-col mt-[100px] gap-10 items-center"
+      data-aos="fade-down"
+      data-aos-duration="1000"
     >
       <h1 className="text-secondary text-[32px] font-bold">Artikel</h1>
       <div id="article-list" className="flex flex-wrap gap-10">

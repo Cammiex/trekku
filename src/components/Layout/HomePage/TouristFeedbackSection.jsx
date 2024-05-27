@@ -138,6 +138,8 @@ function TouristFeedbackSection() {
     <section
       id="touristFeedback"
       className="flex flex-wrap flex-col items-center mt-[100px] gap-10 w-full"
+      data-aos="fade-right"
+      data-aos-duration="1000"
     >
       <h1 className="text-secondary text-[32px] font-bold">Ulasan Pengguna</h1>
       <div

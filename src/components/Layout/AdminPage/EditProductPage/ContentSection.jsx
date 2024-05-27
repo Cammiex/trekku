@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const ContentSection = () => {
+  const navigate = useNavigate();
+
   const { id } = useParams();
   const [data, setData] = useState('');
 
@@ -50,6 +52,28 @@ const ContentSection = () => {
     if (durasi) formData.append('duration', durasi);
     if (tanggal) formData.append('date', tanggal);
     if (kuota) formData.append('quota', kuota);
+    if (
+      !nama &&
+      !lokasi &&
+      !image1 &&
+      !image2 &&
+      !image3 &&
+      !image4 &&
+      !image5 &&
+      !informasi &&
+      !destinasi &&
+      !jadwal &&
+      !fasilitas &&
+      !akomodasi &&
+      !persiapan &&
+      !harga &&
+      !durasi &&
+      !tanggal &&
+      !kuota
+    ) {
+      await Swal.fire('Anda tidak mengubah apapun!', '', 'error');
+      return;
+    }
 
     try {
       await axios.patch(`${apiUrl}/products/update/${id}`, formData, {
@@ -58,8 +82,9 @@ const ContentSection = () => {
         },
       });
       Swal.fire('Produk berhasil diupdate.', '', 'success');
+      navigate('/admin/products');
     } catch (error) {
-      console.log(console.error());
+      console.log(error);
     }
   };
 

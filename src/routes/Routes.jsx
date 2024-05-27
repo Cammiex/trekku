@@ -62,7 +62,7 @@ const ProjectRoutes = () => {
           <Route path="/about-us" element={<AboutPage />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/trip/:id" element={<OpenTripDetail />} />
+          <Route path="/open-trip/:id" element={<OpenTripDetail />} />
           <Route path="/help" element={<HelpPage />} />
           <Route path="/budget-planning/:id" element={<BudgetPlanningPage />} />
           <Route path="/article" element={<ArticleDetailPage />} />

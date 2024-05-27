@@ -2,10 +2,11 @@ import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import moment from 'moment/moment';
 
 const BookDetailSection = ({ location, duration, date, price }) => {
-  const discountedPrice = Math.round(price - price * 0.16);
-  const formattedPrice = discountedPrice.toLocaleString('id-ID');
+  const formattedPrice = Number(price).toLocaleString('id-ID');
+  const beforePrice = Number(price + 200000).toLocaleString('id-ID');
 
   return (
     <div
@@ -18,9 +19,8 @@ const BookDetailSection = ({ location, duration, date, price }) => {
         </h1>
         <div id="original-price" className="flex gap-[13px] items-center">
           <h1 className="italic font-bold text-[32px] line-through text-neutral-40">
-            Rp{price.toLocaleString('id-ID')}
+            Rp{beforePrice}
           </h1>
-          <h1 className="text-base font-medium text-red-600">(-16.67%)</h1>
         </div>
       </div>
       <div id="book-information" className="grid grid-cols-2 gap-5">
@@ -38,7 +38,9 @@ const BookDetailSection = ({ location, duration, date, price }) => {
             alt=""
             className="w-8 h-8"
           />
-          <h1 className="text-[20px] text-neutral-40">{date}</h1>
+          <h1 className="text-[20px] text-neutral-40">
+            {moment(date).format('DD MMMM YYYY')}
+          </h1>
         </div>{' '}
         <div id="information-item" className="flex gap-[13px] items-center">
           <img
@@ -56,7 +58,7 @@ const BookDetailSection = ({ location, duration, date, price }) => {
           </h1>
         </div>
       </div>
-      <Link className="px-[40px] py-[15px] bg-primary-60 w-fit rounded-xl text-white text-xl font-medium self-center hover:bg-primaryDark active:bg-primaryDarker mt-[36px]">
+      <Link className="px-[40px] py-[15px] bg-primary-60 w-fit rounded-xl text-white text-xl font-medium self-center hover:bg-primaryDark active:bg-primaryDarker mt-[12px]">
         Pesan Sekarang
       </Link>
     </div>

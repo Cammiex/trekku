@@ -113,7 +113,7 @@ OutputBudgetPlanning.propTypes = {
 };
 
 const BudgetFormSection = ({ price, date }) => {
-  const fixedPrice = price.toLocaleString('id-ID');
+  const fixedPrice = Number(price).toLocaleString('id-ID');
   const [souvenir, setSouvenir] = useState('');
   const [eat, setEat] = useState('');
   const [other, setOther] = useState('');

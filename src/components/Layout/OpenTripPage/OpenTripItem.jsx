@@ -9,11 +9,12 @@ export const OpenTripItem = ({
   duration,
   order,
   id,
+  price,
 }) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
-    navigate(`/trip/${id}`);
+    navigate(`/open-trip/${id}`);
   };
   return (
     <div
@@ -61,10 +62,10 @@ export const OpenTripItem = ({
         </div>
         <div id="price" className="self-end">
           <h1 className="text-[24px] font-semibold underline text-primary-90">
-            Rp500.000
+            Rp{Number(price).toLocaleString('id-ID')}
           </h1>
           <h1 className="text-base italic font-semibold text-right text-gray-500 line-through">
-            Rp600.000
+            Rp{Number(price + 200000).toLocaleString('id-ID')}
           </h1>
         </div>
       </div>
@@ -80,4 +81,5 @@ OpenTripItem.propTypes = {
   duration: PropTypes.string,
   order: PropTypes.string,
   id: PropTypes.number.isRequired,
+  price: PropTypes.number,
 };
