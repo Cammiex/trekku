@@ -5,12 +5,13 @@ import moment from 'moment';
 import Swal from 'sweetalert2';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashCan } from '@fortawesome/free-regular-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const ContentSection = () => {
   const [data, setData] = useState([]);
+  const navigate = useNavigate();
 
   const getProducts = async () => {
     try {
@@ -98,7 +99,10 @@ const ContentSection = () => {
                   'id-ID'
                 )}`}</Table.Cell>
                 <Table.Cell className="flex gap-3">
-                  <button className="font-medium text-white rounded-[4px] bg-primary-60 hover:underline w-8 h-fit pb-1 pt-[6px] hover:bg-primary-70">
+                  <button
+                    onClick={() => navigate(`/admin/products/edit/${item.id}`)}
+                    className="font-medium text-white rounded-[4px] bg-primary-60 hover:underline w-8 h-fit pb-1 pt-[6px] hover:bg-primary-70"
+                  >
                     <FontAwesomeIcon icon={faEdit} className="size-[18px]" />
                   </button>
                   <button

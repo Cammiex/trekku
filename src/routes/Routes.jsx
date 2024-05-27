@@ -46,6 +46,9 @@ const ProductPage = React.lazy(() =>
 const AddProductPage = React.lazy(() =>
   import('../components/Pages/AdminPage/AddProductPage')
 );
+const EditProductPage = React.lazy(() =>
+  import('../components/Pages/AdminPage/EditProductPage')
+);
 
 const ProjectRoutes = () => {
   return (
@@ -68,6 +71,10 @@ const ProjectRoutes = () => {
           <Route path="/admin/dashboard" element={<AdminPage />} />
           <Route path="/admin/products" element={<ProductPage />} />
           <Route path="/admin/products/add" element={<AddProductPage />} />
+          <Route
+            path="/admin/products/edit/:id"
+            element={<EditProductPage />}
+          />
         </Routes>
       </Router>
     </React.Suspense>

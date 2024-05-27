@@ -1,12 +1,12 @@
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
-
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const ContentSection = () => {
-  const navigate = useNavigate();
+  const { id } = useParams();
+  const [data, setData] = useState('');
 
   const [nama, setNama] = useState('');
   const [lokasi, setLokasi] = useState('');
@@ -29,9 +29,52 @@ const ContentSection = () => {
   const [tanggal, setTanggal] = useState('');
   const [kuota, setKuota] = useState('');
 
-  const handleChange = (setter) => (e) => {
-    setter(e.target.value);
+  const editProduct = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    if (nama) formData.append('name', nama);
+    if (lokasi) formData.append('location', lokasi);
+    if (image1) formData.append('image1', image1);
+    if (image2) formData.append('image2', image2);
+    if (image3) formData.append('image3', image3);
+    if (image4) formData.append('image4', image4);
+    if (image5) formData.append('image5', image5);
+    if (informasi) formData.append('desc_information', informasi);
+    if (destinasi) formData.append('desc_destination', destinasi);
+    if (jadwal) formData.append('desc_schedule', jadwal);
+    if (fasilitas) formData.append('desc_facility', fasilitas);
+    if (akomodasi) formData.append('desc_accommodation', akomodasi);
+    if (persiapan) formData.append('desc_preparation', persiapan);
+    if (harga) formData.append('price', harga.replace(/\D/g, '')); // remove formatting
+    if (durasi) formData.append('duration', durasi);
+    if (tanggal) formData.append('date', tanggal);
+    if (kuota) formData.append('quota', kuota);
+
+    try {
+      await axios.patch(`${apiUrl}/products/update/${id}`, formData, {
+        headers: {
+          'Content-type': 'multipart/form-data',
+        },
+      });
+      Swal.fire('Produk berhasil diupdate.', '', 'success');
+    } catch (error) {
+      console.log(console.error());
+    }
   };
+
+  useEffect(() => {
+    const getProductById = async () => {
+      try {
+        const result = await axios.get(`${apiUrl}/products/${id}`);
+        setData(result.data.payload.datas);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    getProductById();
+  }, [id]);
 
   const handleHargaChange = (e) => {
     const value = e.target.value.replace(/\D/g, '');
@@ -50,75 +93,18 @@ const ContentSection = () => {
       .filter((word) => word.length > 0).length;
   };
 
-  const addProduct = async (e) => {
-    e.preventDefault();
-
-    if (
-      !nama ||
-      !lokasi ||
-      !image1 ||
-      !image2 ||
-      !image3 ||
-      !image4 ||
-      !image5 ||
-      !informasi ||
-      !destinasi ||
-      !jadwal ||
-      !fasilitas ||
-      !akomodasi ||
-      !persiapan ||
-      !harga ||
-      !durasi ||
-      !tanggal ||
-      !kuota
-    ) {
-      Swal.fire('Semua harus diisi!', '', 'error');
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('name', nama);
-    formData.append('location', lokasi);
-    formData.append('image1', image1);
-    formData.append('image2', image2);
-    formData.append('image3', image3);
-    formData.append('image4', image4);
-    formData.append('image5', image5);
-    formData.append('desc_information', informasi);
-    formData.append('desc_destination', destinasi);
-    formData.append('desc_schedule', jadwal);
-    formData.append('desc_facility', fasilitas);
-    formData.append('desc_accommodation', akomodasi);
-    formData.append('desc_preparation', persiapan);
-    formData.append('price', harga);
-    formData.append('duration', durasi);
-    formData.append('date', tanggal);
-    formData.append('quota', kuota);
-    try {
-      await axios.post(`${apiUrl}/products/add`, formData, {
-        headers: {
-          'Content-type': 'multipart/form-data',
-        },
-      });
-      Swal.fire('Produk berhasil ditambahkan.', '', 'success');
-      navigate('/admin/products');
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
-    <section
-      className="flex flex-col w-full gap-3 overflow-y-hidden"
-      onSubmit={addProduct}
-    >
+    <section className="flex flex-col w-full gap-3 overflow-y-hidden">
       <div className="flex items-center justify-between w-full px-3">
         <h1 className="text-[32px] font-semibold text-neutral-70">
-          Tambahkan Open Trip
+          Edit Open Trip
         </h1>
       </div>
       <div className="w-full rounded-[10px] h-fit border py-8 px-10 bg-white">
-        <form action="" className="grid grid-cols-2 gap-3 text-neutral-80">
+        <form
+          onSubmit={editProduct}
+          className="grid grid-cols-2 gap-3 text-neutral-80"
+        >
           {/* Nama dan Lokasi */}
           <label className="w-full max-w-[660px] form-control">
             <div className="label">
@@ -126,7 +112,7 @@ const ContentSection = () => {
             </div>
             <input
               type="text"
-              placeholder="Ketik disini..."
+              placeholder={data.name}
               className="w-full max-w-[660px] input input-bordered text-neutral-80"
               value={nama}
               onChange={(e) => setNama(e.target.value)}
@@ -141,7 +127,7 @@ const ContentSection = () => {
             </div>
             <input
               type="text"
-              placeholder="Ketik disini..."
+              placeholder={data.location}
               className="w-full max-w-[660px] input input-bordered text-neutral-80"
               value={lokasi}
               onChange={(e) => setLokasi(e.target.value)}
@@ -233,9 +219,9 @@ const ContentSection = () => {
             </div>
             <textarea
               className="h-24 textarea textarea-bordered"
-              placeholder="Open trip ini merupakan..."
+              placeholder={data.desc_information}
               value={informasi}
-              onChange={handleChange(setInformasi)}
+              onChange={(e) => setInformasi(e.target.value)}
             ></textarea>
             <div className="label">
               <span className="label-text-alt">
@@ -252,9 +238,9 @@ const ContentSection = () => {
             </div>
             <textarea
               className="h-24 textarea textarea-bordered"
-              placeholder="Ketik disini..."
+              placeholder={data.desc_destination}
               value={destinasi}
-              onChange={handleChange(setDestinasi)}
+              onChange={(e) => setDestinasi(e.target.value)}
             ></textarea>
             <div className="label">
               <span className="label-text-alt">
@@ -273,9 +259,9 @@ const ContentSection = () => {
             </div>
             <textarea
               className="h-24 textarea textarea-bordered"
-              placeholder="Ketik disini..."
+              placeholder={data.desc_schedule}
               value={jadwal}
-              onChange={handleChange(setJadwal)}
+              onChange={(e) => setJadwal(e.target.value)}
             ></textarea>
             <div className="label">
               <span className="label-text-alt">
@@ -290,9 +276,9 @@ const ContentSection = () => {
             </div>
             <textarea
               className="h-24 textarea textarea-bordered"
-              placeholder="Ketik disini..."
+              placeholder={data.desc_facility}
               value={fasilitas}
-              onChange={handleChange(setFasilitas)}
+              onChange={(e) => setFasilitas(e.target.value)}
             ></textarea>
             <div className="label">
               <span className="label-text-alt">
@@ -311,9 +297,9 @@ const ContentSection = () => {
             </div>
             <textarea
               className="h-24 textarea textarea-bordered"
-              placeholder="Ketik disini..."
+              placeholder={data.desc_accommodation}
               value={akomodasi}
-              onChange={handleChange(setAkomodasi)}
+              onChange={(e) => setAkomodasi(e.target.value)}
             ></textarea>
             <div className="label">
               <span className="label-text-alt">
@@ -330,9 +316,9 @@ const ContentSection = () => {
             </div>
             <textarea
               className="h-24 textarea textarea-bordered"
-              placeholder="Ketik disini..."
+              placeholder={data.desc_preparation}
               value={persiapan}
-              onChange={handleChange(setPersiapan)}
+              onChange={(e) => setPersiapan(e.target.value)}
             ></textarea>
             <div className="label">
               <span className="label-text-alt">
@@ -351,7 +337,7 @@ const ContentSection = () => {
             </div>
             <input
               type="text"
-              placeholder="Ketik disini..."
+              placeholder={Number(data.price).toLocaleString('id-ID')}
               className="w-full max-w-[660px] input input-bordered text-neutral-80"
               value={harga}
               onChange={handleHargaChange}
@@ -368,7 +354,7 @@ const ContentSection = () => {
             </div>
             <input
               type="text"
-              placeholder="Ketik disini..."
+              placeholder={data.duration}
               className="w-full max-w-[660px] input input-bordered text-neutral-80"
               value={durasi}
               onChange={(e) => setDurasi(e.target.value)}
@@ -387,7 +373,6 @@ const ContentSection = () => {
             </div>
             <input
               type="date"
-              placeholder="Ketik disini..."
               className="w-full max-w-[660px] input input-bordered text-neutral-80"
               value={tanggal}
               onChange={(e) => setTanggal(e.target.value)}
@@ -404,7 +389,7 @@ const ContentSection = () => {
             </div>
             <input
               type="text"
-              placeholder="Ketik disini..."
+              placeholder={data.quota}
               className="w-full max-w-[660px] input input-bordered text-neutral-80"
               value={kuota}
               onChange={handleKuotaChange}
@@ -416,7 +401,7 @@ const ContentSection = () => {
             </div>
           </label>
           <button className="col-span-2 rounded-[10px] bg-success h-fit py-3 text-white font-semibold btn hover:bg-success hover:text-white">
-            Tambahkan
+            Perbarui
           </button>
         </form>
       </div>
