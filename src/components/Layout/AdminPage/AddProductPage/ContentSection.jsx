@@ -90,7 +90,7 @@ const ContentSection = () => {
     formData.append('desc_facility', fasilitas);
     formData.append('desc_accommodation', akomodasi);
     formData.append('desc_preparation', persiapan);
-    formData.append('price', harga);
+    formData.append('price', harga.replace(/\D/g, ''));
     formData.append('duration', durasi);
     formData.append('date', tanggal);
     formData.append('quota', kuota);

@@ -34,23 +34,23 @@ function Navbar() {
     name.split(' ')[0].charAt(0).toUpperCase() + name.split(' ')[0].slice(1);
   const [openModal, setOpenModal] = useState(false);
 
-  const refreshToken = async () => {
-    try {
-      const response = await axios.get(`${apiUrl}/token`);
-      // setToken(response.data.accessToken);
-      const decoded = jwtDecode(response.data.accessToken);
-      setName(decoded.name);
-      setEmail(decoded.email);
-      // setExpire(decoded.exp);
-      return true;
-    } catch (error) {
-      if (error.response) {
-        return false;
-      }
-    }
-  };
-
   useEffect(() => {
+    const refreshToken = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/token`);
+        // setToken(response.data.accessToken);
+        const decoded = jwtDecode(response.data.accessToken);
+        setName(decoded.name);
+        setEmail(decoded.email);
+        // setExpire(decoded.exp);
+        return true;
+      } catch (error) {
+        if (error.response) {
+          return false;
+        }
+      }
+    };
+
     const isUserLoggedIn = async () => {
       const result = await refreshToken();
       setIsLogin(!!result);
@@ -69,14 +69,6 @@ function Navbar() {
       console.error('Logout failed:', error);
     }
   };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      refreshToken();
-    };
-
-    fetchData();
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -131,16 +123,6 @@ function Navbar() {
           >
             Open Trip
           </Link>
-          {/* <Link
-            id="destination-link"
-            to="/destination"
-            aria-current={
-              currentPage.includes('destination') ? 'page' : undefined
-            }
-            className="text-[20px] font-semibold aria-[current=page]:text-black aria-[current=page]:bg-white aria-[current=page]:opacity-90 aria-[current=page]:shadow-inset px-5 py-3 rounded-3xl hover:text-black hover:bg-white hover:opacity-90 hover:shadow-inset hover:shadow-dropbox transition duration-100 active:opacity-80 focus:text-black focus:bg-white focus:opacity-90 focus:shadow-inset focus:shadow-dropbox"
-          >
-            Destinations
-          </Link> */}
           <Link
             id="about-link"
             to="/about-us"

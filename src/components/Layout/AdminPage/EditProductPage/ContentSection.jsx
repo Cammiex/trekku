@@ -48,7 +48,7 @@ const ContentSection = () => {
     if (fasilitas) formData.append('desc_facility', fasilitas);
     if (akomodasi) formData.append('desc_accommodation', akomodasi);
     if (persiapan) formData.append('desc_preparation', persiapan);
-    if (harga) formData.append('price', harga.replace(/\D/g, '')); // remove formatting
+    if (harga) formData.append('price', harga.replace(/\D/g, ''));
     if (durasi) formData.append('duration', durasi);
     if (tanggal) formData.append('date', tanggal);
     if (kuota) formData.append('quota', kuota);
