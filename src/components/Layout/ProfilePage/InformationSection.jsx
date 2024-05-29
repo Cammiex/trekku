@@ -5,6 +5,108 @@ import Cropper from 'react-easy-crop';
 
 import PropTypes from 'prop-types';
 
+const createImage = (url) =>
+  new Promise((resolve, reject) => {
+    const image = new Image();
+    image.addEventListener('load', () => resolve(image));
+    image.addEventListener('error', (error) => reject(error));
+    image.setAttribute('crossOrigin', 'anonymous');
+    image.src = url;
+  });
+
+const getRadianAngle = (degreeValue) => {
+  return (degreeValue * Math.PI) / 180;
+};
+
+/**
+ * Returns the new bounding area of a rotated rectangle.
+ */
+const rotateSize = (width, height, rotation) => {
+  const rotRad = getRadianAngle(rotation);
+
+  return {
+    width:
+      Math.abs(Math.cos(rotRad) * width) + Math.abs(Math.sin(rotRad) * height),
+    height:
+      Math.abs(Math.sin(rotRad) * width) + Math.abs(Math.cos(rotRad) * height),
+  };
+};
+
+/**
+ * This function was adapted from the one in the ReadMe of https://github.com/DominicTobias/react-image-crop
+ */
+const getCroppedImg = async (
+  imageSrc,
+  pixelCrop,
+  rotation = 0,
+  flip = { horizontal: false, vertical: false }
+) => {
+  const image = await createImage(imageSrc);
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+
+  if (!ctx) {
+    return null;
+  }
+
+  const rotRad = getRadianAngle(rotation);
+
+  // calculate bounding box of the rotated image
+  const { width: bBoxWidth, height: bBoxHeight } = rotateSize(
+    image.width,
+    image.height,
+    rotation
+  );
+
+  // set canvas size to match the bounding box
+  canvas.width = bBoxWidth;
+  canvas.height = bBoxHeight;
+
+  // translate canvas context to a central location to allow rotating and flipping around the center
+  ctx.translate(bBoxWidth / 2, bBoxHeight / 2);
+  ctx.rotate(rotRad);
+  ctx.scale(flip.horizontal ? -1 : 1, flip.vertical ? -1 : 1);
+  ctx.translate(-image.width / 2, -image.height / 2);
+
+  // draw rotated image
+  ctx.drawImage(image, 0, 0);
+
+  const croppedCanvas = document.createElement('canvas');
+
+  const croppedCtx = croppedCanvas.getContext('2d');
+
+  if (!croppedCtx) {
+    return null;
+  }
+
+  // Set the size of the cropped canvas
+  croppedCanvas.width = pixelCrop.width;
+  croppedCanvas.height = pixelCrop.height;
+
+  // Draw the cropped image onto the new canvas
+  croppedCtx.drawImage(
+    canvas,
+    pixelCrop.x,
+    pixelCrop.y,
+    pixelCrop.width,
+    pixelCrop.height,
+    0,
+    0,
+    pixelCrop.width,
+    pixelCrop.height
+  );
+
+  // As Base64 string
+  // return croppedCanvas.toDataURL('image/jpeg');
+
+  // As a blob
+  return new Promise((resolve, reject) => {
+    croppedCanvas.toBlob((file) => {
+      resolve(URL.createObjectURL(file));
+    }, 'image/jpeg');
+  });
+};
+
 const PopUpChangePicture = ({
   handlePopUpChangePicture,
   isPopUpChangePictureOpen,
@@ -128,22 +230,20 @@ PopUpDeletePictuce.propTypes = {
 
 const PopUpCropPicture = ({
   profileImage,
-  isPopUpDeletePictureOpen,
-  handlePopUpDeletePicture2,
+  isPopUpCropPictureOpen,
+  handlePopUpCropPicture,
+  handleSaveCropPicture,
+  cropComplete,
 }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(3);
 
-  const cropSize = { width: 197, height: 197 };
-
-  const onCropComplete = (croppedArea, croppedAreaPixels) => {
-    console.log(croppedArea, croppedAreaPixels);
-  };
+  const cropSize = { width: 180, height: 180 };
 
   return (
     <div
       className={
-        isPopUpDeletePictureOpen
+        isPopUpCropPictureOpen
           ? 'fixed inset-0 z-40 flex items-center justify-center backdrop-filter backdrop-brightness-50 backdrop-blur-sm'
           : 'fixed inset-0 z-40 hidden items-center justify-center backdrop-filter backdrop-brightness-50 backdrop-blur-sm'
       }
@@ -152,12 +252,12 @@ const PopUpCropPicture = ({
         <FontAwesomeIcon
           icon={faArrowLeft}
           className="absolute top-[36px] left-[32px] cursor-pointer active:scale-90 transition-all duration-100"
-          onClick={handlePopUpDeletePicture2}
+          onClick={handlePopUpCropPicture}
         />
         <h1 className="text-[24px] font-semibold text-neutral-70">
           Pangkas & putar
         </h1>
-        <div className="w-[197px] h-[197px] relative border-[3px] border-neutral-40 mt-10 p-[2px] bg-[#D0D0D0] rounded-[2px]">
+        <div className="size-[200px] relative border-[3px] border-neutral-40 p-[2px] mt-3 bg-[#D0D0D0] rounded-[2px]">
           {' '}
           <div className="relative size-full">
             {' '}
@@ -169,13 +269,15 @@ const PopUpCropPicture = ({
               cropSize={cropSize}
               aspect={1 / 1}
               onCropChange={setCrop}
-              onCropComplete={onCropComplete}
+              onCropComplete={cropComplete}
               onZoomChange={setZoom}
-              showGrid="false"
             />
           </div>
         </div>
-        <button className="rounded-lg bg-primary-60 size-fit px-[14px] py-2 text-white text-[14px] font-medium mt-10">
+        <button
+          onClick={handleSaveCropPicture}
+          className="rounded-lg bg-primary-60 size-fit px-[14px] py-2 text-white text-[14px] font-medium mt-3"
+        >
           Selanjutnya
         </button>
       </div>
@@ -185,21 +287,40 @@ const PopUpCropPicture = ({
 
 PopUpCropPicture.propTypes = {
   profileImage: PropTypes.string,
-  isPopUpDeletePictureOpen: PropTypes.bool.isRequired,
-  handlePopUpDeletePicture2: PropTypes.func.isRequired,
+  isPopUpCropPictureOpen: PropTypes.bool.isRequired,
+  handlePopUpCropPicture: PropTypes.func.isRequired,
+  cropComplete: PropTypes.func.isRequired,
+  handleSaveCropPicture: PropTypes.func.isRequired,
 };
 
 const InformationSection = () => {
   const [isEdit, setIsEdit] = useState(false);
   const [isPopUpChangePicture, setIsPopUpChangePicture] = useState(false);
+  const [isPopUpChangePicture2, setIsPopUpChangePicture2] = useState(false);
   const [isPopUpDeletePicture, setIsPopUpDeletePicture] = useState(false);
-  const [isPopUpDeletePicture2, setIsPopUpDeletePicture2] = useState(false);
 
   const [profileImage, setProfileImage] = useState(null);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const [croppedImage, setCroppedImage] = useState(null);
+
+  const onCropComplete = (croppedArea, croppedAreaPixels) => {
+    setCroppedAreaPixels(croppedAreaPixels);
+  };
+
+  const saveCroppedImage = async () => {
+    try {
+      const cropImage = await getCroppedImg(profileImage, croppedAreaPixels);
+      setCroppedImage(cropImage);
+      setIsPopUpChangePicture2(!isPopUpChangePicture2);
+      setIsPopUpChangePicture(!isPopUpChangePicture);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
     if (profileImage) {
-      setIsPopUpDeletePicture2(true);
+      setIsPopUpChangePicture2(!isPopUpChangePicture2);
     }
   }, [profileImage]);
 
@@ -210,8 +331,9 @@ const InformationSection = () => {
   const handlePopUpDeletePicture = () => {
     setIsPopUpDeletePicture(!isPopUpDeletePicture);
   };
-  const handlePopUpDeletePicture2 = () => {
-    setIsPopUpDeletePicture2(!isPopUpDeletePicture2);
+  const handlePopUpChangePicture2 = () => {
+    setIsPopUpChangePicture2(!isPopUpChangePicture2);
+    // setProfileImage(null);
   };
 
   const handleEdit = () => {
@@ -232,18 +354,22 @@ const InformationSection = () => {
       {/* {profileImage && (
         <PopUpCropPicture
           profileImage={profileImage}
-          isPopUpDeletePictureOpen={isPopUpDeletePicture2}
-          handlePopUpDeletePicture2={handlePopUpDeletePicture2}
+          isPopUpCropPictureOpen={isPopUpChangePicture2}
+          handlePopUpCropPicture={handlePopUpChangePicture2}
         />
       )} */}
       <PopUpCropPicture
         profileImage={profileImage}
-        isPopUpDeletePictureOpen={isPopUpDeletePicture2}
-        handlePopUpDeletePicture2={handlePopUpDeletePicture2}
+        isPopUpCropPictureOpen={isPopUpChangePicture2}
+        handlePopUpCropPicture={handlePopUpChangePicture2}
+        handleSaveCropPicture={saveCroppedImage}
+        cropComplete={onCropComplete}
       />
       <h1 className="text-[24px] font-semibold">Informasi Akun</h1>
       <div className="flex items-center gap-6 mt-10">
-        <div className="size-[111px] rounded-full bg-neutral-40"></div>
+        <div className="size-[111px] rounded-full bg-neutral-40 overflow-hidden">
+          <img src={croppedImage} alt="" />
+        </div>
         <div className="flex flex-col gap-[7px]">
           <button
             onClick={handlePopUpChangePicture}
