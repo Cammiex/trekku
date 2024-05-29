@@ -100,6 +100,7 @@ const getCroppedImg = async (
   // return croppedCanvas.toDataURL('image/jpeg');
 
   // As a blob
+  // eslint-disable-next-line no-unused-vars
   return new Promise((resolve, reject) => {
     croppedCanvas.toBlob((file) => {
       resolve(URL.createObjectURL(file));
@@ -112,6 +113,7 @@ const PopUpChangePicture = ({
   isPopUpChangePictureOpen,
   setProfileImage,
 }) => {
+  // eslint-disable-next-line no-unused-vars
   const [image, setImage] = useState(null);
   const handleImageChange = (e) => {
     const file = e.target.files[0];

@@ -1,10 +1,9 @@
-// import Footer from '../../Fragments/Footer/Footer';
 import Footer from '../../Fragments/Footer/Footer';
 import Navbar from '../../Fragments/Navbar/Navbar';
-import InformationSection from '../../Layout/ProfilePage/InformasiAkun/InformationSection';
+import BantuanSection from '../../Layout/ProfilePage/Bantuan/BantuanSection';
 import SidebarSection from '../../Layout/ProfilePage/SidebarSection';
 
-const ProfilePage = () => {
+const HelpPage = () => {
   const bgImage = '/images/ProfilePage/bg-profile.png';
 
   return (
@@ -16,7 +15,7 @@ const ProfilePage = () => {
       >
         <div id="profile-wrapper" className="flex items-center gap-5">
           <SidebarSection />
-          <InformationSection />
+          <BantuanSection />
         </div>{' '}
         <Footer />
       </div>
@@ -24,4 +23,4 @@ const ProfilePage = () => {
   );
 };
 
-export default ProfilePage;
+export default HelpPage;
