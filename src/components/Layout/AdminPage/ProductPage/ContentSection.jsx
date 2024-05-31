@@ -1,31 +1,27 @@
 import { Table } from 'flowbite-react';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import moment from 'moment';
 import Swal from 'sweetalert2';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrashCan } from '@fortawesome/free-regular-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchProduct } from '../../../../redux/slices/products/getProducts';
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const ContentSection = () => {
-  const [data, setData] = useState([]);
-  const navigate = useNavigate();
+  const productData = useSelector((state) => state.products.data.produk);
+  const isLoading = useSelector((state) => state.products.loading);
+  const dispatch = useDispatch();
 
-  const getProducts = async () => {
-    try {
-      const response = await axios.get(`${apiUrl}/products`);
-      setData(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  const navigate = useNavigate();
 
   const deleteProduct = async (id) => {
     try {
       await axios.delete(`${apiUrl}/products/delete/${id}`);
-      getProducts();
+      dispatch(fetchProduct());
     } catch (error) {
       console.log(error);
     }
@@ -55,8 +51,9 @@ const ContentSection = () => {
   };
 
   useEffect(() => {
-    getProducts();
-  }, []);
+    dispatch(fetchProduct());
+  }, [dispatch]);
+  if (isLoading) return <div>Loading...</div>;
 
   return (
     <section className="flex flex-col w-full overflow-hidden">
@@ -80,7 +77,7 @@ const ContentSection = () => {
             <Table.HeadCell>Aksi</Table.HeadCell>
           </Table.Head>
           <Table.Body className="divide-y">
-            {data.map((item, index) => (
+            {productData?.map((item, index) => (
               <Table.Row
                 key={index}
                 className="bg-white dark:border-gray-700 dark:bg-gray-800"

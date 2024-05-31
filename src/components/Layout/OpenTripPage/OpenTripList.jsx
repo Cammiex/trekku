@@ -11,6 +11,8 @@ function OpenTripList() {
   const isLoading = useSelector((state) => state.products.loading);
   const dispatch = useDispatch();
 
+  const productList = productData.produk;
+
   useEffect(() => {
     dispatch(fetchProduct());
   }, [dispatch]);
@@ -18,7 +20,7 @@ function OpenTripList() {
 
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = productData.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = productList?.slice(indexOfFirstItem, indexOfLastItem);
 
   const paginate = (pageNumber) => {
     window.scrollTo({ top: 700, behavior: 'smooth' });
@@ -33,11 +35,11 @@ function OpenTripList() {
         id="open-trip-list"
         className="grid w-[1240px] grid-cols-3 gap-5"
       >
-        {currentItems.map((item, index) => (
+        {currentItems?.map((item, index) => (
           <OpenTripItem
             key={index}
             id={item.id}
-            img={item.url_img1}
+            img={item.product_imgs[1].url_img}
             itemName={item.name}
             organizer={item.location}
             location={item.location}
