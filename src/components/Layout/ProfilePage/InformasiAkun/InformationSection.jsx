@@ -2,8 +2,11 @@ import { faArrowLeft, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState, useEffect } from 'react';
 import Cropper from 'react-easy-crop';
-
 import PropTypes from 'prop-types';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const createImage = (url) =>
   new Promise((resolve, reject) => {
@@ -170,6 +173,7 @@ const PopUpChangePicture = ({
                     name=""
                     id=""
                     className="absolute inset-0 opacity-0"
+                    onChange={handleImageChange}
                   />
                 </button>
                 <button className="w-fit h-10 px-[14px] py-2 flex gap-[10px] items-center">
@@ -196,6 +200,7 @@ PopUpChangePicture.propTypes = {
 const PopUpDeletePictuce = ({
   isPopUpDeletePicture,
   handlePopUpDeletePicture,
+  handleDeleteImageFunc,
 }) => {
   return (
     <div
@@ -216,7 +221,10 @@ const PopUpDeletePictuce = ({
           >
             Batal
           </button>
-          <button className="w-[213px] h-[54px] font-medium rounded-xl bg-primary-60 text-white text-[20px]">
+          <button
+            onClick={handleDeleteImageFunc}
+            className="w-[213px] h-[54px] font-medium rounded-xl bg-primary-60 text-white text-[20px]"
+          >
             Hapus
           </button>
         </div>
@@ -228,6 +236,7 @@ const PopUpDeletePictuce = ({
 PopUpDeletePictuce.propTypes = {
   isPopUpDeletePicture: PropTypes.bool.isRequired,
   handlePopUpDeletePicture: PropTypes.func.isRequired,
+  handleDeleteImageFunc: PropTypes.func.isRequired,
 };
 
 const PopUpCropPicture = ({
@@ -296,6 +305,48 @@ PopUpCropPicture.propTypes = {
 };
 
 const InformationSection = () => {
+  const { id } = useParams();
+  const [data, setData] = useState('');
+
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
+
+  const handleSaveChanges = async (e) => {
+    e.preventDefault();
+
+    try {
+      await axios.patch(`${apiUrl}/users/edit/${id}`, {
+        name: name,
+        email: email,
+        phone_number: phone,
+      });
+      Swal.fire({
+        title: 'Data berhasil diperbarui!',
+        icon: 'success',
+      }).then((result) => {
+        if (result.isConfirmed) {
+          window.location.reload();
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const getUserById = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/users/${id}`);
+
+        setData(response.data.payload.datas);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    getUserById();
+  }, [id]);
+
   const [isEdit, setIsEdit] = useState(false);
   const [isPopUpChangePicture, setIsPopUpChangePicture] = useState(false);
   const [isPopUpChangePicture2, setIsPopUpChangePicture2] = useState(false);
@@ -303,16 +354,57 @@ const InformationSection = () => {
 
   const [profileImage, setProfileImage] = useState(null);
   const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
-  const [croppedImage, setCroppedImage] = useState(null);
 
   const onCropComplete = (croppedArea, croppedAreaPixels) => {
     setCroppedAreaPixels(croppedAreaPixels);
   };
 
+  const convertBlobUrlToFile = async (blobUrl, fileName) => {
+    const response = await fetch(blobUrl);
+    const blob = await response.blob();
+    const file = new File([blob], fileName, { type: blob.type });
+    return file;
+  };
+
+  const handleSaveImage = async (imageCropped) => {
+    if (!imageCropped) {
+      console.log('tiadk ada gmbar');
+      return;
+    }
+    console.log(imageCropped);
+    const file = await convertBlobUrlToFile(
+      imageCropped,
+      'profile_picture.jpg'
+    );
+    const formData = new FormData();
+    formData.append('url_profile_img', file);
+
+    try {
+      await axios.patch(`${apiUrl}/users/edit/image/${id}`, formData, {
+        headers: {
+          'Content-type': 'multipart/form-data',
+        },
+      });
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDeleteImage = async () => {
+    try {
+      await axios.delete(`${apiUrl}/users/edit/delete-image/${id}`);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const saveCroppedImage = async () => {
     try {
       const cropImage = await getCroppedImg(profileImage, croppedAreaPixels);
-      setCroppedImage(cropImage);
+      // setCroppedImage(cropImage);
+      handleSaveImage(cropImage);
       setIsPopUpChangePicture2(!isPopUpChangePicture2);
       setIsPopUpChangePicture(!isPopUpChangePicture);
     } catch (error) {
@@ -324,6 +416,7 @@ const InformationSection = () => {
     if (profileImage) {
       setIsPopUpChangePicture2(!isPopUpChangePicture2);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [profileImage]);
 
   const handlePopUpChangePicture = () => {
@@ -335,7 +428,6 @@ const InformationSection = () => {
   };
   const handlePopUpChangePicture2 = () => {
     setIsPopUpChangePicture2(!isPopUpChangePicture2);
-    // setProfileImage(null);
   };
 
   const handleEdit = () => {
@@ -352,14 +444,8 @@ const InformationSection = () => {
       <PopUpDeletePictuce
         handlePopUpDeletePicture={handlePopUpDeletePicture}
         isPopUpDeletePicture={isPopUpDeletePicture}
+        handleDeleteImageFunc={handleDeleteImage}
       />
-      {/* {profileImage && (
-        <PopUpCropPicture
-          profileImage={profileImage}
-          isPopUpCropPictureOpen={isPopUpChangePicture2}
-          handlePopUpCropPicture={handlePopUpChangePicture2}
-        />
-      )} */}
       <PopUpCropPicture
         profileImage={profileImage}
         isPopUpCropPictureOpen={isPopUpChangePicture2}
@@ -370,7 +456,7 @@ const InformationSection = () => {
       <h1 className="text-[24px] font-semibold">Informasi Akun</h1>
       <div className="flex items-center gap-6 mt-10">
         <div className="size-[111px] rounded-full bg-neutral-40 overflow-hidden">
-          <img src={croppedImage} alt="" />
+          <img src={data.url_profile_img} alt="" />
         </div>
         <div className="flex flex-col gap-[7px]">
           <button
@@ -397,7 +483,7 @@ const InformationSection = () => {
           </button>
         </div>
       </div>
-      <form action="" className="mt-[38px]">
+      <form onSubmit={handleSaveChanges} action="" className="mt-[38px]">
         <div className="grid grid-cols-2 gap-x-[29px] gap-y-6">
           {' '}
           <div className="flex flex-col gap-1">
@@ -412,8 +498,10 @@ const InformationSection = () => {
               name=""
               id="fullname"
               className="w-[350px] h-12 rounded-md shadow-inputShadow border-none"
-              placeholder="Nama"
+              placeholder={data.name}
               autoComplete="off"
+              value={isEdit ? name : data.name}
+              onChange={(e) => setName(e.target.value)}
               disabled={isEdit ? false : true}
             />
           </div>
@@ -429,8 +517,12 @@ const InformationSection = () => {
               name=""
               id="telp"
               className="w-[350px] h-12 rounded-md shadow-inputShadow border-none"
-              placeholder="0821"
+              placeholder={
+                data.phone_number ? data.phone_number : 'Tidak ada no. telpon'
+              }
               autoComplete="off"
+              value={isEdit ? phone : data.phone_number}
+              onChange={(e) => setPhone(e.target.value)}
               disabled={isEdit ? false : true}
             />
           </div>
@@ -442,12 +534,14 @@ const InformationSection = () => {
               Email
             </label>
             <input
-              type="text"
+              type="email"
               name=""
               id="email"
               className="w-[350px] h-12 rounded-md shadow-inputShadow border-none"
-              placeholder="john@mail.com"
+              placeholder={data.email}
               autoComplete="off"
+              value={isEdit ? email : data.email}
+              onChange={(e) => setEmail(e.target.value)}
               disabled={isEdit ? false : true}
             />
           </div>

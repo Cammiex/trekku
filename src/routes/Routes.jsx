@@ -82,7 +82,7 @@ const ProjectRoutes = () => {
             element={<EditProductPage />}
           />
 
-          <Route path="/profile/information" element={<ProfilePage />} />
+          <Route path="/profile/information/:id" element={<ProfilePage />} />
           <Route path="/profile/help" element={<ProfileHelpPage />} />
         </Routes>
       </Router>

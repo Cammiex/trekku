@@ -79,7 +79,7 @@ OpenTripItem.propTypes = {
   organizer: PropTypes.string,
   location: PropTypes.string,
   duration: PropTypes.string,
-  order: PropTypes.string,
+  order: PropTypes.number,
   id: PropTypes.number.isRequired,
   price: PropTypes.number,
 };

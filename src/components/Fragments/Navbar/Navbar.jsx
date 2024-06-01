@@ -9,14 +9,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserCircle } from '@fortawesome/free-regular-svg-icons';
 const apiUrl = import.meta.env.VITE_API_URL;
 
-const AvatarIcon = ({ name }) => {
+const AvatarIcon = ({ name, profilePicture }) => {
   return (
     <div className="flex items-center gap-3">
-      <div className="size-[46px] ring-2 ring-white/75 rounded-full bg-white flex items-center justify-center relative">
-        <FontAwesomeIcon
-          icon={faUserCircle}
-          className="size-[44px] object-cover object-center text-[#5D5D5D]"
-        />
+      <div className="size-[46px] ring-2 ring-white/75 rounded-full bg-white flex items-center justify-center relative overflow-hidden">
+        {profilePicture ? (
+          <img
+            src={profilePicture}
+            alt=""
+            className="object-cover object-center size-full"
+          />
+        ) : (
+          <FontAwesomeIcon
+            icon={faUserCircle}
+            className="size-[44px] object-cover object-center text-[#5D5D5D]"
+          />
+        )}
       </div>
       <h1 className="text-base font-semibold">{name}</h1>
     </div>
@@ -27,22 +35,39 @@ function Navbar() {
   const [isLogin, setIsLogin] = useState(false);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
-  // const [token, setToken] = useState('');
-  // const [expire, setExpire] = useState('');
+  const [userId, setUserId] = useState('');
+  const [token, setToken] = useState('');
+  const [expire, setExpire] = useState('');
+  const [profilePicture, setProfilePicture] = useState('');
   const navigate = useNavigate();
   const firstname =
     name.split(' ')[0].charAt(0).toUpperCase() + name.split(' ')[0].slice(1);
   const [openModal, setOpenModal] = useState(false);
 
   useEffect(() => {
+    const getPicture = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/users/${userId}`);
+        setProfilePicture(response.data.payload.datas.url_profile_img);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getPicture();
+  });
+
+  useEffect(() => {
     const refreshToken = async () => {
       try {
         const response = await axios.get(`${apiUrl}/token`);
-        // setToken(response.data.accessToken);
+        setToken(response.data.accessToken);
         const decoded = jwtDecode(response.data.accessToken);
         setName(decoded.name);
         setEmail(decoded.email);
-        // setExpire(decoded.exp);
+        setExpire(decoded.exp);
+        setUserId(decoded.userId);
+        localStorage.setItem('expire', expire);
+        localStorage.setItem('token', token);
         return true;
       } catch (error) {
         if (error.response) {
@@ -57,7 +82,7 @@ function Navbar() {
     };
 
     isUserLoggedIn();
-  }, []);
+  }, [expire, token]);
 
   const handleLogout = async () => {
     try {
@@ -137,6 +162,7 @@ function Navbar() {
             <AvatarIcon
               className=""
               name={isLogin ? `Hai, ${firstname}!` : 'Tamu'}
+              profilePicture={profilePicture}
             />
           }
           arrowIcon={false}
@@ -156,7 +182,10 @@ function Navbar() {
               </Dropdown.Header>
               <div className="w-[240px] h-[0.5px] bg-black/40"></div>
               <Dropdown.Item className="hover:text-primary-60 text-[16px] font-semibold w-full p-0">
-                <Link to="/profile" className="py-4 pl-8 text-left size-full">
+                <Link
+                  to={`/profile/information/${userId}`}
+                  className="py-4 pl-8 text-left size-full"
+                >
                   {' '}
                   Profil{' '}
                 </Link>
@@ -238,6 +267,7 @@ function Navbar() {
 
 AvatarIcon.propTypes = {
   name: PropTypes.string.isRequired,
+  profilePicture: PropTypes.string.isRequired,
 };
 
 export default Navbar;
