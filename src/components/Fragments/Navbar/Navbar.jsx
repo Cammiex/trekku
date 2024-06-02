@@ -46,6 +46,7 @@ function Navbar() {
 
   useEffect(() => {
     const getPicture = async () => {
+      if (!userId) return;
       try {
         const response = await axios.get(`${apiUrl}/users/${userId}`);
         setProfilePicture(response.data.payload.datas.url_profile_img);
@@ -54,7 +55,7 @@ function Navbar() {
       }
     };
     getPicture();
-  });
+  }, [userId]);
 
   useEffect(() => {
     const refreshToken = async () => {
