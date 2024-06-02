@@ -1,3 +1,7 @@
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
+
 const ContentSection = () => {
   return (
     <div
@@ -5,6 +9,13 @@ const ContentSection = () => {
       className="w-full mt-[71px] flex flex-col gap-10 items-center text-black"
     >
       <div id="title" className="w-[1244px]">
+        <Link
+          to={`/`}
+          className="flex items-center gap-5 w-fit h-[30px] select-none self-start"
+        >
+          <FontAwesomeIcon icon={faChevronLeft} className="text-neutral-80" />
+          <h1 className="text-[20px] font-medium text-neutral-80">Kembali</h1>
+        </Link>
         <h1 className="text-[50px] font-bold text-black">
           Banda Neira, Surga di Timur Indonesia
         </h1>

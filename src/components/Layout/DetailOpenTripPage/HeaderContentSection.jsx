@@ -4,9 +4,11 @@ import {
   faGlobeAmericas,
   faBookmark,
   faStar,
+  faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
 import { faBookmark as faBookmarkRegular } from '@fortawesome/free-regular-svg-icons';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const HeaderContentSection = ({
   name,
@@ -25,6 +27,13 @@ const HeaderContentSection = ({
 
   return (
     <section>
+      <Link
+        to="/open-trip"
+        className="flex items-center gap-5 mb-5 w-fit h-[30px] select-none"
+      >
+        <FontAwesomeIcon icon={faChevronLeft} />
+        <h1 className="text-[20px] font-medium text-neutral-80">Kembali</h1>
+      </Link>
       <div className="flex items-center justify-between w-full">
         <div>
           <h1 className="font-bold text-[50px] mb-[9px]">{name}</h1>

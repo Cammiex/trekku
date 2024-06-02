@@ -55,6 +55,9 @@ const ProfilePage = React.lazy(() =>
 const ProfileHelpPage = React.lazy(() =>
   import('../components/Pages/ProfilePage/HelpPage')
 );
+const OrderPage = React.lazy(() =>
+  import('../components/Pages/OrderPage/OrderPage')
+);
 
 const ProjectRoutes = () => {
   return (
@@ -84,6 +87,8 @@ const ProjectRoutes = () => {
 
           <Route path="/profile/information/:id" element={<ProfilePage />} />
           <Route path="/profile/help/:id" element={<ProfileHelpPage />} />
+
+          <Route path="/order" element={<OrderPage />} />
         </Routes>
       </Router>
     </React.Suspense>

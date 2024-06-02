@@ -1,5 +1,8 @@
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Tabs } from 'flowbite-react';
 import { Accordion } from 'flowbite-react';
+import { Link } from 'react-router-dom';
 
 const tabsTheme = {
   base: 'flex flex-col gap-2',
@@ -376,30 +379,39 @@ const AccordionPerubahan = () => {
 
 const AccordionSection = () => {
   return (
-    <div className="w-[797px] min-h-[461px] max-h-fit pb-8 pt-4 bg-white flex flex-col items-center rounded-2xl shadow-cardShadow text-black mt-10">
-      {' '}
-      <Tabs
-        aria-label="Tabs with underline"
-        style="underline"
-        theme={tabsTheme}
-        className="w-[716px] h-fit"
+    <div className="w-[797px] mt-10 flex flex-col gap-5">
+      <Link
+        to={`/`}
+        className="flex items-center gap-5 w-fit h-[30px] select-none self-start"
       >
-        <Tabs.Item active title="Umum">
-          <AccordionUmum />
-        </Tabs.Item>
-        <Tabs.Item active title="Akun">
-          <AccordionAkun />
-        </Tabs.Item>
-        <Tabs.Item active title="Pemesanan">
-          <AccordionPemesanan />
-        </Tabs.Item>
-        <Tabs.Item active title="Pembayaran">
-          <AccordionPembayaran />
-        </Tabs.Item>
-        <Tabs.Item active title="Perubahan & Pembatalan">
-          <AccordionPerubahan />
-        </Tabs.Item>
-      </Tabs>
+        <FontAwesomeIcon icon={faChevronLeft} className="text-neutral-80" />
+        <h1 className="text-[20px] font-medium text-neutral-80">Kembali</h1>
+      </Link>
+      <div className="w-[797px] min-h-[461px] max-h-fit pb-8 pt-4 bg-white flex flex-col items-center rounded-2xl shadow-cardShadow text-black">
+        {' '}
+        <Tabs
+          aria-label="Tabs with underline"
+          style="underline"
+          theme={tabsTheme}
+          className="w-[716px] h-fit"
+        >
+          <Tabs.Item active title="Umum">
+            <AccordionUmum />
+          </Tabs.Item>
+          <Tabs.Item active title="Akun">
+            <AccordionAkun />
+          </Tabs.Item>
+          <Tabs.Item active title="Pemesanan">
+            <AccordionPemesanan />
+          </Tabs.Item>
+          <Tabs.Item active title="Pembayaran">
+            <AccordionPembayaran />
+          </Tabs.Item>
+          <Tabs.Item active title="Perubahan & Pembatalan">
+            <AccordionPerubahan />
+          </Tabs.Item>
+        </Tabs>
+      </div>
     </div>
   );
 };

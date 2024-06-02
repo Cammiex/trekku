@@ -65,7 +65,7 @@ function OpenTripList() {
             paginate(currentPage + 1);
           }}
           disabled={
-            currentPage === Math.ceil(productList.length / itemsPerPage)
+            currentPage === Math.ceil(productList?.length / itemsPerPage)
           }
         >
           »

@@ -1,6 +1,11 @@
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faGlobeAmericas, faStar } from '@fortawesome/free-solid-svg-icons';
+import {
+  faChevronLeft,
+  faGlobeAmericas,
+  faStar,
+} from '@fortawesome/free-solid-svg-icons';
+import { Link, useParams } from 'react-router-dom';
 
 const ProductHeaderSection = ({
   name,
@@ -11,8 +16,17 @@ const ProductHeaderSection = ({
   image4,
   image5,
 }) => {
+  const { id } = useParams();
+
   return (
     <section className="mt-20">
+      <Link
+        to={`/open-trip/${id}`}
+        className="flex items-center gap-5 mb-5 w-fit h-[30px] select-none"
+      >
+        <FontAwesomeIcon icon={faChevronLeft} className="text-neutral-80" />
+        <h1 className="text-[20px] font-medium text-neutral-80">Kembali</h1>
+      </Link>
       <div className="flex items-center justify-between w-full">
         <div>
           <h1 className="font-bold text-[40px] mb-[9px] text-black">{name}</h1>
