@@ -65,6 +65,7 @@ const OpenTripDetail = () => {
               duration={productData?.datas.duration}
               price={productData?.datas.price}
               date={productData?.datas.date}
+              quota={productData?.datas.quota}
             />
           </div>
           <BudgetPlanningSection id={productData?.datas.id} />

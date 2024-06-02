@@ -56,8 +56,8 @@ const FloatButton = () => {
         <h1
           className={
             isOpen
-              ? 'transition-all duration-100 select-none h-7 overflow-hidden text-white/70'
-              : 'transition-all duration-100 select-none h-7 overflow-hidden text-white/70'
+              ? 'transition-all duration-100 select-none h-7 overflow-hidden text-neutral-70'
+              : 'transition-all duration-100 select-none h-7 overflow-hidden text-neutral-70'
           }
         >
           Halo! Ada yang bisa kami bantu?

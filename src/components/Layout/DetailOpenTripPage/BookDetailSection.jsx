@@ -4,7 +4,7 @@ import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import moment from 'moment/moment';
 
-const BookDetailSection = ({ location, duration, date, price }) => {
+const BookDetailSection = ({ location, duration, date, price, quota }) => {
   const formattedPrice = Number(price).toLocaleString('id-ID');
   const beforePrice = Number(price + 200000).toLocaleString('id-ID');
 
@@ -54,7 +54,7 @@ const BookDetailSection = ({ location, duration, date, price }) => {
           <FontAwesomeIcon icon={faUsers} className="size-8 text-neutral-40" />
           <h1 className="text-[20px] text-neutral-40">
             Sisa Kuota:{' '}
-            <span className="font-bold text-[#2BC128]">6 Orang</span>
+            <span className="font-bold text-[#2BC128]">{quota} Orang</span>
           </h1>
         </div>
       </div>
@@ -70,6 +70,7 @@ BookDetailSection.propTypes = {
   duration: PropTypes.string,
   date: PropTypes.string,
   price: PropTypes.number,
+  quota: PropTypes.number,
 };
 
 export default BookDetailSection;

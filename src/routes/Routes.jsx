@@ -83,7 +83,7 @@ const ProjectRoutes = () => {
           />
 
           <Route path="/profile/information/:id" element={<ProfilePage />} />
-          <Route path="/profile/help" element={<ProfileHelpPage />} />
+          <Route path="/profile/help/:id" element={<ProfileHelpPage />} />
         </Routes>
       </Router>
     </React.Suspense>

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 const LogoutPopUp = ({ handlePopUpLogout, isPop }) => {
@@ -51,6 +51,8 @@ LogoutPopUp.propTypes = {
 };
 
 const SidebarSection = () => {
+  const { id } = useParams();
+
   const location = useLocation();
   const currentPage = location.pathname;
 
@@ -68,7 +70,7 @@ const SidebarSection = () => {
       </div>
       <div className="flex flex-col mt-5">
         <Link
-          to="/profile/information"
+          to={`/profile/information/${id}`}
           className="w-full h-[56px] px-12 flex gap-3 items-center cursor-pointer hover:bg-[#E3F4FF] aria-[current=page]:bg-[#E3F4FF] aria-[current=page]:border-primary-40 aria-[current=page]:border-b-[4px]"
           aria-current={
             currentPage.includes('information') ? 'page' : undefined
@@ -104,7 +106,7 @@ const SidebarSection = () => {
           <h1 className="text-medium">Favorit</h1>
         </div>
         <Link
-          to="/profile/help"
+          to={`/profile/help/${id}`}
           className="w-full h-[56px] px-12 flex gap-3 items-center cursor-pointer hover:bg-[#E3F4FF] aria-[current=page]:bg-[#E3F4FF] aria-[current=page]:border-primary-40 aria-[current=page]:border-b-[4px]"
           aria-current={currentPage.includes('help') ? 'page' : undefined}
         >
