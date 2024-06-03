@@ -1,4 +1,6 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 const DetailPengunjungCard = () => {
   return (
@@ -74,9 +76,59 @@ const DetailPengunjungCard = () => {
   );
 };
 
+const PopUpNextPage = ({ handlePopUp, isOpen }) => {
+  return (
+    <div
+      className={
+        isOpen
+          ? 'fixed inset-0 z-40 flex items-center justify-center backdrop-filter backdrop-brightness-50 backdrop-blur-sm'
+          : 'fixed inset-0 z-40 hidden items-center justify-center backdrop-filter backdrop-brightness-50 backdrop-blur-sm'
+      }
+    >
+      <div className="w-[504px] h-[290px] p-8 flex flex-col items-center rounded-2xl shadow-inset bg-white">
+        <div className="flex flex-col items-center gap-2">
+          <h1 className="text-[20px] font-medium">
+            Apakah pesanan Anda benar?
+          </h1>
+          <p className="font-medium text-center text-neutral-40">
+            Anda tidak akan bisa mengubah detail pesanan setelah melanjutkan ke
+            halaman pembayaran.
+          </p>
+        </div>
+        <div className="flex flex-col gap-3 mt-5">
+          <button
+            onClick={handlePopUp}
+            className="w-[272px] h-fit rounded-xl bg-neutral-10 text-neutral-30 py-3 text-[20px] font-medium active:scale-95 transition-all duration-150"
+          >
+            Periksa Kembali
+          </button>
+          <Link
+            to="/payment"
+            className="w-[272px] h-fit rounded-xl bg-primary-60 text-white py-3 text-[20px] font-medium active:scale-95 transition-all duration-150 flex items-center justify-center"
+          >
+            Lanjutkan
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+PopUpNextPage.propTypes = {
+  handlePopUp: PropTypes.func.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+};
+
 const LeftFormSection = () => {
+  const [isPopUpOpen, setIsPopUpOpen] = useState(false);
+
+  const handlePopUp = () => {
+    setIsPopUpOpen(!isPopUpOpen);
+  };
+
   return (
     <div className="w-[654px] flex flex-col text-black mt-8 gap-8">
+      <PopUpNextPage isOpen={isPopUpOpen} handlePopUp={handlePopUp} />
       <div className="flex flex-col">
         <h1 className="text-[40px] font-bold">Pemesanan Anda</h1>
         <h1 className="font-medium">Isi data Anda dan review pesanan Anda.</h1>
@@ -172,12 +224,12 @@ const LeftFormSection = () => {
           </div>
         </div>
       </div>
-      <Link
-        to="/payment"
+      <button
+        onClick={handlePopUp}
         className="px-6 py-3 size-fit rounded-xl bg-primary-60 text-[20px] font-semibold self-end text-white"
       >
         Lanjut ke Pembayaran
-      </Link>
+      </button>
     </div>
   );
 };

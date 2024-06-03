@@ -29,7 +29,7 @@ const LeftPaymentSection = () => {
               Transfer Bank
             </label>
           </div>
-          <div className="hidden flex-col self-end peer-has-[:checked]:flex mb-4">
+          <div className="h-0 flex-col self-end peer-has-[:checked]:h-[328px] flex overflow-hidden transition-all duration-500">
             <h1 className="font-medium text-neutral-40">
               Pilih rekening tujuan
             </h1>
@@ -144,7 +144,7 @@ const LeftPaymentSection = () => {
               Minimarket
             </label>
           </div>
-          <div className="hidden flex-col self-end peer-has-[:checked]:flex mb-4">
+          <div className="h-0 flex-col self-end peer-has-[:checked]:h-[212px] flex overflow-hidden transition-all duration-500">
             <h1 className="font-medium text-neutral-40">
               Pilih jenis minimarket
             </h1>

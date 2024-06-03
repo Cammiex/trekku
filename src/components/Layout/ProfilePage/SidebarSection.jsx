@@ -94,7 +94,8 @@ const SidebarSection = () => {
           />
           <h1 className="font-medium">Riwayat Pembelian</h1>
         </div>
-        <div
+        <Link
+          to={`/profile/wishlist/${id}`}
           className="w-full h-[56px] px-12 flex gap-3 items-center cursor-pointer hover:bg-[#E3F4FF] aria-[current=page]:bg-[#E3F4FF] aria-[current=page]:border-primary-40 aria-[current=page]:border-b-[4px]"
           aria-current={currentPage.includes('wishlist') ? 'page' : undefined}
         >
@@ -103,8 +104,8 @@ const SidebarSection = () => {
             alt=""
             className="size-6"
           />
-          <h1 className="text-medium">Favorit</h1>
-        </div>
+          <h1 className="font-medium">Favorit</h1>
+        </Link>
         <Link
           to={`/profile/help/${id}`}
           className="w-full h-[56px] px-12 flex gap-3 items-center cursor-pointer hover:bg-[#E3F4FF] aria-[current=page]:bg-[#E3F4FF] aria-[current=page]:border-primary-40 aria-[current=page]:border-b-[4px]"

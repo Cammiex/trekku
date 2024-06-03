@@ -1,13 +1,15 @@
 import Footer from '../../Fragments/Footer/Footer';
 import Navbar from '../../Fragments/Navbar/Navbar';
 import HeroSection from '../../Layout/OrderPage/HeroSection';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import LeftFormSection from '../../Layout/OrderSummaryPage/LeftFormSection';
 import FloatingCardSection from '../../Layout/OrderSummaryPage/FloatingCardSection';
 
 const OrderSummaryPage = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <Navbar />
@@ -15,7 +17,7 @@ const OrderSummaryPage = () => {
         <HeroSection />
         <div className="w-[1200px] flex flex-col mt-10">
           <Link
-            to=".."
+            onClick={() => navigate(-1)}
             className="flex items-center gap-5 w-fit h-[30px] select-none"
           >
             <FontAwesomeIcon icon={faChevronLeft} className="text-neutral-80" />

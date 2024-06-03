@@ -45,6 +45,7 @@ const OpenTripDetail = () => {
           <HeaderContentSection
             name={productData?.datas.name}
             location={productData?.datas.location}
+            idProduct={id}
             image1={productData?.datas.product_imgs[0].url_img}
             image2={productData?.datas.product_imgs[1].url_img}
             image3={productData?.datas.product_imgs[2].url_img}

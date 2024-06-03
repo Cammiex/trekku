@@ -69,6 +69,7 @@ function Navbar() {
         setUserId(decoded.userId);
         localStorage.setItem('expire', expire);
         localStorage.setItem('token', token);
+        localStorage.setItem('userId', decoded.userId);
         return true;
       } catch (error) {
         if (error.response) {
@@ -268,7 +269,7 @@ function Navbar() {
 
 AvatarIcon.propTypes = {
   name: PropTypes.string.isRequired,
-  profilePicture: PropTypes.string.isRequired,
+  profilePicture: PropTypes.string,
 };
 
 export default Navbar;

@@ -67,6 +67,10 @@ const PaymentPage = React.lazy(() =>
 const PaymentConfirmPage = React.lazy(() =>
   import('../components/Pages/PaymentConfirmPage/PaymentConfirmPage')
 );
+const WishlistPage = React.lazy(() =>
+  import('../components/Pages/ProfilePage/WishlistPage')
+);
+
 const ProjectRoutes = () => {
   return (
     <React.Suspense fallback={<div>Loading...</div>}>
@@ -95,6 +99,7 @@ const ProjectRoutes = () => {
 
           <Route path="/profile/information/:id" element={<ProfilePage />} />
           <Route path="/profile/help/:id" element={<ProfileHelpPage />} />
+          <Route path="/profile/wishlist/:id" element={<WishlistPage />} />
 
           <Route path="/order" element={<OrderPage />} />
           <Route path="/order-summary" element={<OrderSummaryPage />} />

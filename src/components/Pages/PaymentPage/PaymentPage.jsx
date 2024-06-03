@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../../Fragments/Footer/Footer';
 import Navbar from '../../Fragments/Navbar/Navbar';
 import HeroSection from '../../Layout/OrderPage/HeroSection';
@@ -8,6 +8,8 @@ import LeftPaymentSection from '../../Layout/PaymentPage/LeftPaymentSection';
 import FloatingCardSection from '../../Layout/PaymentPage/FloatingCardSection';
 
 const PaymentPage = () => {
+  const navigate = useNavigate();
+
   return (
     <>
       <Navbar />
@@ -15,7 +17,7 @@ const PaymentPage = () => {
         <HeroSection />
         <div className="w-[1200px] flex flex-col mt-10">
           <Link
-            to=".."
+            onClick={() => navigate(-1)}
             className="flex items-center gap-5 w-fit h-[30px] select-none"
           >
             <FontAwesomeIcon icon={faChevronLeft} className="text-neutral-80" />

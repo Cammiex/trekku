@@ -7,8 +7,10 @@ import {
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
 import { faBookmark as faBookmarkRegular } from '@fortawesome/free-regular-svg-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const HeaderContentSection = ({
   name,
@@ -18,12 +20,64 @@ const HeaderContentSection = ({
   image3,
   image4,
   image5,
+  idProduct,
 }) => {
   const [saved, setSaved] = useState(false);
+  const idUser = localStorage.getItem('userId');
+  // eslint-disable-next-line no-unused-vars
+  const [isWishlist, setIsWishlist] = useState(null);
 
-  const handleSaved = () => {
-    setSaved(!saved);
+  const handleSaved = async () => {
+    try {
+      await axios.post(`${apiUrl}/wishlist`, {
+        user_id: idUser,
+        product_id: idProduct,
+      });
+      setSaved(true);
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  const handleRemoveWishlist = async () => {
+    try {
+      await axios.delete(`${apiUrl}/wishlist`, {
+        params: { user_id: idUser, product_id: idProduct },
+      });
+      setSaved(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchWishlist = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/wishlist`, {
+          params: {
+            user_id: idUser,
+            product_id: idProduct,
+          },
+        });
+        setIsWishlist(response.data);
+
+        // Update saved state based on the response
+        if (response.data.length === 0) {
+          setSaved(false);
+        } else if (response.data.length > 0) {
+          setSaved(true);
+        }
+      } catch (error) {
+        setIsWishlist(null);
+        setSaved(false);
+        console.log(error);
+      }
+    };
+
+    if (idUser && idProduct) {
+      fetchWishlist();
+    }
+  }, [idUser, idProduct]);
 
   return (
     <section>
@@ -66,7 +120,7 @@ const HeaderContentSection = ({
               ? `w-10 h-[50px] text-[#FFC107] cursor-pointer active:scale-90 transition-all duration-300`
               : `w-10 h-[50px] text-neutral-40 cursor-pointer active:scale-90 transition-all duration-300 hover:text-[#FFC107]`
           }
-          onClick={handleSaved}
+          onClick={saved ? handleRemoveWishlist : handleSaved}
         />
       </div>
 
@@ -119,6 +173,7 @@ HeaderContentSection.propTypes = {
   image3: PropTypes.string,
   image4: PropTypes.string,
   image5: PropTypes.string,
+  idProduct: PropTypes.number,
 };
 
 export default HeaderContentSection;
