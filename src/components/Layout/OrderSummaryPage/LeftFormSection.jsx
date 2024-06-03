@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+
 const DetailPengunjungCard = () => {
   return (
     <div className="w-full h-[542px] bg-white rounded-2xl shadow-cardShadow p-10 flex flex-col">
@@ -159,11 +161,23 @@ const LeftFormSection = () => {
       </div>
       <div className="flex flex-col w-full gap-6">
         <h1 className="text-[32px] font-semibold">Rincian Harga</h1>
-        <div className="w-full h-[128px] bg-white rounded-2xl shadow-cardShadow"></div>
+        <div className="w-full h-[128px] bg-white rounded-2xl shadow-cardShadow p-10 flex items-center">
+          <div className="flex items-center justify-between w-full">
+            <h1 className="text-neutral-60 text-[20px] font-medium">
+              Harga yang anda bayar
+            </h1>
+            <h1 className="text-[#F96A01] text-[32px] font-semibold">
+              Rp500.000
+            </h1>
+          </div>
+        </div>
       </div>
-      <button className="px-6 py-3 size-fit rounded-xl bg-primary-60 text-[20px] font-semibold self-end text-white">
+      <Link
+        to="/payment"
+        className="px-6 py-3 size-fit rounded-xl bg-primary-60 text-[20px] font-semibold self-end text-white"
+      >
         Lanjut ke Pembayaran
-      </button>
+      </Link>
     </div>
   );
 };

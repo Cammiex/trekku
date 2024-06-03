@@ -1,6 +1,7 @@
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 const CardRightSection = () => {
   const [ticket, setTicket] = useState(0);
@@ -66,9 +67,12 @@ const CardRightSection = () => {
             <h1 className="font-medium text-neutral-40">Dewasa (1x)</h1>
             <h1 className="font-semibold text-neutral-70">Rp500.000</h1>
           </div>
-          <button className="px-6 py-3 size-fit bg-primary-60 rounded-xl text-[20px] font-semibold">
+          <Link
+            to="/order-summary"
+            className="px-6 py-3 size-fit bg-primary-60 rounded-xl text-[20px] font-semibold"
+          >
             Pesan Sekarang
-          </button>
+          </Link>
         </div>
       </div>
     </div>

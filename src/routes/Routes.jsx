@@ -61,7 +61,12 @@ const OrderPage = React.lazy(() =>
 const OrderSummaryPage = React.lazy(() =>
   import('../components/Pages/OrderSummaryPage/OrderSummaryPage')
 );
-
+const PaymentPage = React.lazy(() =>
+  import('../components/Pages/PaymentPage/PaymentPage')
+);
+const PaymentConfirmPage = React.lazy(() =>
+  import('../components/Pages/PaymentConfirmPage/PaymentConfirmPage')
+);
 const ProjectRoutes = () => {
   return (
     <React.Suspense fallback={<div>Loading...</div>}>
@@ -93,6 +98,8 @@ const ProjectRoutes = () => {
 
           <Route path="/order" element={<OrderPage />} />
           <Route path="/order-summary" element={<OrderSummaryPage />} />
+          <Route path="/payment" element={<PaymentPage />} />
+          <Route path="/payment-confirm" element={<PaymentConfirmPage />} />
         </Routes>
       </Router>
     </React.Suspense>

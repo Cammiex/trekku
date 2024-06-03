@@ -1,13 +1,13 @@
+import { Link } from 'react-router-dom';
 import Footer from '../../Fragments/Footer/Footer';
 import Navbar from '../../Fragments/Navbar/Navbar';
 import HeroSection from '../../Layout/OrderPage/HeroSection';
-import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
-import LeftFormSection from '../../Layout/OrderSummaryPage/LeftFormSection';
-import FloatingCardSection from '../../Layout/OrderSummaryPage/FloatingCardSection';
+import LeftPaymentSection from '../../Layout/PaymentPage/LeftPaymentSection';
+import FloatingCardSection from '../../Layout/PaymentPage/FloatingCardSection';
 
-const OrderSummaryPage = () => {
+const PaymentPage = () => {
   return (
     <>
       <Navbar />
@@ -21,9 +21,8 @@ const OrderSummaryPage = () => {
             <FontAwesomeIcon icon={faChevronLeft} className="text-neutral-80" />
             <h1 className="text-[20px] font-medium text-neutral-80">Kembali</h1>
           </Link>
-          <div className="flex gap-10">
-            {' '}
-            <LeftFormSection />
+          <div className="flex gap-10 mt-8">
+            <LeftPaymentSection />
             <FloatingCardSection />
           </div>
         </div>
@@ -33,4 +32,4 @@ const OrderSummaryPage = () => {
   );
 };
 
-export default OrderSummaryPage;
+export default PaymentPage;

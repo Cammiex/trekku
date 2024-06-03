@@ -15,7 +15,7 @@ const OrderPage = () => {
         <HeroSection />
         <div className="w-[1200px] flex flex-col mt-10 gap-10">
           <Link
-            to="/open-trip"
+            to=".."
             className="flex items-center gap-5 w-fit h-[30px] select-none"
           >
             <FontAwesomeIcon icon={faChevronLeft} className="text-neutral-80" />
