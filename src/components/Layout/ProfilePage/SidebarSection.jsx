@@ -83,7 +83,8 @@ const SidebarSection = () => {
           />
           <h1 className="font-medium">Informasi Akun</h1>
         </Link>
-        <div
+        <Link
+          to={`/profile/order/${id}`}
           className="w-full h-[56px] px-12 flex gap-3 items-center cursor-pointer hover:bg-[#E3F4FF] aria-[current=page]:bg-[#E3F4FF] aria-[current=page]:border-primary-40 aria-[current=page]:border-b-[4px]"
           aria-current={currentPage.includes('purchased') ? 'page' : undefined}
         >
@@ -93,7 +94,7 @@ const SidebarSection = () => {
             className="size-6"
           />
           <h1 className="font-medium">Riwayat Pembelian</h1>
-        </div>
+        </Link>
         <Link
           to={`/profile/wishlist/${id}`}
           className="w-full h-[56px] px-12 flex gap-3 items-center cursor-pointer hover:bg-[#E3F4FF] aria-[current=page]:bg-[#E3F4FF] aria-[current=page]:border-primary-40 aria-[current=page]:border-b-[4px]"

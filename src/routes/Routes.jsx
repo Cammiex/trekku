@@ -70,6 +70,9 @@ const PaymentConfirmPage = React.lazy(() =>
 const WishlistPage = React.lazy(() =>
   import('../components/Pages/ProfilePage/WishlistPage')
 );
+const RiwayatPembelianPage = React.lazy(() =>
+  import('../components/Pages/ProfilePage/RiwayatPembelianPage')
+);
 
 const ProjectRoutes = () => {
   return (
@@ -100,6 +103,7 @@ const ProjectRoutes = () => {
           <Route path="/profile/information/:id" element={<ProfilePage />} />
           <Route path="/profile/help/:id" element={<ProfileHelpPage />} />
           <Route path="/profile/wishlist/:id" element={<WishlistPage />} />
+          <Route path="/profile/order/:id" element={<RiwayatPembelianPage />} />
 
           <Route path="/order/:id" element={<OrderPage />} />
           <Route path="/order-summary/:id" element={<OrderSummaryPage />} />
