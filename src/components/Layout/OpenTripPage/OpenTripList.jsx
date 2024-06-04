@@ -39,12 +39,12 @@ function OpenTripList() {
           <OpenTripItem
             key={index}
             id={item.id}
-            img={item.product_imgs[1].url_img}
+            img={item.product_imgs[0].url_img}
             itemName={item.name}
-            organizer={item.location}
+            organizer={item.organizer}
             location={item.location}
             duration={item.duration}
-            order={item.quota}
+            order={item.many_ordered}
             price={item.price}
           />
         ))}

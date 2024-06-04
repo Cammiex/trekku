@@ -101,10 +101,10 @@ const ProjectRoutes = () => {
           <Route path="/profile/help/:id" element={<ProfileHelpPage />} />
           <Route path="/profile/wishlist/:id" element={<WishlistPage />} />
 
-          <Route path="/order" element={<OrderPage />} />
-          <Route path="/order-summary" element={<OrderSummaryPage />} />
-          <Route path="/payment" element={<PaymentPage />} />
-          <Route path="/payment-confirm" element={<PaymentConfirmPage />} />
+          <Route path="/order/:id" element={<OrderPage />} />
+          <Route path="/order-summary/:id" element={<OrderSummaryPage />} />
+          <Route path="/payment/:id" element={<PaymentPage />} />
+          <Route path="/payment-confirm/:id" element={<PaymentConfirmPage />} />
         </Routes>
       </Router>
     </React.Suspense>

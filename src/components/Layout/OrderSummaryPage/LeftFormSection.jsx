@@ -1,11 +1,22 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import Swal from 'sweetalert2';
 
-const DetailPengunjungCard = () => {
+const DetailPengunjungCard = ({
+  nameVisitor,
+  changeHandler,
+  setNameVisitor,
+  phoneVisitor,
+  setPhoneVisitor,
+  emailVisitor,
+  setEmailVisitor,
+  titleVisitor,
+  setTitleVisitor,
+}) => {
   return (
     <div className="w-full h-[542px] bg-white rounded-2xl shadow-cardShadow p-10 flex flex-col">
-      <h1 className="text-[24px] font-medium">Dewasa 1</h1>
+      <h1 className="text-[24px] font-medium">Pengunjung 1</h1>
       <div className="flex flex-col w-full mt-7 gap-7">
         <div className="flex flex-col gap-1">
           <h1 className="text-neutral-80 text-[20px] font-medium after:content-['*'] after:ml-0.5 after:text-red-500">
@@ -14,13 +25,12 @@ const DetailPengunjungCard = () => {
           <select
             name=""
             id=""
+            value={titleVisitor}
+            onChange={(e) => changeHandler(e, setTitleVisitor)}
             className="w-[320px] h-12 bg-white border-none ring-0 focus:ring-0 shadow-inputShadow rounded-md"
           >
-            <option value="" disabled selected>
-              Pilih Panggilan Anda
-            </option>
-            <option value="">Tuan</option>
-            <option value="">Nyonya</option>
+            <option value="tuan">Tuan</option>
+            <option value="nyonya">Nyonya</option>
           </select>
         </div>
         <div className="flex flex-col">
@@ -31,6 +41,8 @@ const DetailPengunjungCard = () => {
             type="text"
             name=""
             id=""
+            value={nameVisitor}
+            onChange={(e) => changeHandler(e, setNameVisitor)}
             className="w-full border-none rounded-md ring-0 shadow-inputShadow"
             placeholder="Ketik disini..."
           />
@@ -47,6 +59,8 @@ const DetailPengunjungCard = () => {
               type="text"
               name=""
               id=""
+              value={phoneVisitor}
+              onChange={(e) => changeHandler(e, setPhoneVisitor)}
               placeholder="Ketik disini..."
               className="w-[289px] border-none rounded-md ring-0 shadow-inputShadow"
             />
@@ -63,6 +77,8 @@ const DetailPengunjungCard = () => {
               type="text"
               name=""
               id=""
+              value={emailVisitor}
+              onChange={(e) => changeHandler(e, setEmailVisitor)}
               placeholder="Ketik disini..."
               className="w-[289px] border-none rounded-md ring-0 shadow-inputShadow"
             />
@@ -76,7 +92,19 @@ const DetailPengunjungCard = () => {
   );
 };
 
-const PopUpNextPage = ({ handlePopUp, isOpen }) => {
+DetailPengunjungCard.propTypes = {
+  nameVisitor: PropTypes.string,
+  changeHandler: PropTypes.func,
+  setNameVisitor: PropTypes.func,
+  phoneVisitor: PropTypes.string,
+  setPhoneVisitor: PropTypes.func,
+  emailVisitor: PropTypes.string,
+  setEmailVisitor: PropTypes.func,
+  titleVisitor: PropTypes.string,
+  setTitleVisitor: PropTypes.func,
+};
+
+const PopUpNextPage = ({ handlePopUp, isOpen, onClickNext }) => {
   return (
     <div
       className={
@@ -102,12 +130,12 @@ const PopUpNextPage = ({ handlePopUp, isOpen }) => {
           >
             Periksa Kembali
           </button>
-          <Link
-            to="/payment"
+          <button
+            onClick={onClickNext}
             className="w-[272px] h-fit rounded-xl bg-primary-60 text-white py-3 text-[20px] font-medium active:scale-95 transition-all duration-150 flex items-center justify-center"
           >
             Lanjutkan
-          </Link>
+          </button>
         </div>
       </div>
     </div>
@@ -117,18 +145,80 @@ const PopUpNextPage = ({ handlePopUp, isOpen }) => {
 PopUpNextPage.propTypes = {
   handlePopUp: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
+  onClickNext: PropTypes.func,
 };
 
-const LeftFormSection = () => {
+const LeftFormSection = ({ price, quantity, location, id }) => {
+  const navigate = useNavigate();
+  const totalHarga = price * quantity;
+  const formattedTotalHarga = Number(totalHarga).toLocaleString('id-ID');
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
-
   const handlePopUp = () => {
     setIsPopUpOpen(!isPopUpOpen);
   };
 
+  const [nameOrderer, setNameOrderer] = useState('');
+  const [phoneOrderer, setPhoneOrderer] = useState('');
+  const [emailOrderer, setEmailOrderer] = useState('');
+
+  const [titleVisitor, setTitleVisitor] = useState('tuan');
+  const [nameVisitor, setNameVisitor] = useState('');
+  const [phoneVisitor, setPhoneVisitor] = useState('');
+  const [emailVisitor, setEmailVisitor] = useState('');
+
+  const handleInputChange = (e, setter) => {
+    setter(e.target.value);
+  };
+
+  const handleSendDataToLocal = async () => {
+    if (
+      !nameOrderer ||
+      !phoneOrderer ||
+      !emailOrderer ||
+      !nameVisitor ||
+      !phoneVisitor ||
+      !emailVisitor
+    ) {
+      Swal.fire(
+        'Pengisian form belum selesai!',
+        'Isi kolom untuk melanjutkan.',
+        'warning'
+      );
+      setIsPopUpOpen(false);
+      return;
+    }
+
+    try {
+      const dataOrderer = {
+        nameOrderer: nameOrderer,
+        phoneOrderer: phoneOrderer,
+        emailOrderer: emailOrderer,
+      };
+
+      const dataVisitor = {
+        titleVisitor: titleVisitor,
+        nameVisitor: nameVisitor,
+        phoneVisitor: phoneVisitor,
+        emailVisitor: emailVisitor,
+      };
+
+      const jsonDataOrderer = JSON.stringify(dataOrderer);
+      const jsonDataVisitor = JSON.stringify(dataVisitor);
+      await localStorage.setItem('ordererData', jsonDataOrderer);
+      await localStorage.setItem('visitorData', jsonDataVisitor);
+      navigate(`/payment/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <div className="w-[654px] flex flex-col text-black mt-8 gap-8">
-      <PopUpNextPage isOpen={isPopUpOpen} handlePopUp={handlePopUp} />
+      <PopUpNextPage
+        isOpen={isPopUpOpen}
+        handlePopUp={handlePopUp}
+        onClickNext={handleSendDataToLocal}
+      />
       <div className="flex flex-col">
         <h1 className="text-[40px] font-bold">Pemesanan Anda</h1>
         <h1 className="font-medium">Isi data Anda dan review pesanan Anda.</h1>
@@ -148,6 +238,8 @@ const LeftFormSection = () => {
                 type="text"
                 name=""
                 id=""
+                value={nameOrderer}
+                onChange={(e) => handleInputChange(e, setNameOrderer)}
                 className="w-full border-none rounded-md ring-0 shadow-inputShadow"
                 placeholder="Ketik disini..."
               />
@@ -164,6 +256,8 @@ const LeftFormSection = () => {
                   type="text"
                   name=""
                   id=""
+                  value={phoneOrderer}
+                  onChange={(e) => handleInputChange(e, setPhoneOrderer)}
                   placeholder="Ketik disini..."
                   className="w-[289px] border-none rounded-md ring-0 shadow-inputShadow"
                 />
@@ -180,6 +274,8 @@ const LeftFormSection = () => {
                   type="text"
                   name=""
                   id=""
+                  value={emailOrderer}
+                  onChange={(e) => handleInputChange(e, setEmailOrderer)}
                   placeholder="Ketik disini..."
                   className="w-[289px] border-none rounded-md ring-0 shadow-inputShadow"
                 />
@@ -193,7 +289,17 @@ const LeftFormSection = () => {
       </div>
       <div className="flex flex-col w-full gap-6">
         <h1 className="text-[32px] font-semibold">Detail Pengunjung</h1>
-        <DetailPengunjungCard />
+        <DetailPengunjungCard
+          changeHandler={handleInputChange}
+          nameVisitor={nameVisitor}
+          setNameVisitor={setNameVisitor}
+          phoneVisitor={phoneVisitor}
+          setPhoneVisitor={setPhoneVisitor}
+          emailVisitor={emailVisitor}
+          setEmailVisitor={setEmailVisitor}
+          titleVisitor={titleVisitor}
+          setTitleVisitor={setTitleVisitor}
+        />
       </div>
       <div className="flex flex-col w-full gap-6">
         <h1 className="text-[32px] font-semibold">Detail Lokasi</h1>
@@ -208,7 +314,7 @@ const LeftFormSection = () => {
               className="size-full rounded-xl"
             ></iframe>
           </div>
-          <h1 className="font-medium text-neutral-60">Labuan Bajo</h1>
+          <h1 className="font-medium text-neutral-60">{location}</h1>
         </div>
       </div>
       <div className="flex flex-col w-full gap-6">
@@ -219,7 +325,7 @@ const LeftFormSection = () => {
               Harga yang anda bayar
             </h1>
             <h1 className="text-[#F96A01] text-[32px] font-semibold">
-              Rp500.000
+              Rp{formattedTotalHarga}
             </h1>
           </div>
         </div>
@@ -232,6 +338,13 @@ const LeftFormSection = () => {
       </button>
     </div>
   );
+};
+
+LeftFormSection.propTypes = {
+  price: PropTypes.number,
+  quantity: PropTypes.string,
+  location: PropTypes.string,
+  id: PropTypes.string,
 };
 
 export default LeftFormSection;

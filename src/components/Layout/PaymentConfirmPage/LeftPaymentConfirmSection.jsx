@@ -1,4 +1,37 @@
-const LeftPaymentConfirmSection = () => {
+import axios from 'axios';
+import PropTypes from 'prop-types';
+import Swal from 'sweetalert2';
+const apiUrl = import.meta.env.VITE_API_URL;
+
+const LeftPaymentConfirmSection = ({
+  bank_name,
+  bank_number,
+  price,
+  idOrder,
+}) => {
+  const formattedPrice = Number(price).toLocaleString('id-ID');
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(bank_number).catch((err) => {
+      console.error('Failed to copy text: ', err);
+    });
+  };
+
+  const copyPriceToClipboard = () => {
+    navigator.clipboard.writeText(price).catch((err) => {
+      console.error('Failed to copy text: ', err);
+    });
+  };
+
+  const confirmPayment = async () => {
+    try {
+      await axios.put(`${apiUrl}/order/${idOrder}`);
+      Swal.fire('Pembayaran Berhasil!', '', 'success');
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <section className="w-[654px] h-fit rounded-2xl bg-white shadow-cardShadow flex flex-col overflow-hidden text-black">
       <div className="w-full h-[64px] flex gap-2 items-center justify-center bg-primary-20">
@@ -11,7 +44,7 @@ const LeftPaymentConfirmSection = () => {
         <h1 className="text-[24px] font-medium">Mohon Transfer ke</h1>
         <div className="flex flex-col w-full overflow-hidden rounded-t-xl">
           <div className="flex items-center w-full h-10 px-5 font-medium bg-primary-10">
-            Bank Central Asia (BCA)
+            {bank_name}
           </div>
           <div className="flex flex-col w-full px-5 mt-2">
             <h1 className="text-neutral-40 font-medium text-[14px]">
@@ -23,9 +56,12 @@ const LeftPaymentConfirmSection = () => {
                   Nomor Rekening:
                 </h1>
                 <h1 className="font-medium text-[14px] w-[143px]">
-                  084 123 1234
+                  {bank_number}
                 </h1>
-                <h1 className="text-[14px] w-9 font-semibold text-primary-60">
+                <h1
+                  onClick={copyToClipboard}
+                  className="text-[14px] w-9 font-semibold text-primary-60 cursor-pointer"
+                >
                   Salin
                 </h1>
               </div>
@@ -42,8 +78,13 @@ const LeftPaymentConfirmSection = () => {
                 <h1 className="font-medium text-[14px] w-[121px]">
                   Jumlah Transfer:
                 </h1>
-                <h1 className="font-medium text-[14px] w-[143px]">505.123</h1>
-                <h1 className="text-[14px] w-9 font-semibold text-primary-60">
+                <h1 className="font-medium text-[14px] w-[143px]">
+                  Rp{formattedPrice}
+                </h1>
+                <h1
+                  onClick={copyPriceToClipboard}
+                  className="text-[14px] w-9 font-semibold text-primary-60 cursor-pointer"
+                >
                   Salin
                 </h1>
               </div>
@@ -64,13 +105,23 @@ const LeftPaymentConfirmSection = () => {
             Kalau pembayaranmu sudah dikonfirmasi, kami akan mengirimkan
             e-ticket dan bukti pembayaran ke emailmu.
           </h1>
-          <button className="w-full py-2 rounded-lg h-fit bg-primary-60 text-white text-[14px] font-semibold active:scale-95 transition-all duration-150">
+          <button
+            onClick={confirmPayment}
+            className="w-full py-2 rounded-lg h-fit bg-primary-60 text-white text-[14px] font-semibold active:scale-95 transition-all duration-150"
+          >
             Ya, Saya Sudah Bayar
           </button>
         </div>
       </div>
     </section>
   );
+};
+
+LeftPaymentConfirmSection.propTypes = {
+  bank_name: PropTypes.string,
+  bank_number: PropTypes.string,
+  price: PropTypes.number,
+  idOrder: PropTypes.number,
 };
 
 export default LeftPaymentConfirmSection;

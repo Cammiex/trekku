@@ -1,6 +1,69 @@
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
+const apiUrl = import.meta.env.VITE_API_URL;
 
-const LeftPaymentSection = () => {
+const LeftPaymentSection = ({ price, quantity, idProduct }) => {
+  const navigate = useNavigate();
+
+  const [paymentType, setPaymentType] = useState('');
+
+  const handlePaymentType = (e) => {
+    setPaymentType(e.target.value);
+  };
+
+  const idUser = localStorage.getItem('userId');
+
+  const totalHarga = price * quantity;
+  const formattedTotalHarga = Number(totalHarga).toLocaleString('id-ID');
+
+  const dataOrderer = localStorage.getItem('ordererData');
+  const jsonDataOrderer = JSON.parse(dataOrderer);
+
+  const dataVisitor = localStorage.getItem('visitorData');
+  const jsonDataVisitor = JSON.parse(dataVisitor);
+
+  const createOrder = async () => {
+    try {
+      if (
+        !quantity ||
+        !price ||
+        !idProduct ||
+        !idUser ||
+        !paymentType ||
+        !jsonDataOrderer ||
+        !jsonDataVisitor
+      ) {
+        Swal.fire('Semua data harus diisi!', '', 'error');
+        return;
+      }
+
+      const response = await axios.post(`${apiUrl}/order/add`, {
+        quantity: quantity,
+        total_price: totalHarga,
+        idUser: idUser,
+        idProduct: idProduct,
+        idPayment: paymentType,
+        nameOrderer: jsonDataOrderer.nameOrderer,
+        phoneOrderer: jsonDataOrderer.phoneOrderer,
+        emailOrderer: jsonDataOrderer.emailOrderer,
+        titleVisitor: jsonDataVisitor.titleVisitor,
+        nameVisitor: jsonDataVisitor.nameVisitor,
+        phoneVisitor: jsonDataVisitor.phoneVisitor,
+        emailVisitor: jsonDataVisitor.emailVisitor,
+      });
+      Swal.fire('Pesanan berhasil dibuat!', '', 'success');
+      await localStorage.removeItem('ordererData');
+      await localStorage.removeItem('visitorData');
+      await localStorage.removeItem('ticket_quantity');
+      navigate(`/payment-confirm/${response.data.id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <section className="w-[602px] flex flex-col text-black">
       <div className="flex flex-col gap-8">
@@ -44,6 +107,8 @@ const LeftPaymentSection = () => {
                     type="radio"
                     name="bank-name"
                     id="bca"
+                    value={1}
+                    onChange={handlePaymentType}
                     className="size-[18px] radio radio-primary peer"
                   />
                   <h1 className="ml-3 text-gray-700 peer-checked:font-medium">
@@ -62,6 +127,8 @@ const LeftPaymentSection = () => {
                     type="radio"
                     name="bank-name"
                     id="mandiri"
+                    value={2}
+                    onChange={handlePaymentType}
                     className="size-[18px] radio radio-primary peer peer"
                   />
                   <h1 className="ml-3 text-gray-700 peer-checked:font-medium">
@@ -80,6 +147,8 @@ const LeftPaymentSection = () => {
                     type="radio"
                     name="bank-name"
                     id="bri"
+                    value={3}
+                    onChange={handlePaymentType}
                     className="size-[18px] radio radio-primary peer"
                   />
                   <h1 className="ml-3 text-gray-700 peer-checked:font-medium">
@@ -98,6 +167,8 @@ const LeftPaymentSection = () => {
                     type="radio"
                     name="bank-name"
                     id="bni"
+                    value={4}
+                    onChange={handlePaymentType}
                     className="size-[18px] radio radio-primary peer"
                   />
                   <h1 className="ml-3 text-gray-700 peer-checked:font-medium">
@@ -116,6 +187,8 @@ const LeftPaymentSection = () => {
                     type="radio"
                     name="bank-name"
                     id="other"
+                    value={5}
+                    onChange={handlePaymentType}
                     className="size-[18px] radio radio-primary peer"
                   />
                   <h1 className="ml-3 text-gray-700 peer-checked:font-medium">
@@ -159,6 +232,8 @@ const LeftPaymentSection = () => {
                     type="radio"
                     name="bank-name"
                     id="alfamart"
+                    value={6}
+                    onChange={handlePaymentType}
                     className="size-[18px] radio radio-primary peer"
                   />
                   <h1 className="ml-3 text-gray-700 peer-checked:font-medium">
@@ -177,6 +252,8 @@ const LeftPaymentSection = () => {
                     type="radio"
                     name="bank-name"
                     id="alfamidi"
+                    value={7}
+                    onChange={handlePaymentType}
                     className="size-[18px] radio radio-primary peer peer"
                   />
                   <h1 className="ml-3 text-gray-700 peer-checked:font-medium">
@@ -195,6 +272,8 @@ const LeftPaymentSection = () => {
                     type="radio"
                     name="bank-name"
                     id="indomaret"
+                    value={8}
+                    onChange={handlePaymentType}
                     className="size-[18px] radio radio-primary peer"
                   />
                   <h1 className="ml-3 text-gray-700 peer-checked:font-medium">
@@ -219,19 +298,25 @@ const LeftPaymentSection = () => {
               Rincian Harga
             </h1>
             <h1 className="text-[24px] font-semibold text-neutral-60">
-              Rp500.000
+              Rp{formattedTotalHarga}
             </h1>
           </div>
-          <Link
-            to="/payment-confirm"
+          <button
+            onClick={createOrder}
             className="w-full flex justify-center py-3 rounded-xl h-fit bg-primary-60 text-[20px] font-semibold text-white active:scale-95 transition-all duration-150"
           >
-            Bayar dengan Bank BCA
-          </Link>
+            Proses Pembayaran
+          </button>
         </div>
       </div>
     </section>
   );
+};
+
+LeftPaymentSection.propTypes = {
+  price: PropTypes.number,
+  quantity: PropTypes.string,
+  idProduct: PropTypes.string,
 };
 
 export default LeftPaymentSection;

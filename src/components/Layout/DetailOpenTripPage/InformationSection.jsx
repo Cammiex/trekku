@@ -74,6 +74,7 @@ const InformationSection = ({
   facility,
   accommodation,
   preparation,
+  schedule,
 }) => {
   return (
     <section className="self-start w-[1240px] h-fit min-h-[385px] pt-2 rounded-2xl shadow-cardShadow">
@@ -89,7 +90,7 @@ const InformationSection = ({
           <div className="px-8 py-2">{destination}</div>
         </Tabs.Item>
         <Tabs.Item active title="Jadwal">
-          <div className="px-8 py-2">{facility}</div>
+          <div className="px-8 py-2">{schedule}</div>
         </Tabs.Item>
         <Tabs.Item active title="Fasilitas">
           <div className="px-8 py-2">{facility}</div>
@@ -111,6 +112,7 @@ InformationSection.propTypes = {
   facility: PropTypes.string,
   accommodation: PropTypes.string,
   preparation: PropTypes.string,
+  schedule: PropTypes.string,
 };
 
 export default InformationSection;

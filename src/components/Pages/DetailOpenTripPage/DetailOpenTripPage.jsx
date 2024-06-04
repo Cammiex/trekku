@@ -32,10 +32,7 @@ const OpenTripDetail = () => {
     <>
       <Navbar />
       <FloatButton />
-      <main
-        onClick={() => console.log(productData)}
-        className="flex flex-wrap justify-center"
-      >
+      <main className="flex flex-wrap justify-center">
         <HeroSection />
         <div
           id="content"
@@ -58,6 +55,7 @@ const OpenTripDetail = () => {
             facility={productData?.datas.desc_facility}
             accommodation={productData?.datas.desc_accommodation}
             preparation={productData?.datas.desc_preparation}
+            schedule={productData?.datas.desc_schedule}
           />
           <div className="flex gap-4 mt-6">
             <RatingHeaderSection />

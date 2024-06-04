@@ -29,6 +29,8 @@ const ContentSection = () => {
   const [tanggal, setTanggal] = useState('');
   const [kuota, setKuota] = useState('');
 
+  const [penyelenggara, setPenyelenggara] = useState('');
+
   const handleChange = (setter) => (e) => {
     setter(e.target.value);
   };
@@ -70,7 +72,8 @@ const ContentSection = () => {
       !harga ||
       !durasi ||
       !tanggal ||
-      !kuota
+      !kuota ||
+      !penyelenggara
     ) {
       Swal.fire('Semua harus diisi!', '', 'error');
       return;
@@ -94,6 +97,7 @@ const ContentSection = () => {
     formData.append('duration', durasi);
     formData.append('date', tanggal);
     formData.append('quota', kuota);
+    formData.append('organizer', penyelenggara);
     try {
       await axios.post(`${apiUrl}/products/add`, formData, {
         headers: {
@@ -412,6 +416,25 @@ const ContentSection = () => {
             <div className="label">
               <span className="label-text-alt">
                 Masukkan maksimal orang untuk open trip.
+              </span>
+            </div>
+          </label>
+
+          {/* Penyelenggara dan Jumlah dipesan */}
+          <label className="w-full max-w-[660px] form-control">
+            <div className="label">
+              <span className="label-text">Penyelenggara</span>
+            </div>
+            <input
+              type="text"
+              placeholder="Ketik disini..."
+              className="w-full max-w-[660px] input input-bordered text-neutral-80"
+              value={penyelenggara}
+              onChange={(e) => setPenyelenggara(e.target.value)}
+            />
+            <div className="label">
+              <span className="label-text-alt">
+                Masukkan nama penyelenggara open trip.
               </span>
             </div>
           </label>
