@@ -1,11 +1,90 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClose } from '@fortawesome/free-solid-svg-icons';
 const apiUrl = import.meta.env.VITE_API_URL;
 
+const PopUpVoucher = ({ isOpen, handleOpen, setter, setPopUp }) => {
+  const [code, setCode] = useState('');
+
+  const handleMatchVoucher = async () => {
+    if (!code) {
+      return;
+    }
+
+    try {
+      const response = await axios.post(`${apiUrl}/voucher`, {
+        code: code,
+      });
+
+      if (response.data === null) {
+        Swal.fire('Voucher tidak cocok!', '', 'error');
+        return;
+      }
+
+      setter(response.data.discount);
+      Swal.fire('Voucher berhasil dipakai!', '', 'success');
+      setPopUp(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return (
+    <div
+      className={
+        isOpen
+          ? 'fixed inset-0 z-40 flex items-center justify-center backdrop-filter backdrop-brightness-50 backdrop-blur-sm'
+          : 'fixed inset-0 z-40 hidden items-center justify-center backdrop-filter backdrop-brightness-50 backdrop-blur-sm'
+      }
+    >
+      <div className="w-[450px] h-[200px] bg-white rounded-2xl shadow-inset py-6 px-6 flex flex-col items-center relative justify-center">
+        <FontAwesomeIcon
+          onClick={handleOpen}
+          icon={faClose}
+          className="absolute top-[14px] right-[18px] size-6 text-neutral-70 cursor-pointer"
+        />
+        <h1 className="text-primary-60 font-bold text-[24px]">
+          Masukkan Kode Voucher
+        </h1>
+        <input
+          type="text"
+          name=""
+          id=""
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+          className="w-[320px] h-[40px] border ring-0 rounded-lg shadow-inputShadow font-semibold mt-3"
+        />
+        <button
+          onClick={handleMatchVoucher}
+          className="w-[144px] h-fit py-2 bg-primary-60 text-white rounded-lg mt-3 active:scale-95 transition-all duration-75"
+        >
+          Submit
+        </button>
+      </div>
+    </div>
+  );
+};
+
+PopUpVoucher.propTypes = {
+  isOpen: PropTypes.bool,
+  handleOpen: PropTypes.func,
+  setter: PropTypes.func,
+  setPopUp: PropTypes.func,
+};
+
 const LeftPaymentSection = ({ price, quantity, idProduct }) => {
+  const [popUpVoucher, setPopUpVoucher] = useState(false);
+  const [discount, setDiscount] = useState('');
+  const [totalHarga, setTotalHarga] = useState();
+
+  const handlePopUpVoucher = () => {
+    setPopUpVoucher(!popUpVoucher);
+  };
+
   const navigate = useNavigate();
 
   const [paymentType, setPaymentType] = useState('');
@@ -16,7 +95,16 @@ const LeftPaymentSection = ({ price, quantity, idProduct }) => {
 
   const idUser = localStorage.getItem('userId');
 
-  const totalHarga = price * quantity;
+  useEffect(() => {
+    if (discount) {
+      const total = price * quantity - price * quantity * discount;
+      setTotalHarga(total);
+    } else {
+      const total = price * quantity;
+      setTotalHarga(total);
+    }
+  }, [discount, price, quantity]);
+
   const formattedTotalHarga = Number(totalHarga).toLocaleString('id-ID');
 
   const dataOrderer = localStorage.getItem('ordererData');
@@ -66,6 +154,12 @@ const LeftPaymentSection = ({ price, quantity, idProduct }) => {
 
   return (
     <section className="w-[602px] flex flex-col text-black">
+      <PopUpVoucher
+        isOpen={popUpVoucher}
+        handleOpen={handlePopUpVoucher}
+        setter={setDiscount}
+        setPopUp={setPopUpVoucher}
+      />
       <div className="flex flex-col gap-8">
         <h1 className="font-medium">Isi data Anda dan review pesanan Anda.</h1>
         <h1 className="font-semibold text-[32px]">
@@ -115,7 +209,13 @@ const LeftPaymentSection = ({ price, quantity, idProduct }) => {
                     Transfer BCA
                   </h1>
                 </div>
-                <div className="w-[37px] h-3 bg-red-400"></div>
+                <div className="w-[37px] h-3">
+                  <img
+                    src="/images/Footer/bca.png"
+                    alt=""
+                    className="object-contain size-full"
+                  />
+                </div>
               </label>
               <label
                 htmlFor="mandiri"
@@ -135,7 +235,13 @@ const LeftPaymentSection = ({ price, quantity, idProduct }) => {
                     Transfer Mandiri
                   </h1>
                 </div>
-                <div className="w-[37px] h-3 bg-red-400"></div>
+                <div className="w-[37px] h-3">
+                  <img
+                    src="/images/Footer/mandiri.png"
+                    alt=""
+                    className="object-contain size-full"
+                  />
+                </div>
               </label>
               <label
                 htmlFor="bri"
@@ -155,7 +261,13 @@ const LeftPaymentSection = ({ price, quantity, idProduct }) => {
                     Transfer BRI
                   </h1>
                 </div>
-                <div className="w-[37px] h-3 bg-red-400"></div>
+                <div className="w-[37px] h-3">
+                  <img
+                    src="/images/Footer/bri.png"
+                    alt=""
+                    className="object-contain size-full"
+                  />
+                </div>
               </label>
               <label
                 htmlFor="bni"
@@ -175,7 +287,13 @@ const LeftPaymentSection = ({ price, quantity, idProduct }) => {
                     Transfer BNI
                   </h1>
                 </div>
-                <div className="w-[37px] h-3 bg-red-400"></div>
+                <div className="w-[37px] h-3">
+                  <img
+                    src="/images/Footer/bni.png"
+                    alt=""
+                    className="object-contain size-full"
+                  />
+                </div>
               </label>
               <label
                 htmlFor="other"
@@ -240,7 +358,13 @@ const LeftPaymentSection = ({ price, quantity, idProduct }) => {
                     Alfamart
                   </h1>
                 </div>
-                <div className="w-[37px] h-3 bg-red-400"></div>
+                <div className="w-[37px] h-3">
+                  <img
+                    src="/images/Footer/alfamart.png"
+                    alt=""
+                    className="object-contain size-full"
+                  />
+                </div>
               </label>
               <label
                 htmlFor="alfamidi"
@@ -260,7 +384,13 @@ const LeftPaymentSection = ({ price, quantity, idProduct }) => {
                     Alfamidi
                   </h1>
                 </div>
-                <div className="w-[37px] h-3 bg-red-400"></div>
+                <div className="w-[37px] h-3">
+                  <img
+                    src="/images/Footer/alfamidi.png"
+                    alt=""
+                    className="object-contain size-full"
+                  />
+                </div>
               </label>
               <label
                 htmlFor="indomaret"
@@ -280,7 +410,13 @@ const LeftPaymentSection = ({ price, quantity, idProduct }) => {
                     Indomaret
                   </h1>
                 </div>
-                <div className="w-[37px] h-3 bg-red-400"></div>
+                <div className="w-[37px] h-3">
+                  <img
+                    src="/images/Footer/indomaret.png"
+                    alt=""
+                    className="object-contain size-full"
+                  />
+                </div>
               </label>
             </div>
           </div>
@@ -288,7 +424,12 @@ const LeftPaymentSection = ({ price, quantity, idProduct }) => {
         <div className="w-[550px] h-[136px] p-10 gap-2 rounded-2xl bg-white shadow-cardShadow">
           <div className="flex items-center justify-between w-full">
             <h1 className="text-[20px] font-semibold">Pakai Kupon</h1>
-            <h1 className="text-primary-70 text-[20px] font-semibold">Pakai</h1>
+            <h1
+              onClick={handlePopUpVoucher}
+              className="text-primary-70 text-[20px] font-semibold cursor-pointer"
+            >
+              Pakai
+            </h1>
           </div>
           <h1 className="text-[12px] text-neutral-40">Masukkan kode kupon</h1>
         </div>

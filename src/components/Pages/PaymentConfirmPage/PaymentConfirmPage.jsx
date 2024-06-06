@@ -11,6 +11,8 @@ import axios from 'axios';
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const PaymentConfirmPage = () => {
+  const idUser = localStorage.getItem('userId');
+
   const navigate = useNavigate();
   const { id } = useParams();
   const [orderData, setOrderData] = useState();
@@ -46,6 +48,7 @@ const PaymentConfirmPage = () => {
               bank_number={orderData?.payment_method.account_number}
               price={orderData?.total_price}
               idOrder={id}
+              idUser={idUser}
             />
             <FloatingCardSection
               name={orderData?.product.name}

@@ -56,7 +56,7 @@ export const OpenTripItem = ({
               className="size-6"
             />
             <h1 className="text-[14px] font-medium text-gray-500">
-              {order}x ordered
+              {order}x dipesan
             </h1>
           </div>
         </div>

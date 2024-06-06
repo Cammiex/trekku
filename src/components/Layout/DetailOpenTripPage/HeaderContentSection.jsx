@@ -129,35 +129,35 @@ const HeaderContentSection = ({
           <img
             src={image1}
             alt=""
-            className="w-full h-full transition duration-500 hover:scale-125"
+            className="object-cover object-center w-full h-full transition duration-500 hover:scale-125"
           />
         </div>
         <div className="w-[295px] h-[226px] overflow-hidden">
           <img
             src={image2}
             alt=""
-            className="w-full h-full transition duration-500 hover:scale-125"
+            className="object-cover object-center w-full h-full transition duration-500 hover:scale-125"
           />
         </div>
         <div className="w-[295px] h-[226px] overflow-hidden">
           <img
             src={image3}
             alt=""
-            className="w-full h-full transition duration-500 hover:scale-125"
+            className="object-cover object-center w-full h-full transition duration-500 hover:scale-125"
           />
         </div>
         <div className="w-[295px] h-[226px] overflow-hidden">
           <img
             src={image4}
             alt=""
-            className="w-full h-full transition duration-500 hover:scale-125"
+            className="object-cover object-center w-full h-full transition duration-500 hover:scale-125"
           />
         </div>
         <div className="w-[295px] h-[226px] overflow-hidden">
           <img
             src={image5}
             alt=""
-            className="w-full h-full transition duration-500 hover:scale-125"
+            className="object-cover object-center w-full h-full transition duration-500 hover:scale-125"
           />
         </div>
       </div>

@@ -13,10 +13,11 @@ const DetailPengunjungCard = ({
   setEmailVisitor,
   titleVisitor,
   setTitleVisitor,
+  no,
 }) => {
   return (
     <div className="w-full h-[542px] bg-white rounded-2xl shadow-cardShadow p-10 flex flex-col">
-      <h1 className="text-[24px] font-medium">Pengunjung 1</h1>
+      <h1 className="text-[24px] font-medium">Pengunjung {no}</h1>
       <div className="flex flex-col w-full mt-7 gap-7">
         <div className="flex flex-col gap-1">
           <h1 className="text-neutral-80 text-[20px] font-medium after:content-['*'] after:ml-0.5 after:text-red-500">
@@ -102,6 +103,7 @@ DetailPengunjungCard.propTypes = {
   setEmailVisitor: PropTypes.func,
   titleVisitor: PropTypes.string,
   setTitleVisitor: PropTypes.func,
+  no: PropTypes.number,
 };
 
 const PopUpNextPage = ({ handlePopUp, isOpen, onClickNext }) => {
@@ -299,14 +301,18 @@ const LeftFormSection = ({ price, quantity, location, id }) => {
           setEmailVisitor={setEmailVisitor}
           titleVisitor={titleVisitor}
           setTitleVisitor={setTitleVisitor}
+          no={1}
         />
+        {Array.from({ length: quantity - 1 }, (_, i) => (
+          <DetailPengunjungCard key={i + 2} no={i + 2} />
+        ))}
       </div>
       <div className="flex flex-col w-full gap-6">
         <h1 className="text-[32px] font-semibold">Detail Lokasi</h1>
         <div className="flex flex-col w-full gap-3 p-5 bg-white h-fit rounded-2xl shadow-cardShadow">
           <div className="w-full h-[160px] rounded-xl">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3983.116164114627!2d114.62029807503107!3d-3.3214609966533546!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zM8KwMTknMTcuMyJTIDExNMKwMzcnMjIuMyJF!5e0!3m2!1sen!2sid!4v1717337809878!5m2!1sen!2sid"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d510042.9819714387!2d107.91404905!3d-2.8994298499999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e172904cb3c7b25%3A0x9b308566eb9637c6!2sBelitung!5e0!3m2!1sen!2sid!4v1717583920314!5m2!1sen!2sid"
               style={{ border: 0 }}
               allowFullScreen=""
               loading="lazy"

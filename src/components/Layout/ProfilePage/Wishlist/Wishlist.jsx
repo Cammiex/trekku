@@ -98,10 +98,10 @@ const Wishlist = () => {
 
   return (
     <div className="w-[797px] h-[630px] rounded-2xl bg-white shadow-cardShadow pl-10 pr-7 pt-8 text-black flex flex-col">
-      <h1 className="text-[24px] font-semibold">Informasi Akun</h1>
+      <h1 className="text-[24px] font-semibold">Daftar Favorit</h1>
       <div
         id="wishlist-card-list"
-        className="w-[640px] gap-5 grid grid-cols-3 mt-10 self-center"
+        className="w-[640px] h-[484px] gap-5 grid grid-cols-3 mt-10 self-center custom-scrollbar"
       >
         {data.map((item) => (
           <WishlistCard

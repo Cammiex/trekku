@@ -1,5 +1,6 @@
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -8,7 +9,9 @@ const LeftPaymentConfirmSection = ({
   bank_number,
   price,
   idOrder,
+  idUser,
 }) => {
+  const navigate = useNavigate();
   const formattedPrice = Number(price).toLocaleString('id-ID');
 
   const copyToClipboard = () => {
@@ -27,6 +30,7 @@ const LeftPaymentConfirmSection = ({
     try {
       await axios.put(`${apiUrl}/order/${idOrder}`);
       Swal.fire('Pembayaran Berhasil!', '', 'success');
+      navigate(`/profile/order/${idUser}`);
     } catch (error) {
       console.log(error);
     }
@@ -122,6 +126,7 @@ LeftPaymentConfirmSection.propTypes = {
   bank_number: PropTypes.string,
   price: PropTypes.number,
   idOrder: PropTypes.number,
+  idUser: PropTypes.number,
 };
 
 export default LeftPaymentConfirmSection;

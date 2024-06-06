@@ -86,7 +86,7 @@ const SidebarSection = () => {
         <Link
           to={`/profile/order/${id}`}
           className="w-full h-[56px] px-12 flex gap-3 items-center cursor-pointer hover:bg-[#E3F4FF] aria-[current=page]:bg-[#E3F4FF] aria-[current=page]:border-primary-40 aria-[current=page]:border-b-[4px]"
-          aria-current={currentPage.includes('purchased') ? 'page' : undefined}
+          aria-current={currentPage.includes('order') ? 'page' : undefined}
         >
           <img
             src="/images/ProfilePage/cart-icon.png"

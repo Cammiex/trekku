@@ -4,7 +4,7 @@ import axios from 'axios';
 import { Tabs } from 'flowbite-react';
 import moment from 'moment';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -75,7 +75,22 @@ const tabsTheme = {
   tabpanel: 'py-3',
 };
 
-const OrderCard = ({ img, name, date, id, status }) => {
+const OrderCard = ({ img, name, date, id, status, idOrder }) => {
+  const navigate = useNavigate();
+
+  const handleCancelOrder = async () => {
+    try {
+      await axios.put(`${apiUrl}/order/user/cancel/${idOrder}`);
+      window.location.reload();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleOrderAgain = async () => {
+    navigate(`/order/${id}`);
+  };
+
   const textStatus = () => {
     if (status === 'pending') {
       return (
@@ -98,9 +113,14 @@ const OrderCard = ({ img, name, date, id, status }) => {
   const buttonStatus = () => {
     if (status === 'pending') {
       return (
-        <li>
-          <a>Batalkan Pesanan</a>
-        </li>
+        <>
+          <li onClick={() => navigate(`/payment-confirm/${idOrder}`)}>
+            <a>Bayar Pesanan</a>
+          </li>
+          <li onClick={handleCancelOrder}>
+            <a>Batalkan Pesanan</a>
+          </li>
+        </>
       );
     } else if (status === 'success') {
       return (
@@ -110,7 +130,7 @@ const OrderCard = ({ img, name, date, id, status }) => {
       );
     } else if (status === 'cancel') {
       return (
-        <li>
+        <li onClick={handleOrderAgain}>
           <a>Pesan Kembali</a>
         </li>
       );
@@ -172,6 +192,7 @@ OrderCard.propTypes = {
   name: PropTypes.string,
   date: PropTypes.string,
   id: PropTypes.number,
+  idOrder: PropTypes.number,
   status: PropTypes.string,
 };
 
@@ -186,6 +207,7 @@ const AllOrder = ({ data }) => {
           status={item.status}
           id={item.product.id}
           date={item.product.date}
+          idOrder={item.id}
         />
       ))}
     </div>
@@ -208,6 +230,7 @@ const Success = ({ data }) => {
             status={item.status}
             id={item.product.id}
             date={item.product.date}
+            idOrder={item.id}
           />
         ))}
       </div>
@@ -231,6 +254,7 @@ const Pending = ({ data }) => {
             status={item.status}
             id={item.product.id}
             date={item.product.date}
+            idOrder={item.id}
           />
         ))}
       </div>
@@ -253,6 +277,8 @@ const Cancel = ({ data }) => {
             name={item.product.name}
             status={item.status}
             id={item.product.id}
+            date={item.product.date}
+            idOrder={item.id}
           />
         ))}
       </div>
