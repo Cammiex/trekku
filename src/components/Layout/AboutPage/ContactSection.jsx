@@ -98,8 +98,8 @@ function ContactSection() {
           <div id="message-title" className="flex flex-col gap-2">
             <h1 className="text-2xl font-bold">Kirim pesan</h1>
             <p className="text-base font-medium">
-              Lorem ipsum dolor sit amet consectetur. Aliquam nunc a sapien ut
-              scelerisque mauris.
+              Kami senang mendengar dari Anda! Silakan isi formulir di bawah ini
+              untuk mengirimkan pesan atau pertanyaan kepada kami.
             </p>
           </div>
           <form action="" className="grid grid-cols-2 gap-3 mt-4">

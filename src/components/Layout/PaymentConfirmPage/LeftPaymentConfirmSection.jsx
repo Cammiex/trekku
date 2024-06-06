@@ -2,6 +2,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import Countdown from 'react-countdown';
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const LeftPaymentConfirmSection = ({
@@ -12,7 +13,7 @@ const LeftPaymentConfirmSection = ({
   idUser,
 }) => {
   const navigate = useNavigate();
-  const formattedPrice = Number(price).toLocaleString('id-ID');
+  const formattedPrice = Number(price + 5000).toLocaleString('id-ID');
 
   const copyToClipboard = () => {
     navigator.clipboard.writeText(bank_number).catch((err) => {
@@ -42,7 +43,16 @@ const LeftPaymentConfirmSection = ({
         <h1 className="font-medium text-neutral-40">
           Yuk selesaikan pembayaran dalam
         </h1>
-        <h1 className="font-semibold text-primary-90">00:59:45</h1>
+        <Countdown
+          date={Date.now() + 3600000}
+          intervalDelay={0}
+          renderer={(props) => (
+            <h1 className="font-semibold text-primary-90">
+              {' '}
+              {props.hours}:{props.minutes}:{props.seconds}
+            </h1>
+          )}
+        />
       </div>
       <div className="w-full h-[652px] flex flex-col p-8 gap-7">
         <h1 className="text-[24px] font-medium">Mohon Transfer ke</h1>
@@ -125,8 +135,11 @@ LeftPaymentConfirmSection.propTypes = {
   bank_name: PropTypes.string,
   bank_number: PropTypes.string,
   price: PropTypes.number,
-  idOrder: PropTypes.number,
-  idUser: PropTypes.number,
+  idOrder: PropTypes.string,
+  idUser: PropTypes.string,
+  hours: PropTypes.number,
+  minutes: PropTypes.number,
+  seconds: PropTypes.number,
 };
 
 export default LeftPaymentConfirmSection;

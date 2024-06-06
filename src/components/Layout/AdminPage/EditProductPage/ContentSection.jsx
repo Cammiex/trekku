@@ -31,6 +31,9 @@ const ContentSection = () => {
   const [tanggal, setTanggal] = useState('');
   const [kuota, setKuota] = useState('');
 
+  const [penyelenggara, setPenyelenggara] = useState('');
+  const [urlLokasi, setUrlLokasi] = useState('');
+
   const editProduct = async (e) => {
     e.preventDefault();
 
@@ -52,6 +55,8 @@ const ContentSection = () => {
     if (durasi) formData.append('duration', durasi);
     if (tanggal) formData.append('date', tanggal);
     if (kuota) formData.append('quota', kuota);
+    formData.append('organizer', penyelenggara);
+    formData.append('url_location', urlLokasi);
     if (
       !nama &&
       !lokasi &&
@@ -69,7 +74,9 @@ const ContentSection = () => {
       !harga &&
       !durasi &&
       !tanggal &&
-      !kuota
+      !kuota &&
+      !penyelenggara &&
+      !urlLokasi
     ) {
       await Swal.fire('Anda tidak mengubah apapun!', '', 'error');
       return;
@@ -422,6 +429,42 @@ const ContentSection = () => {
             <div className="label">
               <span className="label-text-alt">
                 Masukkan maksimal orang untuk open trip.
+              </span>
+            </div>
+          </label>
+
+          {/* Penyelenggara dan URL Lokasi */}
+          <label className="w-full max-w-[660px] form-control">
+            <div className="label">
+              <span className="label-text">Penyelenggara</span>
+            </div>
+            <input
+              type="text"
+              placeholder="Ketik disini..."
+              className="w-full max-w-[660px] input input-bordered text-neutral-80"
+              value={penyelenggara}
+              onChange={(e) => setPenyelenggara(e.target.value)}
+            />
+            <div className="label">
+              <span className="label-text-alt">
+                Masukkan nama penyelenggara open trip.
+              </span>
+            </div>
+          </label>
+          <label className="w-full max-w-[660px] form-control">
+            <div className="label">
+              <span className="label-text">URL Google Maps Lokasi</span>
+            </div>
+            <input
+              type="text"
+              placeholder="Ketik disini..."
+              className="w-full max-w-[660px] input input-bordered text-neutral-80"
+              value={urlLokasi}
+              onChange={(e) => setUrlLokasi(e.target.value)}
+            />
+            <div className="label">
+              <span className="label-text-alt">
+                Masukkan link Google Maps yang mengarah ke lokasi open trip.
               </span>
             </div>
           </label>

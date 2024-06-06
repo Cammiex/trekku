@@ -46,6 +46,7 @@ const OrderSummaryPage = () => {
               quantity={quantity}
               location={productData?.datas.location}
               id={id}
+              url_lokasi={productData?.datas.url_location}
             />
             <FloatingCardSection
               name={productData?.datas.name}

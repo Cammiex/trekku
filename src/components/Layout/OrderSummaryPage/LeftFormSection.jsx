@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Swal from 'sweetalert2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 
 const DetailPengunjungCard = ({
   nameVisitor,
@@ -150,10 +152,11 @@ PopUpNextPage.propTypes = {
   onClickNext: PropTypes.func,
 };
 
-const LeftFormSection = ({ price, quantity, location, id }) => {
+const LeftFormSection = ({ price, quantity, location, id, url_lokasi }) => {
   const navigate = useNavigate();
   const totalHarga = price * quantity;
   const formattedTotalHarga = Number(totalHarga).toLocaleString('id-ID');
+  const formattedPrice = Number(price).toLocaleString('id-ID');
   const [isPopUpOpen, setIsPopUpOpen] = useState(false);
   const handlePopUp = () => {
     setIsPopUpOpen(!isPopUpOpen);
@@ -213,6 +216,8 @@ const LeftFormSection = ({ price, quantity, location, id }) => {
       console.log(error);
     }
   };
+
+  const [isDrop, setIsDrop] = useState(false);
 
   return (
     <div className="w-[654px] flex flex-col text-black mt-8 gap-8">
@@ -312,7 +317,7 @@ const LeftFormSection = ({ price, quantity, location, id }) => {
         <div className="flex flex-col w-full gap-3 p-5 bg-white h-fit rounded-2xl shadow-cardShadow">
           <div className="w-full h-[160px] rounded-xl">
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d510042.9819714387!2d107.91404905!3d-2.8994298499999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e172904cb3c7b25%3A0x9b308566eb9637c6!2sBelitung!5e0!3m2!1sen!2sid!4v1717583920314!5m2!1sen!2sid"
+              src={url_lokasi}
               style={{ border: 0 }}
               allowFullScreen=""
               loading="lazy"
@@ -325,15 +330,45 @@ const LeftFormSection = ({ price, quantity, location, id }) => {
       </div>
       <div className="flex flex-col w-full gap-6">
         <h1 className="text-[32px] font-semibold">Rincian Harga</h1>
-        <div className="w-full h-[128px] bg-white rounded-2xl shadow-cardShadow p-10 flex items-center">
+        <div
+          className={
+            isDrop
+              ? 'flex flex-col items-center justify-center w-full p-10 bg-white gap-7 h-[186px] rounded-2xl shadow-cardShadow transition-all duration-300'
+              : 'flex flex-col items-center justify-center w-full p-10 bg-white gap-7 h-[128px] rounded-2xl shadow-cardShadow transition-all duration-300'
+          }
+        >
           <div className="flex items-center justify-between w-full">
             <h1 className="text-neutral-60 text-[20px] font-medium">
               Harga yang anda bayar
             </h1>
-            <h1 className="text-[#F96A01] text-[32px] font-semibold">
-              Rp{formattedTotalHarga}
-            </h1>
+            <div className="flex items-center gap-3">
+              {' '}
+              <h1 className="text-[#F96A01] text-[32px] font-semibold">
+                Rp{formattedTotalHarga}
+              </h1>
+              <FontAwesomeIcon
+                onClick={() => setIsDrop(!isDrop)}
+                icon={faChevronDown}
+                className={
+                  isDrop
+                    ? 'cursor-pointer rotate-180 transition-all duration-500'
+                    : 'cursor-pointer rotate-0 transition-all duration-500'
+                }
+              />
+            </div>
           </div>
+          {isDrop ? (
+            <div className="flex items-center justify-between w-full">
+              <h1 className="text-neutral-60 text-[20px] font-medium">
+                Tiket ({quantity}x)
+              </h1>
+              <h1 className="text-neutral-60 text-[20px] font-medium">
+                Rp{formattedPrice}
+              </h1>
+            </div>
+          ) : (
+            ''
+          )}
         </div>
       </div>
       <button
@@ -351,6 +386,7 @@ LeftFormSection.propTypes = {
   quantity: PropTypes.string,
   location: PropTypes.string,
   id: PropTypes.string,
+  url_lokasi: PropTypes.string,
 };
 
 export default LeftFormSection;

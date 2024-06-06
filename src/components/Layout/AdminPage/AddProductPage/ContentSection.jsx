@@ -30,6 +30,7 @@ const ContentSection = () => {
   const [kuota, setKuota] = useState('');
 
   const [penyelenggara, setPenyelenggara] = useState('');
+  const [urlLokasi, setUrlLokasi] = useState('');
 
   const handleChange = (setter) => (e) => {
     setter(e.target.value);
@@ -98,6 +99,7 @@ const ContentSection = () => {
     formData.append('date', tanggal);
     formData.append('quota', kuota);
     formData.append('organizer', penyelenggara);
+    formData.append('url_location', urlLokasi);
     try {
       await axios.post(`${apiUrl}/products/add`, formData, {
         headers: {
@@ -420,7 +422,7 @@ const ContentSection = () => {
             </div>
           </label>
 
-          {/* Penyelenggara dan Jumlah dipesan */}
+          {/* Penyelenggara dan URL Lokasi */}
           <label className="w-full max-w-[660px] form-control">
             <div className="label">
               <span className="label-text">Penyelenggara</span>
@@ -435,6 +437,23 @@ const ContentSection = () => {
             <div className="label">
               <span className="label-text-alt">
                 Masukkan nama penyelenggara open trip.
+              </span>
+            </div>
+          </label>
+          <label className="w-full max-w-[660px] form-control">
+            <div className="label">
+              <span className="label-text">URL Google Maps Lokasi</span>
+            </div>
+            <input
+              type="text"
+              placeholder="Ketik disini..."
+              className="w-full max-w-[660px] input input-bordered text-neutral-80"
+              value={urlLokasi}
+              onChange={(e) => setUrlLokasi(e.target.value)}
+            />
+            <div className="label">
+              <span className="label-text-alt">
+                Masukkan link Google Maps yang mengarah ke lokasi open trip.
               </span>
             </div>
           </label>

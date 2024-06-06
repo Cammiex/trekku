@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faClose } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown, faClose } from '@fortawesome/free-solid-svg-icons';
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const PopUpVoucher = ({ isOpen, handleOpen, setter, setPopUp }) => {
@@ -105,7 +105,9 @@ const LeftPaymentSection = ({ price, quantity, idProduct }) => {
     }
   }, [discount, price, quantity]);
 
-  const formattedTotalHarga = Number(totalHarga).toLocaleString('id-ID');
+  const totalHargaFinal = totalHarga + 5000;
+  const formattedTotalHarga = Number(totalHargaFinal).toLocaleString('id-ID');
+  const formattedTotalTiket = Number(totalHarga).toLocaleString('id-ID');
 
   const dataOrderer = localStorage.getItem('ordererData');
   const jsonDataOrderer = JSON.parse(dataOrderer);
@@ -151,6 +153,8 @@ const LeftPaymentSection = ({ price, quantity, idProduct }) => {
       console.log(error);
     }
   };
+
+  const [isDrop, setIsDrop] = useState(false);
 
   return (
     <section className="w-[602px] flex flex-col text-black">
@@ -433,15 +437,63 @@ const LeftPaymentSection = ({ price, quantity, idProduct }) => {
           </div>
           <h1 className="text-[12px] text-neutral-40">Masukkan kode kupon</h1>
         </div>
-        <div className="w-[550px] h-[198px] p-10 gap-7 rounded-2xl bg-white shadow-cardShadow flex flex-col">
+        <div className="w-[550px] h-fit p-10 gap-7 rounded-2xl bg-white shadow-cardShadow flex flex-col">
           <div className="flex items-center justify-between w-full">
             <h1 className="text-[24px] font-semibold text-neutral-70">
               Rincian Harga
             </h1>
-            <h1 className="text-[24px] font-semibold text-neutral-60">
-              Rp{formattedTotalHarga}
-            </h1>
+            <div className="flex items-center gap-3">
+              {' '}
+              <h1 className="text-[24px] font-semibold text-neutral-60">
+                Rp{formattedTotalHarga}
+              </h1>
+              <FontAwesomeIcon
+                onClick={() => setIsDrop(!isDrop)}
+                icon={faChevronDown}
+                className={
+                  isDrop
+                    ? 'cursor-pointer rotate-180 transition-all duration-500'
+                    : 'cursor-pointer rotate-0 transition-all duration-500'
+                }
+              />
+            </div>
           </div>
+          {isDrop ? (
+            <div className="flex flex-col w-full">
+              <div className="w-full h-[1px] bg-neutral-20"></div>
+              <div className="flex flex-col mt-7 gap-7">
+                <div className="flex flex-col w-full gap-4">
+                  <div className="flex items-center justify-between w-full">
+                    <h1 className="text-neutral-60 text-[20px] font-medium">
+                      Total Tiket ({quantity}x)
+                    </h1>
+                    <h1 className="text-neutral-60 text-[20px] font-medium">
+                      Rp{formattedTotalTiket}
+                    </h1>
+                  </div>
+                  <div className="flex items-center justify-between w-full">
+                    <h1 className="text-neutral-60 text-[20px] font-medium">
+                      Biaya Layanan
+                    </h1>
+                    <h1 className="text-neutral-60 text-[20px] font-medium">
+                      Rp5.000
+                    </h1>
+                  </div>
+                </div>
+                <div className="flex items-center justify-between w-full">
+                  <h1 className="text-neutral-60 text-[24px] font-semibold">
+                    Harga Total
+                  </h1>
+                  <h1 className="text-neutral-60 text-[24px] font-semibold">
+                    Rp{formattedTotalHarga}
+                  </h1>
+                </div>
+              </div>
+            </div>
+          ) : (
+            ''
+          )}
+
           <button
             onClick={createOrder}
             className="w-full flex justify-center py-3 rounded-xl h-fit bg-primary-60 text-[20px] font-semibold text-white active:scale-95 transition-all duration-150"
