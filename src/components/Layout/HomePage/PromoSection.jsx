@@ -10,7 +10,7 @@ const VoucherCard = ({ img, id }) => {
 
   return (
     <div
-      onClick={() => navigate('')}
+      onClick={() => navigate(`/voucher/${id}`)}
       className="carousel-item w-[523px] h-[225px] shadow-cardShadow overflow-hidden rounded-2xl cursor-pointer active:scale-90 transition duration-300"
     >
       <img src={img} className="object-cover rounded-box size-full" />
