@@ -58,7 +58,10 @@ const OpenTripDetail = () => {
             schedule={productData?.datas.desc_schedule}
           />
           <div className="flex gap-4 mt-6">
-            <RatingHeaderSection />
+            <RatingHeaderSection
+              id={productData?.datas.id}
+              name={productData?.datas.name}
+            />
             <BookDetailSection
               location={productData?.datas.location}
               duration={productData?.datas.duration}
@@ -68,7 +71,7 @@ const OpenTripDetail = () => {
             />
           </div>
           <BudgetPlanningSection id={productData?.datas.id} />
-          <ReviewsSection />
+          <ReviewsSection id={productData?.datas.id} />
         </div>
       </main>
       <Footer />

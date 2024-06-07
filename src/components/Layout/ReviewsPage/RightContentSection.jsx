@@ -10,7 +10,7 @@ const RightContentSection = ({ userID, productID }) => {
 
   const [name, setName] = useState('');
   const [comment, setComment] = useState('');
-  const [rating, setRating] = useState('');
+  const [rating, setRating] = useState(5);
   const [charCount, setCharCount] = useState(0);
 
   const sendReview = async () => {
