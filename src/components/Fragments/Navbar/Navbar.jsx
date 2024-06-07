@@ -91,6 +91,9 @@ function Navbar() {
       await axios.delete(`${apiUrl}/logout`);
       setIsLogin(false);
       setName('');
+      localStorage.removeItem('expire');
+      localStorage.removeItem('token');
+      localStorage.removeItem('userId');
       navigate('/login');
     } catch (error) {
       console.error('Logout failed:', error);

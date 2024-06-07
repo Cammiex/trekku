@@ -25,7 +25,7 @@ const DetailVoucherPage = () => {
       }
     };
     fetchData();
-  });
+  }, [id]);
 
   return (
     <>
@@ -41,7 +41,7 @@ const DetailVoucherPage = () => {
             <h1 className="text-[20px] font-medium text-neutral-80">Kembali</h1>
           </Link>
           <VoucherSection
-            name={data?.name}
+            name={data?.voucher_name}
             img={data?.url_img}
             code={data?.code}
             discount={data?.discount}

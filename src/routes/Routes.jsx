@@ -76,6 +76,9 @@ const RiwayatPembelianPage = React.lazy(() =>
 const DetailVoucherPage = React.lazy(() =>
   import('../components/Pages/DetailVoucherPage/DetailVoucherPage')
 );
+const ReviewsPage = React.lazy(() =>
+  import('../components/Pages/ReviewsPage/ReviewsPage')
+);
 
 const ProjectRoutes = () => {
   return (
@@ -114,6 +117,8 @@ const ProjectRoutes = () => {
           <Route path="/payment-confirm/:id" element={<PaymentConfirmPage />} />
 
           <Route path="/voucher/:id" element={<DetailVoucherPage />} />
+
+          <Route path="/review/:id" element={<ReviewsPage />} />
         </Routes>
       </Router>
     </React.Suspense>

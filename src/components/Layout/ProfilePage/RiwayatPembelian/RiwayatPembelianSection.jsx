@@ -124,7 +124,7 @@ const OrderCard = ({ img, name, date, id, status, idOrder }) => {
       );
     } else if (status === 'success') {
       return (
-        <li>
+        <li onClick={() => navigate(`/review/${idOrder}`)}>
           <a>Berikan Ulasan</a>
         </li>
       );
@@ -145,7 +145,11 @@ const OrderCard = ({ img, name, date, id, status, idOrder }) => {
       <div className="flex justify-between w-full">
         <div className="flex gap-4">
           <div className="w-[129px] h-[86px] rounded-lg overflow-hidden">
-            <img src={img} alt="" />
+            <img
+              src={img}
+              alt=""
+              className="object-cover object-center size-full"
+            />
           </div>
           <div className="flex flex-col justify-between h-full">
             <div>

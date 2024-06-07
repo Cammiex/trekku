@@ -1,3 +1,5 @@
+import PropTypes from 'prop-types';
+
 const VoucherSection = ({ name, code, img, discount }) => {
   const formattedDisc = discount * 100;
 
@@ -127,6 +129,13 @@ const VoucherSection = ({ name, code, img, discount }) => {
       </div>
     </div>
   );
+};
+
+VoucherSection.propTypes = {
+  name: PropTypes.string,
+  code: PropTypes.string,
+  img: PropTypes.string,
+  discount: PropTypes.string,
 };
 
 export default VoucherSection;
