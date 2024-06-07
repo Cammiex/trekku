@@ -1,5 +1,17 @@
-function OpenTripHeroSection() {
+import PropTypes from 'prop-types';
+
+function OpenTripHeroSection({
+  setDestinasi,
+  destinasi,
+  durasi,
+  setDurasi,
+  data,
+}) {
   const bgImage = 'images/OpenTripPage/opentrip-hero.jpg';
+
+  // Extract unique destinations and durations
+  const uniqueDestinations = [...new Set(data?.map((item) => item.location))];
+  const uniqueDurations = [...new Set(data?.map((item) => item.duration))];
 
   return (
     <div
@@ -12,7 +24,7 @@ function OpenTripHeroSection() {
         id="search-form"
         className="absolute z-10 flex justify-center px-20 py-10 text-black -translate-x-1/2 bg-white shadow-2xl min-h-40 w-fit rounded-2xl left-1/2 -bottom-20"
       >
-        <form action="#" className="flex flex-wrap gap-6">
+        <div className="flex gap-6">
           <div id="search-item" className="flex flex-col">
             <div id="icon" className="flex items-center gap-2 mb-3">
               <div className="flex items-center justify-center bg-white rounded-full size-7 shadow-cardShadow">
@@ -23,14 +35,21 @@ function OpenTripHeroSection() {
               <label>Destination</label>
             </div>
 
-            <select name="" id="" className="rounded-lg min-w-[214px]">
-              <option value="" disabled selected hidden>
+            <select
+              name=""
+              id=""
+              value={destinasi}
+              onChange={(e) => setDestinasi(e.target.value)}
+              className="rounded-lg min-w-[214px]"
+            >
+              <option value="" selected>
                 Pilih Destinasi
               </option>
-              <option value="volvo">Volvo</option>
-              <option value="saab">Saab</option>
-              <option value="fiat">Fiat</option>
-              <option value="audi">Audi</option>
+              {uniqueDestinations.map((location) => (
+                <option value={location} key={location}>
+                  {location}
+                </option>
+              ))}
             </select>
           </div>
           <div id="search-item" className="flex flex-col">
@@ -42,24 +61,35 @@ function OpenTripHeroSection() {
               <label>Duration</label>
             </div>
 
-            <select name="" id="" className="rounded-lg min-w-[154px]">
-              <option value="" disabled selected hidden>
+            <select
+              name=""
+              id=""
+              value={durasi}
+              onChange={(e) => setDurasi(e.target.value)}
+              className="rounded-lg min-w-[154px]"
+            >
+              <option value="" selected>
                 Pilih Durasi
               </option>
-              <option value="volvo">Volvo</option>
-              <option value="saab">Saab</option>
-              <option value="fiat">Fiat</option>
-              <option value="audi">Audi</option>
+              {uniqueDurations.map((duration) => (
+                <option value={duration} key={duration}>
+                  {duration}
+                </option>
+              ))}
             </select>
           </div>
-          <button className="flex w-[177px] h-[54px] justify-center items-center bg-primary-60 rounded-xl gap-[10px] px-5 self-end">
-            <img src="images/OpenTripPage/search.png" alt="" />
-            <h1 className="text-white">Cari</h1>
-          </button>
-        </form>
+        </div>
       </div>
     </div>
   );
 }
+
+OpenTripHeroSection.propTypes = {
+  data: PropTypes.array,
+  setDestinasi: PropTypes.func,
+  destinasi: PropTypes.string,
+  durasi: PropTypes.string,
+  setDurasi: PropTypes.func,
+};
 
 export default OpenTripHeroSection;

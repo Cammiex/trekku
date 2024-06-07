@@ -3,7 +3,7 @@ import { OpenTripItem } from './OpenTripItem';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProduct } from '../../../redux/slices/products/getProducts';
 
-function OpenTripList() {
+function OpenTripList({ setData, durasi, destinasi }) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
@@ -14,13 +14,34 @@ function OpenTripList() {
   const productList = productData.produk;
 
   useEffect(() => {
+    setData(productList);
+  }, [productList, setData]);
+
+  useEffect(() => {
     dispatch(fetchProduct());
   }, [dispatch]);
   if (isLoading) return <div>Loading...</div>;
 
+  // Filter the productList based on durasi and destinasi
+  const filteredProductList = productList?.filter((item) => {
+    if (durasi && destinasi) {
+      return item.duration === durasi && item.location === destinasi;
+    }
+    if (durasi) {
+      return item.duration === durasi;
+    }
+    if (destinasi) {
+      return item.location === destinasi;
+    }
+    return true;
+  });
+
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-  const currentItems = productList?.slice(indexOfFirstItem, indexOfLastItem);
+  const currentItems = filteredProductList?.slice(
+    indexOfFirstItem,
+    indexOfLastItem
+  );
 
   const paginate = (pageNumber) => {
     window.scrollTo({ top: 700, behavior: 'smooth' });
@@ -65,7 +86,8 @@ function OpenTripList() {
             paginate(currentPage + 1);
           }}
           disabled={
-            currentPage === Math.ceil(productList?.length / itemsPerPage)
+            currentPage ===
+            Math.ceil(filteredProductList?.length / itemsPerPage)
           }
         >
           »

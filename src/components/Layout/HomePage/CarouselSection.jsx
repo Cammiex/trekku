@@ -11,7 +11,7 @@ const imageSources = [
   'images/HomePage/slide5.jpg',
 ];
 
-function CarouselSection() {
+function CarouselSection({ setSearchValue, searchValue, handleSearch }) {
   const [isOdd, setIsOdd] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [images, setImages] = useState([]);
@@ -78,9 +78,14 @@ function CarouselSection() {
             name=""
             id=""
             placeholder="Labuan Bajo"
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
             className="py-3 rounded-md h-[48px] w-[427px] shadow-inputShadow border-none"
           />
-          <button className="flex items-center justify-center w-[204px] h-fit bg-primary-60 text-white gap-[10px] py-3 rounded-xl">
+          <button
+            onClick={handleSearch}
+            className="flex items-center justify-center w-[204px] h-fit bg-primary-60 text-white gap-[10px] py-3 rounded-xl"
+          >
             <FontAwesomeIcon icon={faSearch} className="size-5" />
             <h1 className="font-medium text-[20px]">Cari</h1>
           </button>

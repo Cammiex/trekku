@@ -4,7 +4,7 @@ import { fetchProduct } from '../../../redux/slices/products/getProducts';
 import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
-const OpenTripCard = ({
+export const OpenTripCard = ({
   img,
   name,
   organizer,

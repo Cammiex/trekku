@@ -6,6 +6,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 const apiUrl = import.meta.env.VITE_API_URL;
 
 const RatingHeaderSection = ({ id, name }) => {
@@ -114,6 +115,11 @@ const RatingHeaderSection = ({ id, name }) => {
       </div>
     </div>
   );
+};
+
+RatingHeaderSection.propTypes = {
+  id: PropTypes.number,
+  name: PropTypes.string,
 };
 
 export default RatingHeaderSection;
