@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { OpenTripItem } from './OpenTripItem';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProduct } from '../../../redux/slices/products/getProducts';
+import PropType from 'prop-types';
 
 function OpenTripList({ setData, durasi, destinasi }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -96,5 +97,11 @@ function OpenTripList({ setData, durasi, destinasi }) {
     </div>
   );
 }
+
+OpenTripList.propTypes = {
+  setData: PropType.func,
+  durasi: PropType.string,
+  destinasi: PropType.string,
+};
 
 export default OpenTripList;

@@ -7,7 +7,7 @@ import TouristFeedbackSection from '../../Layout/HomePage/TouristFeedbackSection
 import ArticleTipsSection from '../../Layout/HomePage/ArticleTipsSection';
 import FloatButton from '../../Fragments/FloatButton/FloatButton';
 import PromoSection from '../../Layout/HomePage/PromoSection';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { OpenTripCard } from '../../Layout/HomePage/OpenTripRecomendSection';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -72,10 +72,6 @@ function HomePage() {
       console.log(error);
     }
   };
-
-  useEffect(() => {
-    console.log(filteredData);
-  }, [filteredData]);
 
   return (
     <>

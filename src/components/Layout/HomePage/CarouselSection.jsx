@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import PropType from 'prop-types';
 
 const imageSources = [
   'images/HomePage/slide1.jpg',
@@ -94,5 +95,11 @@ function CarouselSection({ setSearchValue, searchValue, handleSearch }) {
     </div>
   );
 }
+
+CarouselSection.propTypes = {
+  setSearchValue: PropType.func,
+  searchValue: PropType.string,
+  handleSearch: PropType.func,
+};
 
 export default CarouselSection;

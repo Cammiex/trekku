@@ -95,7 +95,6 @@ const ProjectRoutes = () => {
           <Route path="/open-trip/:id" element={<OpenTripDetail />} />
           <Route path="/help" element={<HelpPage />} />
           <Route path="/budget-planning/:id" element={<BudgetPlanningPage />} />
-          <Route path="/article" element={<ArticleDetailPage />} />
 
           <Route path="/admin" element={<Navigate to="/admin/dashboard" />} />
           <Route path="/admin/dashboard" element={<AdminPage />} />
@@ -119,6 +118,8 @@ const ProjectRoutes = () => {
           <Route path="/voucher/:id" element={<DetailVoucherPage />} />
 
           <Route path="/review/:id" element={<ReviewsPage />} />
+
+          <Route path="/article/:id" element={<ArticleDetailPage />} />
         </Routes>
       </Router>
     </React.Suspense>
