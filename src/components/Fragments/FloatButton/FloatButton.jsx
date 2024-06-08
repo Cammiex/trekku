@@ -17,32 +17,11 @@ const FloatButton = () => {
 
   return (
     <>
-      {/* <div
-        className={
-          isOpen
-            ? 'size-[84px] rounded-full bg-white flex items-center z-[19] justify-center fixed bottom-[202px] right-[24px] transition-all duration-500 scale-100 opacity-100 cursor-pointer shadow-cardShadow'
-            : 'size-[84px] rounded-full bg-white flex items-center z-[19] justify-center fixed bottom-4 right-[24px] transition-all duration-500 scale-75 opacity-70'
-        }
-      >
-        <FontAwesomeIcon
-          icon={faFaceDizzy}
-          className="size-[32px] text-black"
-        />
-      </div>
       <div
         className={
           isOpen
-            ? 'size-[84px] rounded-full bg-[#25D366] flex items-center z-[19] justify-center fixed bottom-[110px] right-[24px] transition-all duration-500 scale-100 opacity-100 cursor-pointer shadow-cardShadow'
-            : 'size-[84px] rounded-full bg-[#25D366] flex items-center z-[19] justify-center fixed bottom-4 right-[24px] transition-all duration-500 scale-75 opacity-70'
-        }
-      >
-        <FontAwesomeIcon icon={faWhatsapp} className="size-[32px]" />
-      </div> */}
-      <div
-        className={
-          isOpen
-            ? 'size-[80px] rounded-full bg-gradient-to-br from-white/80 to-white/20 backdrop-blur-sm bg-black/50 flex items-center z-20 justify-center fixed bottom-4 right-[24px] cursor-pointer transition-all duration-100 active:scale-95 shadow-cardShadow peer'
-            : 'size-[80px] rounded-full bg-gradient-to-br from-white/80 to-white/20 backdrop-blur-sm flex items-center z-20 justify-center fixed bottom-4 right-[24px] cursor-pointer transition-all duration-100 bg-black/50 active:scale-95 shadow-cardShadow peer'
+            ? 'size-[80px] rounded-full bg-gradient-to-br from-white/80 to-white/20 backdrop-blur-sm bg-black/50 flex items-center z-20 justify-center fixed bottom-4 right-[24px] cursor-pointer transition-all duration-100 active:scale-95 shadow-cardShadow peer sm:hidden'
+            : 'size-[80px] rounded-full bg-gradient-to-br from-white/80 to-white/20 backdrop-blur-sm flex items-center z-20 justify-center fixed bottom-4 right-[24px] cursor-pointer transition-all duration-100 bg-black/50 active:scale-95 shadow-cardShadow peer sm:hidden'
         }
         onClick={handleClick}
       >

@@ -5,7 +5,7 @@ function Footer() {
     <footer className="flex flex-col w-full">
       <div
         id="footer-content"
-        className="flex flex-col px-[100px] py-10 w-full h-[508px] bg-[#383838] items-center mt-[120px]"
+        className="flex flex-col px-[100px] py-10 w-full h-[508px] bg-[#383838] items-center mt-[120px] sm:hidden"
       >
         <div className="w-full">
           <h1 className="text-white font-extrabold text-[68px]">Trekku</h1>
@@ -281,8 +281,8 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="w-full h-16 flex items-center justify-center bg-[#2B2B2B]">
-        <h1 className="font-medium text-white">
+      <div className="w-full h-16 sm:h-9 flex items-center justify-center bg-[#2B2B2B] sm:mt-[52px]">
+        <h1 className="font-medium text-white sm:text-[8px]">
           Copyright © 2024 Trekku. Semua hak cipta.
         </h1>
       </div>

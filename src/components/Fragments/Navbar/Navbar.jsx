@@ -130,7 +130,7 @@ function Navbar() {
 
   return (
     <>
-      <header className="px-[100px] py-2 flex items-center justify-between w-full fixed top-0 transition duration-300 z-40 select-none">
+      <header className="px-[100px] py-2 flex items-center justify-between w-full fixed top-0 transition duration-300 z-40 select-none sm:hidden">
         <h1 className="text-[44px] font-extrabold text-white select-none">
           Trekku
         </h1>

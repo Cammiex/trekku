@@ -10,19 +10,22 @@ const FeedbackCard = ({ avatar, name, job, comment }) => {
   return (
     <div
       id="feedback-item"
-      className="flex flex-col items-center min-w-[358px] h-[409px] max-w-[380px] gap-5 p-4 shadow-md group transition-all duration-300 rounded-2xl bg-white"
+      className="flex flex-col items-center min-w-[358px] h-[409px] max-w-[380px] gap-5 p-4 shadow-md group transition-all duration-300 rounded-2xl bg-white sm:min-w-[215px] sm:h-[243px] sm:rounded-[9px]"
     >
       <div id="avatar" className="flex flex-col items-center gap-2">
         <img
-          className="w-[95px] h-[95px] rounded-full object-cover"
+          className="w-[95px] h-[95px] sm:size-[57px] rounded-full object-cover"
           src={avatar}
           alt="Rounded avatar"
         />
         <div id="avatar-text" className="text-center">
-          <h1 id="name" className="text-[20px] font-semibold text-black">
+          <h1
+            id="name"
+            className="text-[20px] font-semibold text-black sm:text-[12px]"
+          >
             {name}
           </h1>
-          <h2 id="job" className="text-black">
+          <h2 id="job" className="text-black sm:text-[9px]">
             {job}
           </h2>
         </div>
@@ -30,7 +33,7 @@ const FeedbackCard = ({ avatar, name, job, comment }) => {
           {[...Array(5)].map((_, index) => (
             <svg
               key={index}
-              className="w-4 h-4 text-yellow-300 ms-1"
+              className="w-4 h-4 text-yellow-300 sm:size-3 ms-1"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="currentColor"
@@ -42,7 +45,7 @@ const FeedbackCard = ({ avatar, name, job, comment }) => {
         </div>
       </div>
       <div id="commentar" className="">
-        <p className="text-center text-black max-w-[310px] max-h-[144px]">
+        <p className="text-center text-black max-w-[310px] max-h-[144px] sm:text-[9px] sm:max-w-[187px] sm:max-h-[84px]">
           {comment}
         </p>
       </div>
@@ -108,7 +111,6 @@ function TouristFeedbackSection() {
       comment:
         'Open trip yang diselenggarakan sangat memuaskan! Pemandu sangat ramah dan berpengalaman, akomodasi nyaman, dan itinerary menarik.',
     },
-    // Add more feedbacks as needed
   ];
 
   const [currentPage, setCurrentPage] = useState(0);
@@ -137,16 +139,18 @@ function TouristFeedbackSection() {
   return (
     <section
       id="touristFeedback"
-      className="flex flex-wrap flex-col items-center mt-[100px] gap-10 w-full"
+      className="flex flex-wrap flex-col items-center mt-[100px] sm:mt-10 gap-10 w-full"
     >
-      <h1 className="text-secondary text-[32px] font-bold">Ulasan Pengguna</h1>
+      <h1 className="text-secondary text-[32px] font-bold sm:text-[16px]">
+        Ulasan Pengguna
+      </h1>
       <div
         id="feedback-list"
-        className="flex items-center justify-center w-full gap-8"
+        className="flex items-center justify-center w-full gap-8 sm:flex-col"
       >
         <button
           onClick={handlePrev}
-          className="p-2 size-[44px] rounded-full shadow-md group"
+          className="p-2 size-[44px] rounded-full shadow-md group sm:hidden"
           disabled={currentPage === 0}
         >
           <FontAwesomeIcon
@@ -159,7 +163,7 @@ function TouristFeedbackSection() {
         ))}
         <button
           onClick={handleNext}
-          className="p-2 size-[44px] rounded-full shadow-md group"
+          className="p-2 size-[44px] rounded-full shadow-md group sm:hidden"
           disabled={startIndex + itemsPerPage >= feedbacks.length}
         >
           <FontAwesomeIcon

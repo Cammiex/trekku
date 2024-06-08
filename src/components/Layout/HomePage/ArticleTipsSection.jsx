@@ -21,7 +21,7 @@ const ArticleCard = ({ writter, title, desc, date, img, id }) => {
     <div
       onClick={() => navigate(`/article/${id}`)}
       id="article-item"
-      className="w-[400px] h-[465px] shadow-cardShadow2 rounded-2xl overflow-hidden group cursor-pointer"
+      className="w-[400px] h-[465px] shadow-cardShadow2 rounded-2xl overflow-hidden group cursor-pointer sm:w-[320px] sm:h-[372px] sm:rounded-xl"
     >
       <div className="relative overflow-hidden">
         <div className="absolute z-10 flex items-center justify-center w-full h-full transition duration-300 bg-black/0 group-hover:bg-black/60 group-active:bg-black/80">
@@ -32,19 +32,29 @@ const ArticleCard = ({ writter, title, desc, date, img, id }) => {
         <img
           src={img}
           alt=""
-          className="w-full max-h-[200px] group-hover:scale-125 transition-transform duration-300 object-cover"
+          className="w-full max-h-[200px] group-hover:scale-125 transition-transform duration-300 object-cover sm:max-h-[162px]"
         />
       </div>
       <div id="article-body" className="flex flex-col gap-3 p-5">
         <div id="article-title" className="flex flex-col">
-          <h2 className="text-[14px] font-medium text-neutral-80">{writter}</h2>
-          <h1 className="text-[20px] font-semibold text-secondary">{title}</h1>
+          <h2 className="text-[14px] font-medium text-neutral-80 sm:text-[11px]">
+            {writter}
+          </h2>
+          <h1 className="text-[20px] font-semibold text-secondary sm:text-[16px]">
+            {title}
+          </h1>
         </div>
-        <p id="article-text" className="text-xs font-normal text-neutral-500">
+        <p
+          id="article-text"
+          className="text-xs font-normal text-neutral-500 sm:text-[12px]"
+        >
           {truncatedDesc}
         </p>
-        <a href="blog-detail.html" className="flex items-center gap-4 mt-5">
-          <span className="text-[14px] font-normal text-black">
+        <a
+          href="blog-detail.html"
+          className="flex items-center gap-4 mt-5 sm:mt-[2px]"
+        >
+          <span className="text-[14px] font-normal text-black sm:text-[11px]">
             {date} Agustus 2024
           </span>
         </a>
@@ -80,10 +90,12 @@ function ArticleTipsSection() {
   return (
     <section
       id="article&tips"
-      className="flex flex-col mt-[100px] gap-10 items-center"
+      className="flex flex-col mt-[100px] sm:mt-10 gap-10 items-center sm:gap-3"
     >
-      <h1 className="text-secondary text-[32px] font-bold">Artikel</h1>
-      <div id="article-list" className="flex flex-wrap gap-10">
+      <h1 className="text-secondary text-[32px] font-bold sm:text-[16px]">
+        Artikel
+      </h1>
+      <div id="article-list" className="flex gap-10 sm:flex-col sm:gap-5">
         {data?.map((item) => (
           <ArticleCard
             key={item.id}
@@ -98,7 +110,7 @@ function ArticleTipsSection() {
       </div>
       <Link
         to="https://www.hipwee.com/tag/destinasi-wisata/"
-        className="h-[54px] px-9 bg-primary-60 rounded-xl text-xl font-medium text-white flex items-center hover:bg-primaryDark active:bg-primaryDarker"
+        className="h-[54px] px-9 bg-primary-60 rounded-xl text-xl font-medium text-white flex items-center hover:bg-primaryDark active:bg-primaryDarker sm:px-[11px] sm:h-[30px] sm:text-[11px] sm:rounded-[6px]"
       >
         Baca Artikel Lain
       </Link>

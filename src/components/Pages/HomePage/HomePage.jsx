@@ -18,12 +18,15 @@ const SearchResult = ({ filteredData }) => {
   return (
     <section
       id="opentripRecomendation"
-      className="flex flex-wrap flex-col items-center mt-[190px] gap-10 -mb-[80px]"
+      className="flex flex-wrap flex-col items-center mt-[190px] gap-10 -mb-[80px] sm:mt-[117px] sm:max-w-[360px] overflow-hidden"
     >
-      <h1 className="text-secondary text-[32px] font-bold">
+      <h1 className="text-secondary text-[32px] font-bold sm:text-[16px]">
         Hasil Pencarian Open Trip
       </h1>
-      <div id="open-trip-list" className="flex gap-10">
+      <div
+        id="open-trip-list"
+        className="flex gap-10 sm:flex-col sm:max-w-full sm:gap-3"
+      >
         {filteredData && filteredData.length > 0 ? (
           filteredData.map((item) => (
             <OpenTripCard
@@ -44,7 +47,7 @@ const SearchResult = ({ filteredData }) => {
       </div>
       <Link
         to="/open-trip"
-        className="h-[54px] px-9 bg-primary-60 rounded-xl text-xl font-medium text-white flex items-center hover:bg-primaryDark active:bg-primaryDarker"
+        className="h-[54px] px-9 bg-primary-60 rounded-xl text-xl font-medium text-white flex items-center hover:bg-primaryDark active:bg-primaryDarker sm:h-[30px] sm:px-[11px] sm:rounded-[6px] sm:text-[11px]"
       >
         Cari petualangan yang lain
       </Link>

@@ -1,4 +1,5 @@
 /** @type {import('tailwindcss').Config} */
+/* prettier-ignore */
 import flowbite from 'flowbite-react/tailwind';
 import daisyui from 'daisyui';
 
@@ -9,6 +10,17 @@ export default {
     flowbite.content(),
   ],
   theme: {
+    screens: {
+      '2xl': { max: '1535px' },
+
+      xl: { max: '1279px' },
+
+      lg: { max: '1023px' },
+
+      md: { max: '767px' },
+
+      sm: { max: '360px' },
+    },
     extend: {
       colors: {
         primaryDark: '#1375ba',
