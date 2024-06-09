@@ -32,10 +32,10 @@ const DetailVoucherPage = () => {
       <Navbar />
       <main className="flex flex-col items-center">
         <HeroSection />
-        <div className="flex flex-col w-[973px] mt-10">
+        <div className="flex flex-col w-[973px] mt-10 sm:w-[320px]">
           <Link
             onClick={() => navigate(-1)}
-            className="flex items-center gap-5 w-fit h-[30px] select-none"
+            className="flex items-center gap-5 w-fit h-[30px] select-none sm:hidden"
           >
             <FontAwesomeIcon icon={faChevronLeft} className="text-neutral-80" />
             <h1 className="text-[20px] font-medium text-neutral-80">Kembali</h1>
