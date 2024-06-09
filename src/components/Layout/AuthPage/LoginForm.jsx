@@ -5,9 +5,10 @@ import toast, { Toaster } from 'react-hot-toast';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import PropTypes from 'prop-types';
 const apiUrl = import.meta.env.VITE_API_URL;
 
-const LoginForm = () => {
+const LoginForm = ({ setLoggedIn }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
@@ -45,6 +46,7 @@ const LoginForm = () => {
           email: email,
           password: password,
         });
+        setLoggedIn(true);
         navigate('/');
       } catch (error) {
         if (error.response) {
@@ -136,6 +138,10 @@ const LoginForm = () => {
       </form>
     </div>
   );
+};
+
+LoginForm.propTypes = {
+  setLoggedIn: PropTypes.func,
 };
 
 export default LoginForm;

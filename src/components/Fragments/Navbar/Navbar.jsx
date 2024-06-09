@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Dropdown } from 'flowbite-react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
@@ -39,7 +39,7 @@ function Navbar() {
   const [token, setToken] = useState('');
   const [expire, setExpire] = useState('');
   const [profilePicture, setProfilePicture] = useState('');
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const firstname =
     name.split(' ')[0].charAt(0).toUpperCase() + name.split(' ')[0].slice(1);
   const [openModal, setOpenModal] = useState(false);
@@ -94,7 +94,9 @@ function Navbar() {
       localStorage.removeItem('expire');
       localStorage.removeItem('token');
       localStorage.removeItem('userId');
-      navigate('/login');
+      // window.location.reload();
+      // navigate('/login');
+      window.location.href = '/login';
     } catch (error) {
       console.error('Logout failed:', error);
     }

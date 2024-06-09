@@ -5,10 +5,23 @@ import {
   faFileText,
 } from '@fortawesome/free-regular-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 const FloatButton = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [idUser, setIdUser] = useState('');
+
+  useEffect(() => {
+    const userId = localStorage.getItem('userId');
+    const token = localStorage.getItem('token');
+    const expire = localStorage.getItem('expire');
+    if (userId && token && expire) {
+      setIdUser(userId);
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClick = () => {
@@ -57,7 +70,7 @@ const FloatButton = () => {
         </div>
         <div className="flex flex-col justify-center w-full mt-3">
           <Link
-            to="/help"
+            to={isLoggedIn ? `/profile/help/${idUser}` : '/help'}
             className="flex items-center justify-center w-full gap-3 py-3 transition duration-200 hover:scale-105 hover:underline text-neutral-70"
           >
             <FontAwesomeIcon

@@ -1,8 +1,22 @@
 import { useState } from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import axios from 'axios';
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const LogoutPopUp = ({ handlePopUpLogout, isPop }) => {
+  const handleLogout = async () => {
+    try {
+      await axios.delete(`${apiUrl}/logout`);
+      localStorage.removeItem('expire');
+      localStorage.removeItem('token');
+      localStorage.removeItem('userId');
+      window.location.href = '/login';
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
+
   return (
     <div
       id="popup-logout"
@@ -36,7 +50,10 @@ const LogoutPopUp = ({ handlePopUpLogout, isPop }) => {
           >
             Batalkan
           </button>
-          <button className="w-[144px] py-3 px-5 h-fit rounded-xl text-white text-xl font-medium bg-red-700 hover:bg-red-800 active:scale-90 transition">
+          <button
+            onClick={handleLogout}
+            className="w-[144px] py-3 px-5 h-fit rounded-xl text-white text-xl font-medium bg-red-700 hover:bg-red-800 active:scale-90 transition"
+          >
             Ya, Logout
           </button>
         </div>

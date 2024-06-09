@@ -3,8 +3,22 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUsers } from '@fortawesome/free-solid-svg-icons';
 import { Link, useParams } from 'react-router-dom';
 import moment from 'moment/moment';
+import { useEffect, useState } from 'react';
 
 const BookDetailSection = ({ location, duration, date, price, quota }) => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const userId = localStorage.getItem('userId');
+    const token = localStorage.getItem('token');
+    const expire = localStorage.getItem('expire');
+    if (userId || token || expire) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
+  console.log(isLoggedIn);
+
   const formattedPrice = Number(price).toLocaleString('id-ID');
   const beforePrice = Number(price + 200000).toLocaleString('id-ID');
 
@@ -61,7 +75,7 @@ const BookDetailSection = ({ location, duration, date, price, quota }) => {
         </div>
       </div>
       <Link
-        to={`/order/${id}`}
+        to={isLoggedIn ? `/order/${id}` : '/login'}
         className="px-[40px] py-[15px] bg-primary-60 w-fit rounded-xl text-white text-xl font-medium self-center hover:bg-primaryDark active:bg-primaryDarker mt-[12px]"
       >
         Pesan Sekarang

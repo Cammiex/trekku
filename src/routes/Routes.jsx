@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -81,6 +81,17 @@ const ReviewsPage = React.lazy(() =>
 );
 
 const ProjectRoutes = () => {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const userId = localStorage.getItem('userId');
+    const token = localStorage.getItem('token');
+    const expire = localStorage.getItem('expire');
+    if (userId && token && expire) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   return (
     <React.Suspense fallback={<div>Loading...</div>}>
       <Router>
@@ -91,33 +102,74 @@ const ProjectRoutes = () => {
           <Route path="/destination" element={<DestinationPage />} />
           <Route path="/about-us" element={<AboutPage />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/login" element={<Login />} />
+          <Route
+            path="/login"
+            element={<Login setLoggedIn={setIsLoggedIn} />}
+          />
           <Route path="/open-trip/:id" element={<OpenTripDetail />} />
           <Route path="/help" element={<HelpPage />} />
           <Route path="/budget-planning/:id" element={<BudgetPlanningPage />} />
 
-          <Route path="/admin" element={<Navigate to="/admin/dashboard" />} />
-          <Route path="/admin/dashboard" element={<AdminPage />} />
-          <Route path="/admin/products" element={<ProductPage />} />
-          <Route path="/admin/products/add" element={<AddProductPage />} />
-          <Route
-            path="/admin/products/edit/:id"
-            element={<EditProductPage />}
-          />
+          {isLoggedIn ? (
+            <>
+              <Route
+                path="/admin"
+                element={<Navigate to="/admin/dashboard" />}
+              />
+              <Route path="/admin/dashboard" element={<AdminPage />} />
+              <Route path="/admin/products" element={<ProductPage />} />
+              <Route path="/admin/products/add" element={<AddProductPage />} />
+              <Route
+                path="/admin/products/edit/:id"
+                element={<EditProductPage />}
+              />
+            </>
+          ) : (
+            ''
+          )}
 
-          <Route path="/profile/information/:id" element={<ProfilePage />} />
-          <Route path="/profile/help/:id" element={<ProfileHelpPage />} />
-          <Route path="/profile/wishlist/:id" element={<WishlistPage />} />
-          <Route path="/profile/order/:id" element={<RiwayatPembelianPage />} />
+          {isLoggedIn ? (
+            <>
+              {' '}
+              <Route
+                path="/profile/information/:id"
+                element={<ProfilePage />}
+              />
+              <Route path="/profile/help/:id" element={<ProfileHelpPage />} />
+              <Route path="/profile/wishlist/:id" element={<WishlistPage />} />
+              <Route
+                path="/profile/order/:id"
+                element={<RiwayatPembelianPage />}
+              />
+            </>
+          ) : (
+            ''
+          )}
 
-          <Route path="/order/:id" element={<OrderPage />} />
-          <Route path="/order-summary/:id" element={<OrderSummaryPage />} />
-          <Route path="/payment/:id" element={<PaymentPage />} />
-          <Route path="/payment-confirm/:id" element={<PaymentConfirmPage />} />
+          {isLoggedIn ? (
+            <>
+              <Route path="/order/:id" element={<OrderPage />} />
+              <Route path="/order-summary/:id" element={<OrderSummaryPage />} />
+              <Route path="/payment/:id" element={<PaymentPage />} />
+              <Route
+                path="/payment-confirm/:id"
+                element={<PaymentConfirmPage />}
+              />
+            </>
+          ) : (
+            ''
+          )}
 
           <Route path="/voucher/:id" element={<DetailVoucherPage />} />
 
-          <Route path="/review/:id" element={<ReviewsPage />} />
+          {isLoggedIn ? (
+            <>
+              {' '}
+              <Route path="/review/:id" element={<ReviewsPage />} />
+            </>
+          ) : (
+            ''
+          )}
 
           <Route path="/article/:id" element={<ArticleDetailPage />} />
         </Routes>
