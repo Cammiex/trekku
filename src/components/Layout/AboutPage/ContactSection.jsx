@@ -2,10 +2,13 @@ function ContactSection() {
   return (
     <section
       id="contact-us"
-      className="flex flex-col items-center mt-[100px] gap-10"
+      className="flex flex-col items-center mt-[100px] gap-10 sm:hidden"
     >
-      <h1 className="text-[32px] font-bold">Hubungi kami.</h1>
-      <div id="contact-wrapper" className="text-blackui flex gap-[60px]">
+      <h1 className="text-[32px] font-bold">Hubungi kami</h1>
+      <div
+        id="contact-wrapper"
+        className="text-blackui flex gap-[60px] sm:flex-col"
+      >
         <div id="contact-information" className="w-[532px] flex flex-col gap-8">
           <div>
             <h1 className="text-2xl font-bold">Informasi kontak</h1>

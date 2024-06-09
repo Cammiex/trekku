@@ -1,3 +1,5 @@
+import { faHome } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 
 function Footer() {
@@ -5,14 +7,16 @@ function Footer() {
     <footer className="flex flex-col w-full">
       <div
         id="footer-content"
-        className="flex flex-col px-[100px] py-10 w-full h-[508px] bg-[#383838] items-center mt-[120px] sm:hidden"
+        className="flex flex-col px-[100px] sm:p-4 py-10 w-full h-fit bg-[#383838] items-center mt-[120px]"
       >
         <div className="w-full">
-          <h1 className="text-white font-extrabold text-[68px]">Trekku</h1>
+          <h1 className="text-white font-extrabold text-[68px] sm:text-[32px]">
+            Trekku
+          </h1>
         </div>
         <div
           id="footer-list"
-          className="flex flex-wrap justify-between w-full gap-11"
+          className="flex flex-wrap justify-between w-full gap-11 sm:mt-6"
         >
           <div id="footer-item" className="mr-[52px]">
             <div id="partner-wrapper" className="flex flex-col gap-7">
@@ -34,75 +38,123 @@ function Footer() {
                 >
                   <div
                     id="payment-partner-item"
-                    className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
+                    className="flex justify-center items-center w-[88px] h-10 sm:w-[66px] sm:h-[30px] sm:rounded-sm bg-white rounded-md"
                   >
-                    <img src="/images/Footer/bca.png" alt="" />
+                    <img
+                      src="/images/Footer/bca.png"
+                      alt=""
+                      className="scale-75"
+                    />
                   </div>
                   <div
                     id="payment-partner-item"
-                    className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
+                    className="flex justify-center items-center w-[88px] h-10 sm:w-[66px] sm:h-[30px] sm:rounded-sm bg-white rounded-md"
                   >
-                    <img src="/images/Footer/bni.png" alt="" />
+                    <img
+                      src="/images/Footer/bni.png"
+                      alt=""
+                      className="scale-75"
+                    />
                   </div>
                   <div
                     id="payment-partner-item"
-                    className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
+                    className="flex justify-center items-center w-[88px] h-10 sm:w-[66px] sm:h-[30px] sm:rounded-sm bg-white rounded-md"
                   >
-                    <img src="/images/Footer/bri.png" alt="" />
+                    <img
+                      src="/images/Footer/bri.png"
+                      alt=""
+                      className="scale-75"
+                    />
                   </div>
                   <div
                     id="payment-partner-item"
-                    className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
+                    className="flex justify-center items-center w-[88px] h-10 sm:w-[66px] sm:h-[30px] sm:rounded-sm bg-white rounded-md"
                   >
-                    <img src="/images/Footer/cimb.png" alt="" />
+                    <img
+                      src="/images/Footer/cimb.png"
+                      alt=""
+                      className="scale-75"
+                    />
                   </div>
                   <div
                     id="payment-partner-item"
-                    className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
+                    className="flex justify-center items-center w-[88px] h-10 sm:w-[66px] sm:h-[30px] sm:rounded-sm bg-white rounded-md"
                   >
-                    <img src="/images/Footer/mandiri.png" alt="" />
+                    <img
+                      src="/images/Footer/mandiri.png"
+                      alt=""
+                      className="scale-75"
+                    />
                   </div>
                   <div
                     id="payment-partner-item"
-                    className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
+                    className="flex justify-center items-center w-[88px] h-10 sm:w-[66px] sm:h-[30px] sm:rounded-sm bg-white rounded-md"
                   >
-                    <img src="/images/Footer/permata.png" alt="" />
+                    <img
+                      src="/images/Footer/permata.png"
+                      alt=""
+                      className="scale-75"
+                    />
                   </div>
                   <div
                     id="payment-partner-item"
-                    className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
+                    className="flex justify-center items-center w-[88px] h-10 sm:w-[66px] sm:h-[30px] sm:rounded-sm bg-white rounded-md"
                   >
-                    <img src="/images/Footer/briva.png" alt="" />
+                    <img
+                      src="/images/Footer/briva.png"
+                      alt=""
+                      className="scale-75"
+                    />
                   </div>
                   <div
                     id="payment-partner-item"
-                    className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
+                    className="flex justify-center items-center w-[88px] h-10 sm:w-[66px] sm:h-[30px] sm:rounded-sm bg-white rounded-md"
                   >
-                    <img src="/images/Footer/indomaret.png" alt="" />
+                    <img
+                      src="/images/Footer/indomaret.png"
+                      alt=""
+                      className="scale-75"
+                    />
                   </div>
                   <div
                     id="payment-partner-item"
-                    className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
+                    className="flex justify-center items-center w-[88px] h-10 sm:w-[66px] sm:h-[30px] sm:rounded-sm bg-white rounded-md"
                   >
-                    <img src="/images/Footer/alfamart.png" alt="" />
+                    <img
+                      src="/images/Footer/alfamart.png"
+                      alt=""
+                      className="scale-75"
+                    />
                   </div>
                   <div
                     id="payment-partner-item"
-                    className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
+                    className="flex justify-center items-center w-[88px] h-10 sm:w-[66px] sm:h-[30px] sm:rounded-sm bg-white rounded-md"
                   >
-                    <img src="/images/Footer/alfamidi.png" alt="" />
+                    <img
+                      src="/images/Footer/alfamidi.png"
+                      alt=""
+                      className="scale-75"
+                    />
                   </div>
                   <div
                     id="payment-partner-item"
-                    className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
+                    className="flex justify-center items-center w-[88px] h-10 sm:w-[66px] sm:h-[30px] sm:rounded-sm bg-white rounded-md"
                   >
-                    <img src="/images/Footer/dana.png" alt="" />
+                    <img
+                      src="/images/Footer/dana.png"
+                      alt=""
+                      className="scale-75"
+                    />
                   </div>
                   <div
                     id="payment-partner-item"
-                    className="flex justify-center items-center w-[88px] h-10 bg-white rounded-md"
+                    className="flex justify-center items-center w-[88px] h-10 sm:w-[66px] sm:h-[30px] sm:rounded-sm bg-white rounded-md"
                   >
-                    <img src="/images/Footer/gopay.png" alt="" />
+                    <img
+                      src="/images/Footer/gopay.png"
+                      alt=""
+                      className="scale-75"
+                    />
                   </div>
                 </div>
               </div>
@@ -180,9 +232,28 @@ function Footer() {
               </div>
             </div>
           </div>
-          <div id="footer-item" className="flex flex-col flex-wrap gap-3">
+          <div
+            id="footer-item"
+            className="flex flex-col flex-wrap gap-3 sm:order-first"
+          >
             <h1 className="text-xl font-semibold text-white">Menu</h1>
             <div id="link-list" className="flex flex-col gap-6">
+              <Link to="/">
+                <div
+                  id="link-item"
+                  className="flex items-center gap-3 opacity-40 group hover:opacity-100"
+                >
+                  {/* <img
+                    src="/images/Footer/trip.svg"
+                    alt=""
+                    className="w-9 h-9"
+                  /> */}
+                  <FontAwesomeIcon icon={faHome} className="size-8" />
+                  <h1 className="text-base font-medium text-white group-hover:underline">
+                    Beranda
+                  </h1>
+                </div>
+              </Link>
               <Link to="/open-trip">
                 <div
                   id="link-item"
@@ -203,7 +274,7 @@ function Footer() {
                 id="link-item"
                 className="flex items-center gap-3 opacity-40 group hover:opacity-100"
               >
-                <img src="/images/Footer/loc2.svg" alt="" className="w-9 h-9" />
+                <img src="/images/Footer/loc2.svg" alt="" className='scale-75'className="w-9 h-9" />
                 <h1 className="text-base font-medium text-white group-hover:underline">
                   Destinations
                 </h1>
@@ -281,7 +352,7 @@ function Footer() {
           </div>
         </div>
       </div>
-      <div className="w-full h-16 sm:h-9 flex items-center justify-center bg-[#2B2B2B] sm:mt-[52px]">
+      <div className="w-full h-16 sm:h-9 flex items-center justify-center bg-[#2B2B2B]">
         <h1 className="font-medium text-white sm:text-[8px]">
           Copyright © 2024 Trekku. Semua hak cipta.
         </h1>

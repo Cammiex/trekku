@@ -78,9 +78,6 @@ const ReviewsSection = ({ id }) => {
           />
         ))}
       </div>
-      <button className="rounded-xl size-fit px-5 py-3 bg-primary-60 text-[20px] font-medium text-white hover:bg-primaryDark active:scale-[0.9] transition-all duration-200">
-        Lihat ulasan lain
-      </button>
     </section>
   );
 };

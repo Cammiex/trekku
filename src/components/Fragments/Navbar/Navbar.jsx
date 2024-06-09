@@ -228,7 +228,6 @@ function Navbar() {
         onClose={() => setOpenModal(false)}
         popup
       >
-        <Modal.Header />
         <Modal.Body>
           <div id="popup-logout" className="z-[51]">
             <div

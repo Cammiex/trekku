@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { OpenTripItem } from './OpenTripItem';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProduct } from '../../../redux/slices/products/getProducts';
 import PropType from 'prop-types';
+import { OpenTripCard } from '../HomePage/OpenTripRecomendSection';
 
 function OpenTripList({ setData, durasi, destinasi }) {
   const [currentPage, setCurrentPage] = useState(1);
@@ -55,14 +55,27 @@ function OpenTripList({ setData, durasi, destinasi }) {
     <div>
       <section
         id="open-trip-list"
-        className="grid w-[1240px] grid-cols-3 gap-5"
+        className="grid w-[1240px] grid-cols-3 gap-5 sm:w-full sm:flex sm:flex-col"
       >
-        {currentItems?.map((item, index) => (
+        {/* {currentItems?.map((item, index) => (
           <OpenTripItem
             key={index}
             id={item.id}
             img={item.product_imgs[0].url_img}
             itemName={item.name}
+            organizer={item.organizer}
+            location={item.location}
+            duration={item.duration}
+            order={item.many_ordered}
+            price={item.price}
+          />
+        ))} */}
+        {currentItems?.map((item, index) => (
+          <OpenTripCard
+            key={index}
+            id={item.id}
+            img={item.product_imgs[0].url_img}
+            name={item.name}
             organizer={item.organizer}
             location={item.location}
             duration={item.duration}

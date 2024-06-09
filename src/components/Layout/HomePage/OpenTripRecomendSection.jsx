@@ -120,14 +120,14 @@ function OpenTripRecomendSection() {
   return (
     <section
       id="opentripRecomendation"
-      className="flex flex-wrap flex-col items-center mt-[190px] gap-10 sm:mt-[117px] sm:max-w-[360px] overflow-hidden"
+      className="flex flex-wrap w-full flex-col items-center mt-[190px] gap-10 sm:mt-[117px] sm:max-w-full overflow-hidden"
     >
       <h1 className="text-secondary text-[32px] font-bold sm:text-[16px]">
         Rekomendasi Open Trip
       </h1>
       <div
         id="open-trip-list"
-        className="flex gap-10 sm:flex-col sm:max-w-full sm:gap-3"
+        className="flex items-center gap-10 sm:flex-col sm:max-w-full sm:gap-3"
       >
         {topProducts.map((item) => (
           <OpenTripCard

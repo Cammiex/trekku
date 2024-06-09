@@ -4,8 +4,11 @@ function OurTeamSection() {
       id="trekku-team"
       className="flex flex-col items-center mt-[100px] gap-10"
     >
-      <h1 className="text-[32px] font-bold">Tim kami</h1>
-      <div id="team-list" className="flex items-center gap-4">
+      <h1 className="text-[32px] font-bold sm:text-[16px]">Tim kami</h1>
+      <div
+        id="team-list"
+        className="flex items-center gap-4 sm:flex-col sm:gap-7"
+      >
         <div id="team-item" className="flex flex-col gap-4 group">
           <div
             id="image-person"

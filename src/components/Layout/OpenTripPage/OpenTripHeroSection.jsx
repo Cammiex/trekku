@@ -15,14 +15,16 @@ function OpenTripHeroSection({
 
   return (
     <div
-      className="w-full h-[660px] flex items-center justify-center relative bg-cover bg-center"
+      className="w-full h-[660px] flex items-center justify-center relative bg-cover bg-center sm:h-[196px]"
       style={{ backgroundImage: `url(${bgImage})` }}
     >
       <div className="absolute inset-0 bg-black/20"></div>
-      <h1 className="text-[80px] font-extrabold z-10">Open Trip</h1>
+      <h1 className="text-[80px] font-extrabold z-10 sm:text-[24px]">
+        Open Trip
+      </h1>
       <div
         id="search-form"
-        className="absolute z-10 flex justify-center px-20 py-10 text-black -translate-x-1/2 bg-white shadow-2xl min-h-40 w-fit rounded-2xl left-1/2 -bottom-20"
+        className="absolute z-10 flex justify-center px-10 py-10 text-black -translate-x-1/2 bg-white shadow-2xl min-h-40 w-fit rounded-2xl left-1/2 -bottom-20 sm:min-h-[113px] sm:rounded-lg sm:p-4 sm:hidden"
       >
         <div className="flex gap-6">
           <div id="search-item" className="flex flex-col">
@@ -32,7 +34,7 @@ function OpenTripHeroSection({
                 <img src="images/OpenTripPage/Loc.svg" alt="" />
               </div>
 
-              <label>Destination</label>
+              <label className="">Destination</label>
             </div>
 
             <select
@@ -40,7 +42,7 @@ function OpenTripHeroSection({
               id=""
               value={destinasi}
               onChange={(e) => setDestinasi(e.target.value)}
-              className="rounded-lg min-w-[214px]"
+              className="rounded-lg w-[214px] sm:w-[110px]"
             >
               <option value="" selected>
                 Pilih Destinasi
@@ -66,7 +68,7 @@ function OpenTripHeroSection({
               id=""
               value={durasi}
               onChange={(e) => setDurasi(e.target.value)}
-              className="rounded-lg min-w-[154px]"
+              className="rounded-lg w-[154px] sm:w-[80px]"
             >
               <option value="" selected>
                 Pilih Durasi

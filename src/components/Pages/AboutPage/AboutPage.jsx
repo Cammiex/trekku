@@ -15,7 +15,7 @@ function AboutPage() {
       <AboutUsHeroSection />
       <div
         id="main-content"
-        className="w-full mt-20 px-[120px] flex flex-col justify-center text-black"
+        className="flex flex-col justify-center w-full mt-20 sm:mt-[29px] text-black sm:px-6"
       >
         <OurVisionSection />
         <WhyUsSection />

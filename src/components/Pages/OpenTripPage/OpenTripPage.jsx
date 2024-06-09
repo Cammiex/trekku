@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import FloatButton from '../../Fragments/FloatButton/FloatButton';
 import Footer from '../../Fragments/Footer/Footer';
 import Navbar from '../../Fragments/Navbar/Navbar';
@@ -9,11 +9,6 @@ function OpenTripPage() {
   const [destinasi, setDestinasi] = useState('');
   const [durasi, setDurasi] = useState('');
   const [data, setData] = useState();
-
-  useEffect(() => {
-    console.log(destinasi);
-    console.log(durasi);
-  }, [destinasi, durasi]);
 
   return (
     <>
@@ -26,7 +21,7 @@ function OpenTripPage() {
         durasi={durasi}
         data={data}
       />
-      <div className="flex justify-center w-full mt-[170px]">
+      <div className="flex justify-center w-full mt-[170px] sm:mt-[52px]">
         <OpenTripList setData={setData} destinasi={destinasi} durasi={durasi} />
       </div>
       <Footer />

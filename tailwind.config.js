@@ -19,7 +19,7 @@ export default {
 
       md: { max: '767px' },
 
-      sm: { max: '360px' },
+      sm: { max: '430px' },
     },
     extend: {
       colors: {
