@@ -1,15 +1,15 @@
 import {
-  faUser,
-  faBarChart,
-  faCreditCard,
+  // faUser,
+  // faBarChart,
+  // faCreditCard,
   faFolder,
 } from '@fortawesome/free-regular-svg-icons';
 import {
   faBars,
   faXmark,
-  faChartBar,
-  faUser as faUserBold,
-  faCreditCard as faCreditCardBold,
+  // faChartBar,
+  // faUser as faUserBold,
+  // faCreditCard as faCreditCardBold,
   faFolder as faFolderBold,
   faArrowRightFromBracket,
 } from '@fortawesome/free-solid-svg-icons';
@@ -58,7 +58,7 @@ const AdminNavbar = () => {
       <div className="flex flex-col flex-grow w-full gap-2">
         {isOpen ? (
           <>
-            <Link
+            {/* <Link
               to="/admin"
               className="flex items-center gap-6 hover:bg-secondary hover:text-white text-neutral-60 size-full rounded-[4px] h-fit py-3 px-3 cursor-pointer aria-[current=page]:bg-secondary aria-[current=page]:text-white"
               aria-current={
@@ -81,7 +81,7 @@ const AdminNavbar = () => {
             >
               <FontAwesomeIcon icon={faCreditCard} className="size-[20px]" />
               <h1 className="text-[18px] font-semibold">Orders</h1>
-            </div>
+            </div> */}
             <Link
               to="/admin/products"
               className="flex items-center gap-6 hover:bg-secondary hover:text-white text-neutral-60 size-full rounded-[4px] h-fit py-3 px-3 cursor-pointer aria-[current=page]:bg-secondary aria-[current=page]:text-white"
@@ -95,7 +95,7 @@ const AdminNavbar = () => {
           </>
         ) : (
           <>
-            <Link
+            {/* <Link
               to="/admin"
               className="flex items-center self-end justify-center px-3 py-3 transition-all duration-300 rounded-full cursor-pointer size-fit hover:bg-secondary hover:text-white text-neutral-60 aria-[current=page]:bg-secondary aria-[current=page]:text-white"
               aria-current={
@@ -118,7 +118,7 @@ const AdminNavbar = () => {
                 icon={faCreditCardBold}
                 className="size-[20px]"
               />
-            </div>
+            </div> */}
             <Link
               to="/admin/products"
               className="flex items-center self-end justify-center px-3 py-3 transition-all duration-300 rounded-full cursor-pointer size-fit hover:bg-secondary hover:text-white text-neutral-60 aria-[current=page]:bg-secondary aria-[current=page]:text-white"

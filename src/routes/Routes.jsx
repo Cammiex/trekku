@@ -114,7 +114,7 @@ const ProjectRoutes = () => {
             <>
               <Route
                 path="/admin"
-                element={<Navigate to="/admin/dashboard" />}
+                element={<Navigate to="/admin/products" />}
               />
               <Route path="/admin/dashboard" element={<AdminPage />} />
               <Route path="/admin/products" element={<ProductPage />} />

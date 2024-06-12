@@ -89,7 +89,7 @@ function CarouselSection({ setSearchValue, searchValue, handleSearch }) {
             onClick={handleSearch}
             className="flex items-center justify-center w-[204px] h-fit bg-primary-60 text-white gap-[10px] py-3 sm:py-1 rounded-xl sm:w-[83px] sm:rounded-[4px]"
           >
-            <FontAwesomeIcon icon={faSearch} className="size-[10px]" />
+            <FontAwesomeIcon icon={faSearch} className="size-[16px]" />
             <h1 className="font-medium text-[20px] sm:text-[7px]">Cari</h1>
           </button>
         </div>

@@ -1,23 +1,33 @@
 import {
   faChevronLeft,
   faChevronRight,
+  faUserCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
+const apiUrl = import.meta.env.VITE_API_URL;
 
-const FeedbackCard = ({ avatar, name, job, comment }) => {
+const FeedbackCard = ({ avatar, name, comment, rating }) => {
   return (
     <div
       id="feedback-item"
       className="flex flex-col items-center min-w-[358px] h-[409px] max-w-[380px] gap-5 p-4 shadow-md group transition-all duration-300 rounded-2xl bg-white sm:min-w-[215px] sm:h-[243px] sm:rounded-[9px]"
     >
       <div id="avatar" className="flex flex-col items-center gap-2">
-        <img
-          className="w-[95px] h-[95px] sm:size-[57px] rounded-full object-cover"
-          src={avatar}
-          alt="Rounded avatar"
-        />
+        {avatar ? (
+          <img
+            src={avatar}
+            alt=""
+            className="w-[95px] h-[95px] sm:size-[57px] rounded-full object-cover"
+          />
+        ) : (
+          <FontAwesomeIcon
+            icon={faUserCircle}
+            className="w-[95px] h-[95px] sm:size-[57px] rounded-full object-cover text-[#5D5D5D]"
+          />
+        )}
         <div id="avatar-text" className="text-center">
           <h1
             id="name"
@@ -25,12 +35,9 @@ const FeedbackCard = ({ avatar, name, job, comment }) => {
           >
             {name}
           </h1>
-          <h2 id="job" className="text-black sm:text-[9px]">
-            {job}
-          </h2>
         </div>
         <div className="flex items-center">
-          {[...Array(5)].map((_, index) => (
+          {[...Array(rating)].map((_, index) => (
             <svg
               key={index}
               className="w-4 h-4 text-yellow-300 sm:size-3 ms-1"
@@ -46,7 +53,7 @@ const FeedbackCard = ({ avatar, name, job, comment }) => {
       </div>
       <div id="commentar" className="">
         <p className="text-center text-black max-w-[310px] max-h-[144px] sm:text-[9px] sm:max-w-[187px] sm:max-h-[84px]">
-          {comment}
+          &quot;{comment}&quot;
         </p>
       </div>
     </div>
@@ -58,83 +65,43 @@ FeedbackCard.propTypes = {
   name: PropTypes.string,
   job: PropTypes.string,
   comment: PropTypes.string,
+  rating: PropTypes.number,
 };
 
 function TouristFeedbackSection() {
-  const feedbacks = [
-    {
-      avatar: 'images/HomePage/TouristFeedback/avatar1.jpg',
-      name: 'Christine Patricia',
-      job: 'Photografer',
-      comment:
-        'Pengalaman open trip ini luar biasa! Layanan prima, destinasi menakjubkan, dan organisasi trip yang rapi. Sangat merekomendasikan untuk mereka yang mencari petualangan tak terlupakan.',
-    },
-    {
-      avatar: 'images/HomePage/TouristFeedback/avatar2.jpg',
-      name: 'Muhammad Fulan',
-      job: 'Backpacker',
-      comment:
-        'Menawarkan pengalaman terbaik untuk perjalanan saya! Lokasi luar biasa, pemandu wisata yang ramah, dan layanan yang luar biasa.',
-    },
-    {
-      avatar: 'images/HomePage/TouristFeedback/avatar3.jpg',
-      name: 'Rizky Aditya',
-      job: 'Penulis Blog',
-      comment:
-        'Open trip yang diselenggarakan sangat memuaskan! Pemandu sangat ramah dan berpengalaman, akomodasi nyaman, dan itinerary menarik.',
-    },
-    {
-      avatar: 'images/HomePage/TouristFeedback/avatar3.jpg',
-      name: 'Rizky Aditya',
-      job: 'Penulis Blog',
-      comment:
-        'Open trip yang diselenggarakan sangat memuaskan! Pemandu sangat ramah dan berpengalaman, akomodasi nyaman, dan itinerary menarik.',
-    },
-    {
-      avatar: 'images/HomePage/TouristFeedback/avatar3.jpg',
-      name: 'Rizky Aditya',
-      job: 'Penulis Blog',
-      comment:
-        'Open trip yang diselenggarakan sangat memuaskan! Pemandu sangat ramah dan berpengalaman, akomodasi nyaman, dan itinerary menarik.',
-    },
-    {
-      avatar: 'images/HomePage/TouristFeedback/avatar3.jpg',
-      name: 'Rizky Aditya',
-      job: 'Penulis Blog',
-      comment:
-        'Open trip yang diselenggarakan sangat memuaskan! Pemandu sangat ramah dan berpengalaman, akomodasi nyaman, dan itinerary menarik.',
-    },
-    {
-      avatar: 'images/HomePage/TouristFeedback/avatar3.jpg',
-      name: 'Rizky Aditya',
-      job: 'Penulis Blog',
-      comment:
-        'Open trip yang diselenggarakan sangat memuaskan! Pemandu sangat ramah dan berpengalaman, akomodasi nyaman, dan itinerary menarik.',
-    },
-  ];
+  const [data, setData] = useState();
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${apiUrl}/review`);
+        setData(response.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  });
 
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 3;
 
   const handleNext = () => {
     setCurrentPage(
-      (prevPage) => (prevPage + 1) % Math.ceil(feedbacks.length / itemsPerPage)
+      (prevPage) => (prevPage + 1) % Math.ceil(data?.length / itemsPerPage)
     );
   };
 
   const handlePrev = () => {
     setCurrentPage(
       (prevPage) =>
-        (prevPage - 1 + Math.ceil(feedbacks.length / itemsPerPage)) %
-        Math.ceil(feedbacks.length / itemsPerPage)
+        (prevPage - 1 + Math.ceil(data.length / itemsPerPage)) %
+        Math.ceil(data.length / itemsPerPage)
     );
   };
 
   const startIndex = currentPage * itemsPerPage;
-  const selectedFeedbacks = feedbacks.slice(
-    startIndex,
-    startIndex + itemsPerPage
-  );
+  const selectedData = data?.slice(startIndex, startIndex + itemsPerPage);
 
   return (
     <section
@@ -158,13 +125,19 @@ function TouristFeedbackSection() {
             className="text-neutral-70 group-disabled:text-neutral-70/50"
           />
         </button>
-        {selectedFeedbacks.map((feedback, index) => (
-          <FeedbackCard key={index} {...feedback} />
+        {selectedData?.map((item, index) => (
+          <FeedbackCard
+            key={index}
+            name={item.name}
+            avatar={item.user.url_profile_img}
+            comment={item.comment}
+            rating={item.rating}
+          />
         ))}
         <button
           onClick={handleNext}
           className="p-2 size-[44px] rounded-full shadow-md group sm:hidden"
-          disabled={startIndex + itemsPerPage >= feedbacks.length}
+          disabled={startIndex + itemsPerPage >= data?.length}
         >
           <FontAwesomeIcon
             icon={faChevronRight}
