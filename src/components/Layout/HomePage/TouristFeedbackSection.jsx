@@ -7,9 +7,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 const apiUrl = import.meta.env.VITE_API_URL;
 
-const FeedbackCard = ({ avatar, name, comment, rating }) => {
+const FeedbackCard = ({ avatar, name, comment, rating, idProduct }) => {
+  const navigate = useNavigate();
+
   return (
     <div
       id="feedback-item"
@@ -52,7 +55,10 @@ const FeedbackCard = ({ avatar, name, comment, rating }) => {
         </div>
       </div>
       <div id="commentar" className="">
-        <p className="text-center text-black max-w-[310px] max-h-[144px] sm:text-[9px] sm:max-w-[187px] sm:max-h-[84px]">
+        <p
+          onClick={() => navigate(`/open-trip/${idProduct}`)}
+          className="text-center text-black max-w-[310px] max-h-[144px] sm:text-[9px] sm:max-w-[187px] sm:max-h-[84px] cursor-pointer"
+        >
           &quot;{comment}&quot;
         </p>
       </div>
@@ -66,6 +72,7 @@ FeedbackCard.propTypes = {
   job: PropTypes.string,
   comment: PropTypes.string,
   rating: PropTypes.number,
+  idProduct: PropTypes.number,
 };
 
 function TouristFeedbackSection() {
@@ -81,7 +88,7 @@ function TouristFeedbackSection() {
     };
 
     fetchData();
-  });
+  }, []);
 
   const [currentPage, setCurrentPage] = useState(0);
   const itemsPerPage = 3;
@@ -132,6 +139,7 @@ function TouristFeedbackSection() {
             avatar={item.user.url_profile_img}
             comment={item.comment}
             rating={item.rating}
+            idProduct={item.product_id}
           />
         ))}
         <button
