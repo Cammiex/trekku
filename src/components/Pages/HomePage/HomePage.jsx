@@ -25,7 +25,7 @@ const SearchResult = ({ filteredData }) => {
       </h1>
       <div
         id="open-trip-list"
-        className="flex gap-10 sm:flex-col sm:max-w-full sm:gap-3"
+        className="grid grid-cols-3 gap-10 sm:flex-col sm:max-w-full sm:gap-3"
       >
         {filteredData && filteredData.length > 0 ? (
           filteredData.map((item) => (
