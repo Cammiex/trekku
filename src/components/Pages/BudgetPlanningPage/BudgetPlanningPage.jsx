@@ -29,7 +29,7 @@ const BudgetPlanningPage = () => {
       <main className="flex flex-col items-center">
         <HeroSection />
         <ProductHeaderSection
-          name={productData?.datas.itemName}
+          name={productData?.datas.name}
           location={productData?.datas.location}
           image1={productData?.datas.product_imgs[0].url_img}
           image2={productData?.datas.product_imgs[1].url_img}
